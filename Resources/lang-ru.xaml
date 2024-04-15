@@ -1,0 +1,18 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:v="clr-namespace:System;assembly=mscorlib">
+    <v:String x:Key="m_MenuItemDeveloper">Разработчики</v:String>
+    <v:String x:Key="m_MenuItemProject">Проекты</v:String>
+    <v:String x:Key="m_MenuItemSettings">Настройки</v:String>
+    <v:String x:Key="m_SettingsLanguage">Язык</v:String>
+    <v:String x:Key="m_SettingsTheme">Тема</v:String>
+    <v:String x:Key="m_SearchName">Имя</v:String>
+    <v:String x:Key="m_SearchPosition">Уровень</v:String>
+    <v:String x:Key="m_SearchEmail">Email</v:String>
+    <v:String x:Key="m_Search">Поиск</v:String>
+    <v:String x:Key="m_Undo">Отмена</v:String>
+    <v:String x:Key="m_Edit">Изменить</v:String>
+    <v:String x:Key="m_Delete">Удалить</v:String>
+    <v:String x:Key="m_Submit">Готово</v:String>
+    <v:String x:Key="m_Back">Назад</v:String>
+</ResourceDictionary>
