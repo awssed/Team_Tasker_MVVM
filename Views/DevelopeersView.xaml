@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:TeamTasker.Views"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:viewModels="clr-namespace:TeamTasker.ViewModels"
+             xmlns:models="clr-namespace:TeamTasker.Models"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.DataContext>
@@ -32,27 +33,31 @@
                 </Grid.RowDefinitions>
 
                 <Label Grid.Row="0" Style="{DynamicResource LabelDevs}" Content="{DynamicResource m_SearchName}"/>
-                <TextBox x:Name="SearchNameBox" Grid.Row="1" Padding="5" VerticalAlignment="Center" />
+                <TextBox x:Name="SearchNameBox" Text="{Binding SearchName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Padding="5" VerticalAlignment="Center" />
 
                 <Label Grid.Row="2" Style="{DynamicResource LabelDevs}" Content="{DynamicResource m_SearchPosition}"/>
-                <ComboBox Grid.Row="3" x:Name="PositionSearch">
-                    <ComboBoxItem>Junior</ComboBoxItem>
-                    <ComboBoxItem>Middle</ComboBoxItem>
-                    <ComboBoxItem>Senior</ComboBoxItem>
+                <ComboBox Grid.Row="3" x:Name="PositionSearch" SelectedItem="{Binding SearchPosition,Mode=TwoWay}">
+                    <ComboBox.ItemsSource>
+                        <x:Array Type="{x:Type models:Position}">
+                            <models:Position>Junior</models:Position>
+                            <models:Position>Middle</models:Position>
+                            <models:Position>Senior</models:Position>
+                        </x:Array>
+                    </ComboBox.ItemsSource>
                 </ComboBox>
 
                 <!--<Label Grid.Row="4" Style="{DynamicResource LabelDevs}" Content="{DynamicResource m_SearchAge}"/>
             <TextBox Name="yearSearch" Grid.Row="5"></TextBox>-->
 
-                <Grid Grid.Row="6" >
+                <!--<Grid Grid.Row="6" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Button Grid.Column="0" Style="{DynamicResource ButtonDevs}" Content="Search" Background="DodgerBlue" Foreground="White" Margin="5" HorizontalAlignment="Stretch" Command="ApplicationCommands.Find"/>
                     <Button Grid.Column="1" Style="{DynamicResource ButtonDevs}" Content="Cancel" Background="DodgerBlue" Foreground="White" Margin="5" HorizontalAlignment="Stretch"/>
-                </Grid>
-                <Button Grid.Row="7" Command="{Binding AddDeveloperView}" Style="{DynamicResource ButtonDevs}" Content="+" Background="DodgerBlue" Foreground="White" Margin="5" HorizontalAlignment="Stretch" FontSize="20"/>
+                </Grid>-->
+                <Button Grid.Row="4" Command="{Binding AddDeveloperView}" Style="{DynamicResource ButtonDevs}" Content="+" Background="DodgerBlue" Foreground="White" Margin="5" HorizontalAlignment="Stretch" FontSize="20"/>
             </Grid>
         </Border>
 

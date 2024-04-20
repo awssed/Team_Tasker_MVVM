@@ -28,11 +28,11 @@
                         <ColumnDefinition/>
                         <ColumnDefinition Width="0.2*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBox Grid.Column="0" FontSize="18" Text="{Binding SearchString}"/>
+                    <TextBox Grid.Column="0" FontSize="18" Text="{Binding SearchString,UpdateSourceTrigger=PropertyChanged}"/>
                     <Image Grid.Column="1" Source="D:\Учёба\4сем\ОПП\TeamTasker\Images\Magnifier.png"/>
                 </Grid>
             </Border>
-            <ListBox Grid.Row="1" x:Name="ProjectsList" ItemsSource="{Binding SearchProjects}" SelectedItem="{Binding CurrentProject,Mode=TwoWay}">
+            <ListBox Grid.Row="1" x:Name="ProjectsList" ItemsSource="{Binding SearchProjects,Mode=TwoWay}" SelectedItem="{Binding CurrentProject,Mode=TwoWay}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel >
@@ -140,7 +140,7 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Button Grid.Row="0" Content="Save" Command="{Binding SaveProjectCommand}" Cursor="Hand"/>
-                <Button Grid.Column="2" Content="Cancel"/>
+                <Button Grid.Column="2" Content="Cancel" Visibility="Hidden"/>
                 <Button Grid.Column="4" Content="Delete" Command="{Binding DeleteProjectCommand}" Cursor="Hand"/>
             </Grid>
         </StackPanel>

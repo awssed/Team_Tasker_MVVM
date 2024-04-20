@@ -11,24 +11,57 @@ using TeamTasker.Core;
 using TeamTasker.Models;
 using System.Windows.Interactivity;
 using TeamTasker.EntityModels;
+using TeamTasker.UnityOfWork;
 
 namespace TeamTasker.ViewModels
 {
-    public class DevelopersViewModel
+    public class DevelopersViewModel:ObservableObject
     {
+        private UnityOfWorkClass db=new UnityOfWorkClass();
         public delegate void ViewChanger(Developer dev);
 
         public static event ViewChanger ProfileChanger; 
         public RelayCommand GoToProfile { get; set; }
         public ObservableCollection<Developer> Developers { get; set; }
+        public ObservableCollection<Developer> SearchDevelopers { get; set; }
         public Developer SelectedDeveloper { get; set; }
         public static RelayCommand AddDeveloperView { get; set; }
+        private string _searchName;
+        public string SearchName {
+            get
+            {
+                return _searchName;
+            }
+            set
+            {
+                _searchName = value;
+                OnPropertyChanged();
+            }
+        }
+        private Position _searchPosition;
+        public Position SearchPosition
+        {
+            get
+            {
+                return _searchPosition;
+            }
+            set
+            {
+                _searchPosition = value;
+                OnPropertyChanged();
+            }
+        }
 
         public DevelopersViewModel()
         {
-            using(TeamTaskerContext db=new TeamTaskerContext())
+            try
             {
-                Developers = new ObservableCollection<Developer>(db.Developers.ToList());
+                Developers = new ObservableCollection<Developer>(db.Developers.GetAll());
+                SearchDevelopers = new ObservableCollection<Developer>(db.Developers.GetAll());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
             GoToProfile = new RelayCommand((o) =>
             {

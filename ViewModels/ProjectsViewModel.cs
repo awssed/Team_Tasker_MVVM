@@ -9,11 +9,13 @@ using System.Threading.Tasks;
 using TeamTasker.Core;
 using TeamTasker.EntityModels;
 using TeamTasker.Models;
+using TeamTasker.UnityOfWork;
 
 namespace TeamTasker.ViewModels
 {
     internal class ProjectsViewModel : ObservableObject
     {
+        private UnityOfWorkClass bd=new UnityOfWorkClass();
         private ObservableCollection<Developer> _allDevelopers;
         public RelayCommand AddProjectCommand { get; set; }
         public RelayCommand SaveProjectCommand { get; set; }
@@ -36,7 +38,7 @@ namespace TeamTasker.ViewModels
             }
         }
         private string _searchString;
-        public String SearchString { 
+        public string SearchString { 
             get
             {
                 return _searchString;
@@ -44,7 +46,7 @@ namespace TeamTasker.ViewModels
             set
             {
                 _searchString = value;
-                SearchProjects = new ObservableCollection<Project>(Projects.Where(p => p.Name.Contains(_searchString)));
+                    SearchProjects = new ObservableCollection<Project>(Projects.Where(p => p.Name.Contains(_searchString)));
                 OnPropertyChanged();
             }
         }
@@ -140,17 +142,9 @@ namespace TeamTasker.ViewModels
             AddDeveloperCommand = new RelayCommand(AddDeveloper);
             DeleteDeveloperCommand=new RelayCommand(DeleteDeveloper);
             DeleteProjectCommand = new RelayCommand(DeleteProject, CanDeleteProject);
-            using(TeamTaskerContext db=new TeamTaskerContext())
-            {
-                Projects = new ObservableCollection<Project>();
-                foreach(Project project in db.Projects.Include(project=>project.Developers))
-                {
-                    Projects.Add(project);
-                }
-                SearchProjects = Projects;
-                AllDevelopers = new ObservableCollection<Developer>(db.Developers);
-
-            }
+            Projects= (ObservableCollection<Project>)bd.Projects.GetAll();
+            SearchProjects = Projects;
+            AllDevelopers= new ObservableCollection<Developer>(bd.Developers.GetAll());
         }
         private void AddDeveloper(object parametr)
         {
@@ -170,22 +164,11 @@ namespace TeamTasker.ViewModels
         {
             if(CurrentProject.ProjectId == 0)
             {
-                using(TeamTaskerContext db=new TeamTaskerContext())
-                {
-                    db.Projects.Add(CurrentProject);
-                    foreach (Developer dev in CurrentProject.Developers)
-                    {
-                        dev.Projects.Add(CurrentProject);
-                        db.Update(dev);
-                    }
-                    db.SaveChanges();
-                    Projects = new ObservableCollection<Project>();
-                    foreach (Project project in db.Projects.Include(project => project.Developers))
-                    {
-                        Projects.Add(project);
-                    }
-                    CurrentProject = new Project();
-                }
+                bd.Projects.Create(CurrentProject);
+                bd.Save();
+                Projects = (ObservableCollection<Project>)bd.Projects.GetAll();
+                SearchString = "";
+                CurrentProject=new Project();
             }
         }
         private bool CanSaveProject(object paramert)
@@ -206,17 +189,14 @@ namespace TeamTasker.ViewModels
         }
         private void DeleteProject(object paramert)
         {
-            using(TeamTaskerContext db=new TeamTaskerContext())
+            if (CurrentProject.ProjectId != 0)
             {
-                foreach(Developer dev in CurrentProject.Developers)
-                {
-                    dev.Projects.Remove(CurrentProject);
-                }
-                db.Projects.Remove(CurrentProject);
-                db.SaveChanges();
-                Projects = new ObservableCollection<Project>(db.Projects);
+                bd.Projects.Delete(CurrentProject.ProjectId);
+                bd.Save();
+                Projects = (ObservableCollection<Project>)bd.Projects.GetAll();
+                SearchString = "";
+                CurrentProject =new Project(); 
             }
-            CurrentProject =new Project();
         }
         private bool CanDeleteProject(object paramert)
         {
@@ -226,3 +206,4 @@ namespace TeamTasker.ViewModels
         }
     }
 }
+//после удаления индекс выбранного преокта не обнуляется

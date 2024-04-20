@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 using TeamTasker.Core;
 using TeamTasker.EntityModels;
 using TeamTasker.Models;
+using TeamTasker.UnityOfWork;
 
 namespace TeamTasker.ViewModels
 {
     class AddDeveloperViewModel:ObservableObject
     {
+        private UnityOfWorkClass bd=new UnityOfWorkClass();
         public delegate void ViewChanger();
 
         public static event ViewChanger Changer;
@@ -32,11 +34,8 @@ namespace TeamTasker.ViewModels
         }
         private void AddDeveloper(object parametr)
         {
-            using(TeamTaskerContext db=new TeamTaskerContext())
-            {
-                db.Developers.Add(Developer);
-                db.SaveChanges();
-            }
+            bd.Developers.Create(Developer);
+            bd.Save();
             Changer?.Invoke();
         }
         private bool CanAddDeveloper(object parametr)

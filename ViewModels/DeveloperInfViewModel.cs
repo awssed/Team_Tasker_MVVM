@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 using TeamTasker.Core;
 using TeamTasker.EntityModels;
 using TeamTasker.Models;
+using TeamTasker.UnityOfWork;
 
 namespace TeamTasker.ViewModels
 {
     class DeveloperInfViewModel:ObservableObject
     {
+        private UnityOfWorkClass db=new UnityOfWorkClass();
         public delegate void ViewChanger();
         public static event ViewChanger Changer;
         public RelayCommand CancelCommand { get; set; }
@@ -75,33 +77,18 @@ namespace TeamTasker.ViewModels
         }
         private void SaveCommandExecute(object parametr)
         {
-            using (TeamTaskerContext db=new TeamTaskerContext())
-            {
-                Developer updateDeveloper = db.Developers.FirstOrDefault(d => d.DeveloperId == Developer.DeveloperId);
-                if (Developer != null)
-                {
-                    updateDeveloper.Name = Name;
-                    updateDeveloper.Email = Email;
-                    updateDeveloper.Position = Position;
-                    db.Update(updateDeveloper);
-                    db.SaveChanges();
-                }
-            }
             Developer.Name= Name;
             Developer.Email= Email;
             Developer.Position = Position;
+            db.Developers.Update(Developer);
+            db.Save();
         }
         private void DeleteCommandExecute(object parameter)
         {
             if (Developer != null)
             {
-                using(TeamTaskerContext db=new TeamTaskerContext())
-                {
-                    Developer updateDeveloper = db.Developers.FirstOrDefault(d => d.DeveloperId == Developer.DeveloperId);
-                    db.Developers.Remove(updateDeveloper);
-                    db.SaveChanges();
-                    Changer?.Invoke();
-                }
+                db.Developers.Delete(Developer);
+                db.Save();
             }
         }
     }
