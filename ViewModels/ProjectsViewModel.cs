@@ -23,6 +23,17 @@ namespace TeamTasker.ViewModels
         public RelayCommand DeleteDeveloperCommand { get; set; }
         public RelayCommand DeleteProjectCommand { get; set; }
         public Developer SelectedDeveloper { get; set; }
+        private Developer _selectedTeamLead;
+        public Developer SelectedTeamLead
+        {
+            get { return _selectedTeamLead; }
+            set
+            {
+                SelectedDeveloper = value;
+                CurrentProject.TeamLeadId = SelectedDeveloper.DeveloperId;
+                OnPropertyChanged();
+            }
+        }
         private ObservableCollection<Project> _searchProjects;
         public ObservableCollection<Project> SearchProjects
         {

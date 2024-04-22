@@ -21,7 +21,8 @@ namespace TeamTasker.Models
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public string Description { get; set; }
-       public virtual ICollection<Developer>? Developers { get; set; }
+        public string TeamLeadId { get; set; }
+        public virtual ICollection<Developer>? Developers { get; set; }
         public Project(int projectId, string name, DateTime startTime, DateTime endTime)
         {
             ProjectId = projectId;
