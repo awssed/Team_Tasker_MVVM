@@ -1,0 +1,32 @@
+﻿<Window x:Class="TeamTasker.Views.ProgressView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TeamTasker.Views"
+        xmlns:viewModel="clr-namespace:TeamTasker.ViewModels"
+        xmlns:slider="clr-namespace:TeamTasker.UserSlider"
+        mc:Ignorable="d"
+        Title="ProgressView" Height="300" Width="600">
+    <Window.DataContext>
+        <viewModel:ProgressViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition />
+                <RowDefinition Height="0.7*"/>
+                <RowDefinition Height="0.7*"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" HorizontalAlignment="Center">How much you have done?</Label>
+            <slider:UserSlider Grid.Row="1"/>
+            <Label Grid.Row="2" HorizontalAlignment="Center">What have you done?</Label>
+            <TextBox Grid.Row="3"/>
+            <Button Grid.Row="4" Content="Push"/>
+            <Button Grid.Row="5" Content="OpenHistory"/>
+        </Grid>
+    </Grid>
+</Window>

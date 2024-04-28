@@ -1,0 +1,49 @@
+﻿<Window x:Class="TeamTasker.Views.TaskView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TeamTasker.Views"
+        xmlns:viewModel="clr-namespace:TeamTasker.ViewModels"
+        mc:Ignorable="d"
+        Title="TaskView" Height="500" Width="600">
+    <Window.DataContext>
+        <viewModel:TaskViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="0.1*"/>
+            <RowDefinition/>
+            <RowDefinition Height="0.1*"/>
+            <RowDefinition/>
+            <RowDefinition Height="0.3*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="{Binding CurrentTask.Name,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBlock Grid.Row="1" Text="{Binding CurrentTask.Developer.Name,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <Label Grid.Row="2" Content="Description"/>
+        <TextBox Grid.Row="3" Text="{Binding CurrentTask.Description,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextChanged="PropertyChanged"/>
+        <Label Grid.Row="4" Content="Progress"/>
+        <ListBox Grid.Row="5" ItemsSource="{Binding CurrentTask.Progress,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Procent}"/>
+                        <TextBlock Text="{Binding Description}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Grid Grid.Row="6">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" x:Name="SaveBut" IsEnabled="False" Content="Save changes" Command="{Binding SaveChangesCommand}" Click="ClickSave"/>
+            <Button Grid.Column="1" Content="Complete task"/>
+            <Button Grid.Column="2" Content="Delete task"/>
+        </Grid>
+    </Grid>
+</Window>

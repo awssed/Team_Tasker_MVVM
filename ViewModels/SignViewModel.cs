@@ -48,6 +48,12 @@ namespace TeamTasker.ViewModels
                     var userAdmin = db.Developers.Where(d => d.DeveloperId == Login && d.Password == Password && d.isAdmin==true);
                     if (userAdmin.Any())
                         SignAdmin?.Invoke();
+                    var user= db.Developers.FirstOrDefault(d => d.DeveloperId == Login && d.Password == Password && d.isAdmin == false);
+                    if (user!=null)
+                    {
+                        MainViewModel.CurrentUser =user;
+                        SignUser?.Invoke();
+                    }
                 }
             },CanSign);
         }

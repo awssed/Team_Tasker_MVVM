@@ -32,6 +32,7 @@ namespace TeamTasker.Models
         public string Password { get; set; } // Добавленное поле Password
         public bool isAdmin { get; set; }
         public virtual ICollection<Project> Projects { get; set; } = new ObservableCollection<Project>();
+        public virtual ICollection<Models.Task> Tasks { get; set; }=new ObservableCollection<Models.Task>();
 
         public Developer(string login, string name, Position position, string email, string password, byte[] image, bool isAdmin)
         {

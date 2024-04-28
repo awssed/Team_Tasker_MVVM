@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TeamTasker.EntityModels;
 
@@ -11,9 +12,11 @@ using TeamTasker.EntityModels;
 namespace TeamTasker.Migrations
 {
     [DbContext(typeof(TeamTaskerContext))]
-    partial class TeamTaskerContextModelSnapshot : ModelSnapshot
+    [Migration("20240424121311_AddProgressIntoClassTask")]
+    partial class AddProgressIntoClassTask
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -84,10 +87,15 @@ namespace TeamTasker.Migrations
                     b.Property<int>("Procent")
                         .HasColumnType("int");
 
-                    b.Property<int>("TaskId")
+                    b.Property<int>("ProjectId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("TaskId")
                         .HasColumnType("int");
 
                     b.HasKey("ProgressId");
+
+                    b.HasIndex("ProjectId");
 
                     b.HasIndex("TaskId");
 
@@ -116,7 +124,7 @@ namespace TeamTasker.Migrations
                     b.Property<DateTime>("StartTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("TeamLead")
+                    b.Property<string>("TeamLeadId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -133,10 +141,6 @@ namespace TeamTasker.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TaskId"));
 
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("DeveloperId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
@@ -146,10 +150,6 @@ namespace TeamTasker.Migrations
 
                     b.Property<bool>("IsCompleted")
                         .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ProjectId")
                         .HasColumnType("int");
@@ -180,25 +180,29 @@ namespace TeamTasker.Migrations
 
             modelBuilder.Entity("TeamTasker.Models.Progress", b =>
                 {
-                    b.HasOne("TeamTasker.Models.Task", "Task")
-                        .WithMany("Progress")
-                        .HasForeignKey("TaskId")
+                    b.HasOne("TeamTasker.Models.Project", "Project")
+                        .WithMany()
+                        .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Task");
+                    b.HasOne("TeamTasker.Models.Task", null)
+                        .WithMany("Progress")
+                        .HasForeignKey("TaskId");
+
+                    b.Navigation("Project");
                 });
 
             modelBuilder.Entity("TeamTasker.Models.Task", b =>
                 {
                     b.HasOne("TeamTasker.Models.Developer", "Developer")
-                        .WithMany("Tasks")
+                        .WithMany()
                         .HasForeignKey("DeveloperId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("TeamTasker.Models.Project", "Project")
-                        .WithMany("Tasks")
+                        .WithMany()
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -206,16 +210,6 @@ namespace TeamTasker.Migrations
                     b.Navigation("Developer");
 
                     b.Navigation("Project");
-                });
-
-            modelBuilder.Entity("TeamTasker.Models.Developer", b =>
-                {
-                    b.Navigation("Tasks");
-                });
-
-            modelBuilder.Entity("TeamTasker.Models.Project", b =>
-                {
-                    b.Navigation("Tasks");
                 });
 
             modelBuilder.Entity("TeamTasker.Models.Task", b =>

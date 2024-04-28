@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TeamTasker.EntityModels;
 
@@ -11,9 +12,11 @@ using TeamTasker.EntityModels;
 namespace TeamTasker.Migrations
 {
     [DbContext(typeof(TeamTaskerContext))]
-    partial class TeamTaskerContextModelSnapshot : ModelSnapshot
+    [Migration("20240426080229_Mig1")]
+    partial class Mig1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -198,7 +201,7 @@ namespace TeamTasker.Migrations
                         .IsRequired();
 
                     b.HasOne("TeamTasker.Models.Project", "Project")
-                        .WithMany("Tasks")
+                        .WithMany()
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -209,11 +212,6 @@ namespace TeamTasker.Migrations
                 });
 
             modelBuilder.Entity("TeamTasker.Models.Developer", b =>
-                {
-                    b.Navigation("Tasks");
-                });
-
-            modelBuilder.Entity("TeamTasker.Models.Project", b =>
                 {
                     b.Navigation("Tasks");
                 });

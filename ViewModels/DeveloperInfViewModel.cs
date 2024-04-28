@@ -74,6 +74,7 @@ namespace TeamTasker.ViewModels
             Name = Developer.Name;
             Email = Developer.Email;
             Position = Developer.Position;
+            Changer?.Invoke();
         }
         private void SaveCommandExecute(object parametr)
         {
@@ -87,8 +88,9 @@ namespace TeamTasker.ViewModels
         {
             if (Developer != null)
             {
-                db.Developers.Delete(Developer);
+                db.Developers.Delete(Developer.DeveloperId);
                 db.Save();
+                Changer?.Invoke();
             }
         }
     }

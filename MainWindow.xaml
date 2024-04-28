@@ -24,6 +24,13 @@
                 <MenuItem Grid.Column="2" Style="{DynamicResource MenuItemStyle}" Header="{DynamicResource m_MenuItemSettings}" />
             </Menu>
         </Border>
+        <Border x:Name="MenuUser" Visibility="Hidden" BorderBrush="DodgerBlue" BorderThickness="0,0,0,3" Grid.Row="0">
+            <Menu Grid.Row="0" HorizontalAlignment="Center" Background="White">
+                <MenuItem Grid.Column="0" Command="{Binding UserTaskViewCommand}" Style="{DynamicResource MenuItemStyle}" Header="{DynamicResource m_MenuItemTasks}"/>
+                <MenuItem Grid.Column="1" Command="{Binding UserProjectsViewCommand}" Style="{DynamicResource MenuItemStyle}" Header="{DynamicResource m_MenuItemProject}" />
+                <MenuItem Grid.Column="2" Style="{DynamicResource MenuItemStyle}" Header="{DynamicResource m_MenuItemSettings}" />
+            </Menu>
+        </Border>
         <Grid x:Name="StartMenu">
             <Grid.ColumnDefinitions>    
                 <ColumnDefinition />

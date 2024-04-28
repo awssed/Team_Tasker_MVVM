@@ -37,6 +37,21 @@
             <DataTemplate DataType="{x:Type viewModel:AddDeveloperViewModel}">
                 <view:AddDeveloperView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:UserProjectViewModel}">
+                <view:UserProjectsView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:AddTaskViewModel}">
+                <view:AddTaskView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:TaskViewModel}">
+                <view:TaskView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:UserTaskViewModel}">
+                <view:UserTaskView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:ProgressViewModel}">
+                <view:ProgressView/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -22,12 +22,17 @@ namespace TeamTasker.ViewModels
         public RelayCommand DevsViewCommand { get; set; }
         public RelayCommand ProjectsViewCommand { get; set; }
         public RelayCommand AddDeveloperViewCommand { get; set; }
+        public RelayCommand UserProjectsViewCommand { get; set; }
+        public RelayCommand UserTaskViewCommand { get; set; }
         public SignViewModel SignViewModel { get; set; }
         public RegViewModel RegViewModel { get; set; }
         public DeveloperInfViewModel DeveloperInfViewModel { get; set; }
         public DevelopersViewModel DevelopersViewModel { get; set; }
         public ProjectsViewModel ProjectsViewModel { get; set; }
+        public UserProjectViewModel UserProjectViewModel { get; set; }
+        public UserTaskViewModel UserTaskViewModel { get; set; }
         public AddDeveloperView AddDeveloperView { get; set; }
+        public static Developer CurrentUser {  get; set; }
         private object _currentView;
         public object CurrentView
         {
@@ -51,6 +56,15 @@ namespace TeamTasker.ViewModels
                Grid startMenu=App.Current.MainWindow.FindName("StartMenu") as Grid;
                menu.Visibility = Visibility.Visible;
                startMenu.Visibility = Visibility.Hidden;
+            };
+            SignViewModel.SignUser += () =>
+            {
+                AnimateViewChange(UserProjectViewModel);
+                Border menu = App.Current.MainWindow.FindName("MenuUser") as Border;
+                Grid startMenu = App.Current.MainWindow.FindName("StartMenu") as Grid;
+                menu.Visibility = Visibility.Visible;
+                startMenu.Visibility = Visibility.Hidden;
+                UserTaskViewModel = new UserTaskViewModel();
             };
 
             DeveloperInfViewModel.Changer += () =>
@@ -92,6 +106,16 @@ namespace TeamTasker.ViewModels
             {
                 AnimateViewChange(ProjectsViewModel);
             });
+            UserProjectViewModel = new UserProjectViewModel();
+            UserProjectsViewCommand = new RelayCommand(o =>
+            {
+                AnimateViewChange(UserProjectViewModel);
+            });
+            UserTaskViewCommand = new RelayCommand(o =>
+            {
+                AnimateViewChange(UserTaskViewModel);
+            });
+
         }
         private void AnimateViewChange(object newView)
         {

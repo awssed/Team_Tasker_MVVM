@@ -1,0 +1,99 @@
+﻿<UserControl x:Class="TeamTasker.Views.UserProjectsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TeamTasker.Views"
+             xmlns:viewModel="clr-namespace:TeamTasker.ViewModels"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.DataContext>
+        <viewModel:UserProjectViewModel/>
+    </UserControl.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.3*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.1*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Border Grid.Row="0" BorderBrush="Gray" BorderThickness="1" Margin="5">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="0.2*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox Grid.Column="0" FontSize="18" Text="{Binding SearchString,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                    <Image Grid.Column="1" Source="D:\Учёба\4сем\ОПП\TeamTasker\Images\Magnifier.png"/>
+                </Grid>
+            </Border>
+            <ListBox Grid.Row="1" x:Name="ProjectsList" ItemsSource="{Binding SearchProjects,Mode=TwoWay}" SelectedItem="{Binding CurrentProject,Mode=TwoWay}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel >
+                            <TextBlock Text="{Binding Name}"/>
+                            <TextBlock Text="{Binding StartTime.Date, StringFormat={}{0:dd.MM.yyyy}}"/>
+                            <TextBlock Text="{Binding EndTime.Date, StringFormat={}{0:dd.MM.yyyy}}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="0.1*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.1*"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Content="To Do" HorizontalContentAlignment="Center" FontSize="20"/>
+                    <ListBox Grid.Row="1" x:Name="ToDoList" ItemsSource="{Binding ToDoTasks, Mode=TwoWay}" SelectedItem="{Binding SelectedTask}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseDoubleClick">
+                                <i:InvokeCommandAction Command="{Binding OpenTaskCommand}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Name}"/>
+                                    <TextBlock Text="{Binding Developer.Name}"/>
+                                    <TextBlock Text="{Binding EndTime.Date, StringFormat={}{0:dd.MM.yyyy}}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.1*"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Content="Doing" HorizontalContentAlignment="Center" FontSize="20"/>
+                </Grid>
+                <Grid Grid.Column="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.1*"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Content="Done" HorizontalContentAlignment="Center" FontSize="20"/>
+                </Grid>
+            </Grid>
+            <Button Grid.Row="1" Content="Add New Task" Command="{Binding AddNewTaskCommand}"/>
+        </Grid>
+        
+    </Grid>
+</UserControl>

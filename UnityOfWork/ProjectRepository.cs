@@ -18,13 +18,11 @@ namespace TeamTasker.UnityOfWork
         {
             this.db = context;
         }
-
         public void Create(Project item)
         {
             try
             {
                 db.Projects.Add(item);
-
             }
             catch
             (Exception ex)

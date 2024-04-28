@@ -13,6 +13,7 @@ namespace TeamTasker.UnityOfWork
         private TeamTaskerContext db=new TeamTaskerContext();
         private DeveloperRepository _developerRepository;
         private ProjectRepository _projectRepository;
+        private TaskRepository _taskRepository;
         private bool disposed = false;
         public DeveloperRepository Developers
         {
@@ -34,6 +35,17 @@ namespace TeamTasker.UnityOfWork
                     _projectRepository = new ProjectRepository(db);
                 }
                 return _projectRepository;
+            }
+        }
+        public TaskRepository Tasks
+        {
+            get
+            {
+                if(_taskRepository == null)
+                {
+                    _taskRepository=new TaskRepository(db);
+                }
+                return _taskRepository;
             }
         }
         public void Save()

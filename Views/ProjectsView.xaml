@@ -132,7 +132,7 @@
                 </ListBox.ItemTemplate>
             </ListBox>
             <Label Content="Select TeamLead"></Label>
-            <ComboBox Name="TeamLeadBox" Grid.Row="6" ItemsSource="{Binding ProjectDevelopers,Mode=TwoWay}" SelectedItem="{Binding SelectedDeveloper,Mode=TwoWay}" >
+            <ComboBox Name="TeamLeadBox" Grid.Row="6" ItemsSource="{Binding ProjectDevelopers,Mode=TwoWay}" SelectedItem="{Binding SelectedTeamLead,Mode=TwoWay}" >
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Name}" />

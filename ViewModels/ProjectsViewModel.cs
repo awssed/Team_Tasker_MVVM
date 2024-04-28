@@ -29,8 +29,9 @@ namespace TeamTasker.ViewModels
             get { return _selectedTeamLead; }
             set
             {
-                SelectedDeveloper = value;
-                CurrentProject.TeamLeadId = SelectedDeveloper.DeveloperId;
+                _selectedTeamLead = value;
+                if(SelectedTeamLead != null)
+                CurrentProject.TeamLead = SelectedTeamLead.DeveloperId;
                 OnPropertyChanged();
             }
         }
@@ -57,7 +58,7 @@ namespace TeamTasker.ViewModels
             set
             {
                 _searchString = value;
-                    SearchProjects = new ObservableCollection<Project>(Projects.Where(p => p.Name.Contains(_searchString)));
+                SearchProjects = new ObservableCollection<Project>(Projects.Where(p => p.Name.Contains(_searchString)));
                 OnPropertyChanged();
             }
         }
@@ -142,6 +143,7 @@ namespace TeamTasker.ViewModels
                 EndTime = value.EndTime;
                 Description = value.Description;
                 ProjectDevelopers= (ObservableCollection<Developer>)value.Developers;
+                SelectedTeamLead = ProjectDevelopers.FirstOrDefault(d => d.DeveloperId.Equals(CurrentProject.TeamLead));
                 OnPropertyChanged();
             }
         }
@@ -180,6 +182,11 @@ namespace TeamTasker.ViewModels
                 Projects = (ObservableCollection<Project>)bd.Projects.GetAll();
                 SearchString = "";
                 CurrentProject=new Project();
+            }
+            else
+            {
+                bd.Projects.Update(CurrentProject);
+                bd.Save();
             }
         }
         private bool CanSaveProject(object paramert)

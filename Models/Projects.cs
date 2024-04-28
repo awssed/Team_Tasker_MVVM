@@ -21,8 +21,9 @@ namespace TeamTasker.Models
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public string Description { get; set; }
-        public string TeamLeadId { get; set; }
+        public string TeamLead { get; set; }
         public virtual ICollection<Developer>? Developers { get; set; }
+        public virtual ICollection<Models.Task> Tasks { get; set; }=new ObservableCollection<Models.Task>();
         public Project(int projectId, string name, DateTime startTime, DateTime endTime)
         {
             ProjectId = projectId;
@@ -30,6 +31,7 @@ namespace TeamTasker.Models
             StartTime = startTime;
             EndTime = endTime;
             Developers = new ObservableCollection<Developer>();
+
         }
         public Project(int projectId, string name, DateTime startTime, DateTime endTime, ObservableCollection<Developer> developers)
         {

@@ -4,6 +4,7 @@
     <v:String x:Key="m_MenuItemDeveloper">Разработчики</v:String>
     <v:String x:Key="m_MenuItemProject">Проекты</v:String>
     <v:String x:Key="m_MenuItemSettings">Настройки</v:String>
+    <v:String x:Key="m_MenuItemTasks">Задания</v:String>
     <v:String x:Key="m_SettingsLanguage">Язык</v:String>
     <v:String x:Key="m_SettingsTheme">Тема</v:String>
     <v:String x:Key="m_SearchName">Имя</v:String>
