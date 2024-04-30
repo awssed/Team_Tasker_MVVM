@@ -22,10 +22,10 @@
                 <RowDefinition Height="0.7*"/>
             </Grid.RowDefinitions>
             <Label Grid.Row="0" HorizontalAlignment="Center">How much you have done?</Label>
-            <slider:UserSlider Grid.Row="1"/>
+            <slider:UserSlider Grid.Row="1" Value="{Binding CurrentProgress.Procent, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
             <Label Grid.Row="2" HorizontalAlignment="Center">What have you done?</Label>
-            <TextBox Grid.Row="3"/>
-            <Button Grid.Row="4" Content="Push"/>
+            <TextBox Grid.Row="3" Text="{Binding CurrentProgress.Description, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+            <Button Grid.Row="4" Content="Push" Command="{Binding PushProgressCommand}" Cursor="Hand"/>
             <Button Grid.Row="5" Content="OpenHistory"/>
         </Grid>
     </Grid>

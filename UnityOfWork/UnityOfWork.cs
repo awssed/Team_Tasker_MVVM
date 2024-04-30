@@ -14,6 +14,7 @@ namespace TeamTasker.UnityOfWork
         private DeveloperRepository _developerRepository;
         private ProjectRepository _projectRepository;
         private TaskRepository _taskRepository;
+        private ProgressRepository _progressRepository;
         private bool disposed = false;
         public DeveloperRepository Developers
         {
@@ -46,6 +47,17 @@ namespace TeamTasker.UnityOfWork
                     _taskRepository=new TaskRepository(db);
                 }
                 return _taskRepository;
+            }
+        }
+        public ProgressRepository Progress
+        {
+            get
+            {
+                if(_progressRepository == null)
+                {
+                    _progressRepository=new ProgressRepository(db);
+                }
+                return _progressRepository;
             }
         }
         public void Save()
