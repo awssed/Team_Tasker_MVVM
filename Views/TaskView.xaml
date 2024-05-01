@@ -23,9 +23,9 @@
         <TextBlock Grid.Row="0" Text="{Binding CurrentTask.Name,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         <TextBlock Grid.Row="1" Text="{Binding CurrentTask.Developer.Name,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         <Label Grid.Row="2" Content="Description"/>
-        <TextBox Grid.Row="3" Text="{Binding CurrentTask.Description,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextChanged="PropertyChanged"/>
+        <TextBox Grid.Row="3" Text="{Binding Description,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextChanged="PropertyChanged"/>
         <Label Grid.Row="4" Content="Progress"/>
-        <ListBox Grid.Row="5" ItemsSource="{Binding CurrentTask.Progress,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+        <ListBox Grid.Row="5" ItemsSource="{Binding CurrentTask.Progress,Mode=TwoWay}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -40,10 +40,12 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Button Grid.Column="0" x:Name="SaveBut" IsEnabled="False" Content="Save changes" Command="{Binding SaveChangesCommand}" Click="ClickSave"/>
-            <Button Grid.Column="1" Content="Complete task"/>
-            <Button Grid.Column="2" Content="Delete task"/>
+            <Button Grid.Column="1" Content="Complete" Command="{Binding CompleteCommand}"/>
+            <Button Grid.Column="2" Content="Regret" Command="{Binding RegretCommand}"/>
+            <Button Grid.Column="3" Content="Delete task" Command="{Binding DeleteCommand}"/>
         </Grid>
     </Grid>
 </Window>

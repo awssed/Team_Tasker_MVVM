@@ -45,8 +45,14 @@ namespace TeamTasker.ViewModels
             if(sumProgress+CurrentProgress.Procent > 100)
             {
                 CurrentProgress.Procent = 100-sumProgress;
+                CurrentTask.Procent = 100;
+            }
+            else
+            {
+                CurrentTask.Procent = sumProgress+CurrentProgress.Procent;
             }
             db.Progress.Create(CurrentProgress);
+            db.Tasks.Update(CurrentTask);
             db.Save();
             CloseWindow();
         }

@@ -22,6 +22,7 @@ namespace TeamTasker.Views
         public TaskView()
         {
             InitializeComponent();
+            SaveBut.IsEnabled = false;
         }
         public void PropertyChanged(object sender,RoutedEventArgs e)
         {

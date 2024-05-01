@@ -67,11 +67,18 @@
                         </i:Interaction.Triggers>
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel>
-                                    <TextBlock Text="{Binding Name}"/>
-                                    <TextBlock Text="{Binding Developer.Name}"/>
-                                    <TextBlock Text="{Binding EndTime.Date, StringFormat={}{0:dd.MM.yyyy}}"/>
-                                </StackPanel>
+                                <Grid>  
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="0.2*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding Name}"/>
+                                        <TextBlock Text="{Binding Developer.Name}"/>
+                                        <TextBlock Text="{Binding EndTime.Date, StringFormat={}{0:dd.MM.yyyy}}"/>
+                                    </StackPanel>
+                                    <TextBlock Grid.Column="1" Text="{Binding Procent}"/>
+                                </Grid>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
@@ -82,6 +89,29 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Label Grid.Row="0" Content="Doing" HorizontalContentAlignment="Center" FontSize="20"/>
+                    <ListBox Grid.Row="1" x:Name="DoingList" ItemsSource="{Binding DoingTasks, Mode=TwoWay}" SelectedItem="{Binding SelectedTask}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseDoubleClick">
+                                <i:InvokeCommandAction Command="{Binding OpenProgressCommand}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="0.2*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding Name}"/>
+                                        <TextBlock Text="{Binding Developer.Name}"/>
+                                        <TextBlock Text="{Binding EndTime.Date, StringFormat={}{0:dd.MM.yyyy}}"/>
+                                    </StackPanel>
+                                    <TextBlock Grid.Column="1" Text="{Binding Procent}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
                 </Grid>
                 <Grid Grid.Column="2">
                     <Grid.RowDefinitions>
@@ -89,6 +119,29 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Label Grid.Row="0" Content="Done" HorizontalContentAlignment="Center" FontSize="20"/>
+                    <ListBox Grid.Row="1" x:Name="DoneList" ItemsSource="{Binding DoneTasks, Mode=TwoWay}" SelectedItem="{Binding SelectedTask}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseDoubleClick">
+                                <i:InvokeCommandAction Command="{Binding OpenProgressCommand}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="0.2*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding Name}"/>
+                                        <TextBlock Text="{Binding Developer.Name}"/>
+                                        <TextBlock Text="{Binding EndTime.Date, StringFormat={}{0:dd.MM.yyyy}}"/>
+                                    </StackPanel>
+                                    <TextBlock Grid.Column="1" Text="{Binding Procent}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
                 </Grid>
             </Grid>
         </Grid>

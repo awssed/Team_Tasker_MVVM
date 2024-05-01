@@ -133,12 +133,14 @@ namespace TeamTasker.ViewModels
            
             OpenProgressCommand = new RelayCommand(o =>
             {
+                if (SelectedTask.IsCompleted)
+                    return;
                 _progressViewModel = new ProgressViewModel(SelectedTask);
                 var progressView = new ProgressView();
                 progressView.Owner = App.Current.MainWindow;
 
                 progressView.DataContext = _progressViewModel;
-                progressView.Closed += (object sender, EventArgs e) => { _progressViewModel = null; };
+                progressView.Closed += (object sender, EventArgs e) => { _progressViewModel = null;CurrentProject = CurrentProject; };
                 progressView.Show();
             });
         }

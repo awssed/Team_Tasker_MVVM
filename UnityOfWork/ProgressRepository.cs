@@ -34,6 +34,7 @@ namespace TeamTasker.UnityOfWork
                 newProg.Task = exestingTask;
                 newProg.Description = item.Description;
                 db.Progresss.Add(newProg);
+                exestingTask.Progress.Add(newProg);
             }
             catch(Exception ex)
             {
@@ -47,7 +48,7 @@ namespace TeamTasker.UnityOfWork
             {
                 var item = db.Progresss.FirstOrDefault(p => p.ProgressId == (int)id);
                 if(item!= null)
-                    db.Progresss.Add(item);
+                    db.Progresss.Remove(item);
             }
             catch (Exception ex)
             {

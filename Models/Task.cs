@@ -22,6 +22,7 @@ namespace TeamTasker.Models
         public Developer Developer { get; set; }
         public string Description { get; set; }
         public bool IsCompleted { get; set; }
+        public int Procent { get; set; } = 0;
         public ObservableCollection<Progress> Progress { get; set; }
         public Task(String name,Project project, DateTime endTime, Developer developer,string description, bool isCompleted)
         {
@@ -32,6 +33,16 @@ namespace TeamTasker.Models
             Description = description;
             IsCompleted = isCompleted;
             Progress = new ObservableCollection<Progress>();
+        }
+        public Task(String name, Project project, DateTime endTime, Developer developer, string description, bool isCompleted,ObservableCollection<Progress> progress)
+        {
+            Name = name;
+            Project = project;
+            EndTime = endTime;
+            Developer = developer;
+            Description = description;
+            IsCompleted = isCompleted;
+            Progress = progress;
         }
         public Task()
         {

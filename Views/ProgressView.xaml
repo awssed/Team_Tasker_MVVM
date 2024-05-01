@@ -7,7 +7,7 @@
         xmlns:viewModel="clr-namespace:TeamTasker.ViewModels"
         xmlns:slider="clr-namespace:TeamTasker.UserSlider"
         mc:Ignorable="d"
-        Title="ProgressView" Height="300" Width="600">
+        Title="ProgressView" Height="400" Width="600">
     <Window.DataContext>
         <viewModel:ProgressViewModel/>
     </Window.DataContext>
@@ -19,14 +19,23 @@
                 <RowDefinition Height="0.5*"/>
                 <RowDefinition />
                 <RowDefinition Height="0.7*"/>
-                <RowDefinition Height="0.7*"/>
+                <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
             <Label Grid.Row="0" HorizontalAlignment="Center">How much you have done?</Label>
             <slider:UserSlider Grid.Row="1" Value="{Binding CurrentProgress.Procent, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
             <Label Grid.Row="2" HorizontalAlignment="Center">What have you done?</Label>
             <TextBox Grid.Row="3" Text="{Binding CurrentProgress.Description, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
             <Button Grid.Row="4" Content="Push" Command="{Binding PushProgressCommand}" Cursor="Hand"/>
-            <Button Grid.Row="5" Content="OpenHistory"/>
+            <ListBox Grid.Row="5" ItemsSource="{Binding CurrentTask.Progress,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Procent}"/>
+                            <TextBlock Text="{Binding Description}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </Grid>
     </Grid>
 </Window>

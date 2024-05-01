@@ -157,7 +157,7 @@ namespace TeamTasker.ViewModels
                 addTaskView.DataContext = addTaskViewModel;
                 addTaskView.Closed += AddTaskView_Closed; // Добавьте обработчик события Closed для окна
                 addTaskView.Show();
-            });
+            },CanAddNewTask);
             OpenTaskCommand = new RelayCommand(o =>
             {
                 _taskViewModel = new TaskViewModel(SelectedTask);
@@ -165,7 +165,7 @@ namespace TeamTasker.ViewModels
                 taskView.Owner = App.Current.MainWindow;
 
                 taskView.DataContext = _taskViewModel;
-                taskView.Closed += (object sender, EventArgs e) => { _taskViewModel = null; };
+                taskView.Closed += (object sender, EventArgs e) => { _taskViewModel = null;CurrentProject=CurrentProject; };
                 taskView.Show();
             });
         }
@@ -174,7 +174,15 @@ namespace TeamTasker.ViewModels
         {
             // Очистка экземпляра AddTaskViewModel при закрытии окна
             addTaskViewModel = null;
+            CurrentProject = CurrentProject;
         }
-   
+        public bool CanAddNewTask(object parametr)
+        {
+            if(CurrentProject!=null)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

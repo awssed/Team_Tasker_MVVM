@@ -69,35 +69,98 @@ namespace TeamTasker.UnityOfWork
         }
         public ObservableCollection<Models.Task> GetToDoTasks(Project project)
         {
-               return new ObservableCollection<Models.Task>( db.Tasks.AsEnumerable().Where(t => t.Project == project && t.IsCompleted == false && t.Progress.IsNullOrEmpty()).ToList());
-        }
-        public ObservableCollection<Models.Task> GetDoingTasks(Project project)
-        {
-            return new ObservableCollection<Models.Task>(db.Tasks.AsEnumerable().Where(t=>t.Project==project && t.IsCompleted==false && !t.Progress.IsNullOrEmpty()).ToList());
-        }
-        public ObservableCollection<Models.Task> GetDoneTasks(Project project)
-        {
-            return new ObservableCollection<Models.Task>(db.Tasks.AsEnumerable().Where(t => t.Project == project && t.IsCompleted == true).ToList());
+            try
+            {
+                return new ObservableCollection<Models.Task>(db.Tasks.Include(t => t.Progress)
+                    .Where(t => t.Project == project && t.IsCompleted == false && t.Progress.Count == 0)
+                    .ToList());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return null;
         }
 
-        public ObservableCollection<Models.Task> GetToDoUserTasks(Project project,Developer user)
-        {
-            return new ObservableCollection<Models.Task>(db.Tasks.AsEnumerable().Where(t => t.Project == project && t.IsCompleted == false && t.Progress.IsNullOrEmpty() && t.Developer.DeveloperId==user.DeveloperId).ToList());
-        }
-        public ObservableCollection<Models.Task> GetDoingUserTasks(Project project, Developer user)
-        {
-            return new ObservableCollection<Models.Task>(db.Tasks.AsEnumerable().Where(t => t.Project == project && t.IsCompleted == false && !t.Progress.IsNullOrEmpty() && t.Developer.DeveloperId == user.DeveloperId).ToList());
-        }
-        public ObservableCollection<Models.Task> GetDoneUserTasks(Project project, Developer user)
-        {
-            return new ObservableCollection<Models.Task>(db.Tasks.AsEnumerable().Where(t => t.Project == project && t.IsCompleted == true && !t.Progress.IsNullOrEmpty() && t.Developer.DeveloperId == user.DeveloperId).ToList());
-        }
-        public void Delete(object id)
+        public ObservableCollection<Models.Task> GetDoingTasks(Project project)
         {
             try
-            {   
-                var task = db.Tasks.FirstOrDefault(p => p.TaskId == (int)id);
-                db.Tasks.Remove(task);
+            {
+                return new ObservableCollection<Models.Task>(db.Tasks.Include(t => t.Progress)
+                    .Where(t => t.Project == project && t.IsCompleted == false && t.Progress.Count > 0)
+                    .ToList());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return null;
+        }
+
+        public ObservableCollection<Models.Task> GetDoneTasks(Project project)
+        {
+            try
+            {
+                return new ObservableCollection<Models.Task>(db.Tasks.Include(t => t.Progress)
+                    .Where(t => t.Project == project && t.IsCompleted == true)
+                    .ToList());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return null;
+        }
+
+        public ObservableCollection<Models.Task> GetToDoUserTasks(Project project, Developer user)
+        {
+            try
+            {
+                return new ObservableCollection<Models.Task>(db.Tasks.Include(t => t.Progress)
+                    .Where(t => t.Project == project && t.IsCompleted == false && t.Progress.Count == 0 && t.Developer.DeveloperId == user.DeveloperId)
+                    .ToList());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return null;
+        }
+
+        public ObservableCollection<Models.Task> GetDoingUserTasks(Project project, Developer user)
+        {
+            try
+            {
+                return new ObservableCollection<Models.Task>(db.Tasks.Include(t => t.Progress)
+                    .Where(t => t.Project == project && t.IsCompleted == false && t.Progress.Count > 0 && t.Developer.DeveloperId == user.DeveloperId)
+                    .ToList());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return null;
+        }
+
+        public ObservableCollection<Models.Task> GetDoneUserTasks(Project project, Developer user)
+        {
+            try
+            {
+                return new ObservableCollection<Models.Task>(db.Tasks.Include(t => t.Progress)
+                    .Where(t => t.Project == project && t.IsCompleted == true && t.Developer.DeveloperId == user.DeveloperId)
+                    .ToList());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return null;
+        }
+        public void Delete(object task)
+        {
+            try
+            {
+                db.Tasks.Remove((Models.Task)task);
             }
             catch (Exception ex)
             {
@@ -127,7 +190,7 @@ namespace TeamTasker.UnityOfWork
         {
             try
             {
-                return db.Tasks.ToList<Models.Task>();
+                return db.Tasks.Include(t => t.Progress).ToList();
             }
             catch (Exception ex)
             {
@@ -148,6 +211,8 @@ namespace TeamTasker.UnityOfWork
                     taskToUpdate.Name = item.Name;
                     taskToUpdate.EndTime = item.EndTime;
                     taskToUpdate.Description = item.Description;
+                    taskToUpdate.Procent= item.Procent;
+                    taskToUpdate.IsCompleted=item.IsCompleted;
                 }
             }
             catch (Exception ex)
