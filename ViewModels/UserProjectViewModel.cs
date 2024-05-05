@@ -63,6 +63,8 @@ namespace TeamTasker.ViewModels
             }
             set
             {
+                _selectedTask = null;
+                OnPropertyChanged();
                 _selectedTask = value;
                 OnPropertyChanged();
             }
@@ -160,6 +162,8 @@ namespace TeamTasker.ViewModels
             },CanAddNewTask);
             OpenTaskCommand = new RelayCommand(o =>
             {
+                if (SelectedTask == null)
+                    return;
                 _taskViewModel = new TaskViewModel(SelectedTask);
                 var taskView=new TaskView();
                 taskView.Owner = App.Current.MainWindow;

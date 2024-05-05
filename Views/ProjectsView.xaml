@@ -13,8 +13,10 @@
     </UserControl.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="0.3*"/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="0.3*"/>
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
@@ -45,10 +47,9 @@
             </ListBox>
             <Button Grid.Row="2" Content="Add" Margin="10 0 10 0" Command="{Binding AddProjectCommand}" Click="ClickAddProject"/>
         </Grid>
-        <StackPanel Grid.Column="1">
-            
-            <Label Content="Name:"/>
-            <TextBox x:Name="txtName">
+        <StackPanel Grid.Column="2">
+            <Label Content="Name" Style="{DynamicResource LabelAddProjectSyle}"/>
+            <TextBox x:Name="txtName"  Style="{DynamicResource inputText}" TextAlignment="Center">
                 <TextBox.Text>
                     <Binding Path="CurrentProject.Name" Mode="TwoWay">
                         <Binding.ValidationRules>
@@ -57,20 +58,8 @@
                     </Binding>
                 </TextBox.Text>
             </TextBox>
-
-            <Label Content="Start Time:"/>
-            <DatePicker x:Name="dpStartTime" >
-                <DatePicker.SelectedDate>
-                    <Binding Path="CurrentProject.StartTime" Mode="TwoWay">
-                        <Binding.ValidationRules>
-                            <DataErrorValidationRule />
-                        </Binding.ValidationRules>
-                    </Binding>
-                </DatePicker.SelectedDate>
-            </DatePicker>
-
-            <Label Content="End Time:"/>
-            <DatePicker x:Name="dpEndTime">
+            <Label Content="Deadline" Style="{DynamicResource LabelAddProjectSyle}"/>
+            <DatePicker x:Name="dpEndTime" HorizontalContentAlignment="Center">
                 <DatePicker.SelectedDate>
                     <Binding Path="CurrentProject.EndTime" Mode="TwoWay">
                         <Binding.ValidationRules>
@@ -80,22 +69,22 @@
                 </DatePicker.SelectedDate>
             </DatePicker>
 
-            <Label Content="Description:"/>
+            <Label Content="Description" Style="{DynamicResource LabelAddProjectSyle}"/>
             <TextBox Height="100" Grid.Row="4" x:Name="txtDescription" TextWrapping="Wrap">
                 <TextBox.Text>
                     <Binding Path="CurrentProject.Description" Mode="TwoWay">
                     </Binding>
                 </TextBox.Text>
             </TextBox>
-            <Label Content="Add developer from list"/>
-            <Border>
+            <Label Content="Add developer from list" Style="{DynamicResource LabelAddProjectSyle}"/>
+            <Border Height="35" Margin="0 0 0 10">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition Width="0.1*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBox Grid.Column="0"/>
-                    <Image Grid.Column="1" x:Name="SearchImage"/>
+                    <TextBox Grid.Column="0" Text="{Binding SearchStringDevelopers,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                    <Image Grid.Column="1" x:Name="SearchImage" Source="D:\Учёба\4сем\ОПП\TeamTasker\Images\Magnifier.png"/>
                 </Grid>
             </Border>
             <Border>
@@ -104,18 +93,17 @@
                         <ColumnDefinition/>
                         <ColumnDefinition Width="0.1*"/>
                     </Grid.ColumnDefinitions>
-                    <Label Content="Select developers"/>
-                    <ComboBox Grid.Column="0" x:Name="addDeveloperBox" ItemsSource="{Binding AllDevelopers, Mode=TwoWay}" SelectedItem="{Binding SelectedDeveloper,Mode=TwoWay}">
+                    <ComboBox Grid.Column="0" x:Name="addDeveloperBox" ItemsSource="{Binding SearchDevelopers, Mode=TwoWay}" SelectedItem="{Binding SelectedDeveloper,Mode=TwoWay}">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Name}" />
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
-                    <Button Grid.Column="1" Content="Add" Command="{Binding AddDeveloperCommand}"/>
+                    <Button Margin="7" Grid.Column="1" Content="+" Padding="0" Command="{Binding AddDeveloperCommand}"/>
                 </Grid>
             </Border>
-            <Label Content="Selected Developers:"/>
+            <Label Content="Selected Developers" Style="{DynamicResource LabelAddProjectSyle}"/>
             <ListBox Height="100" Grid.Row="5" x:Name="listDevelopers" ItemsSource="{Binding ProjectDevelopers}" SelectedItem="{Binding SelectedDeveloper, Mode=TwoWay}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="MouseDoubleClick">
@@ -131,7 +119,7 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <Label Content="Select TeamLead"></Label>
+            <Label Content="Select TeamLead" Style="{DynamicResource LabelAddProjectSyle}"/>
             <ComboBox Name="TeamLeadBox" Grid.Row="6" ItemsSource="{Binding ProjectDevelopers,Mode=TwoWay}" SelectedItem="{Binding SelectedTeamLead,Mode=TwoWay}" >
                 <ComboBox.ItemTemplate>
                     <DataTemplate>

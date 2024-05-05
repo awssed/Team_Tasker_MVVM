@@ -46,9 +46,15 @@ namespace TeamTasker.UnityOfWork
         {
             try
             {
-                var item = db.Progresss.FirstOrDefault(p => p.ProgressId == (int)id);
-                if(item!= null)
+                Progress item=new Progress();
+                if (id != null)
+                {
+                    item = (Progress)id;
+                }
+                if (item != null)
+                {
                     db.Progresss.Remove(item);
+                }
             }
             catch (Exception ex)
             {
@@ -85,7 +91,20 @@ namespace TeamTasker.UnityOfWork
 
         public void Update(Progress item)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Progress progress = db.Progresss.FirstOrDefault(t=>t.ProgressId == (int)item.ProgressId);
+                if(progress != null)
+                {
+                    progress.Procent = item.Procent;
+                    progress.Description= item.Description;
+                    progress.IsCommited = item.IsCommited;
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

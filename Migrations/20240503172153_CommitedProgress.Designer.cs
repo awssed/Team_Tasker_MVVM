@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TeamTasker.EntityModels;
 
@@ -11,9 +12,11 @@ using TeamTasker.EntityModels;
 namespace TeamTasker.Migrations
 {
     [DbContext(typeof(TeamTaskerContext))]
-    partial class TeamTaskerContextModelSnapshot : ModelSnapshot
+    [Migration("20240503172153_CommitedProgress")]
+    partial class CommitedProgress
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -115,6 +118,9 @@ namespace TeamTasker.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("StartTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("TeamLead")
                         .IsRequired()

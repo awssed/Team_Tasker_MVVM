@@ -21,18 +21,22 @@
                 <RowDefinition Height="0.7*"/>
                 <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
-            <Label Grid.Row="0" HorizontalAlignment="Center">How much you have done?</Label>
+            <Label Grid.Row="0" HorizontalAlignment="Center" Content="{DynamicResource m_How_much_youd_done}"/>
             <slider:UserSlider Grid.Row="1" Value="{Binding CurrentProgress.Procent, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
-            <Label Grid.Row="2" HorizontalAlignment="Center">What have you done?</Label>
+            <Label Grid.Row="2" HorizontalAlignment="Center" Content="{DynamicResource m_What_have_you_done}"/>
             <TextBox Grid.Row="3" Text="{Binding CurrentProgress.Description, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
-            <Button Grid.Row="4" Content="Push" Command="{Binding PushProgressCommand}" Cursor="Hand"/>
-            <ListBox Grid.Row="5" ItemsSource="{Binding CurrentTask.Progress,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            <Button Grid.Row="4" Content="{DynamicResource m_Push}"  Command="{Binding PushProgressCommand}" Cursor="Hand"/>
+            <ListBox Grid.Row="5" ItemsSource="{Binding CurrentTask.Progress, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding Procent}"/>
-                            <TextBlock Text="{Binding Description}"/>
-                        </StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="{Binding Procent, StringFormat={}{0}%}" Padding="10"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Description}" Padding="0 10 10 0" TextAlignment="Center"/>
+                        </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>

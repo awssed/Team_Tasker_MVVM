@@ -52,6 +52,12 @@
             <DataTemplate DataType="{x:Type viewModel:ProgressViewModel}">
                 <view:ProgressView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:UserProfileViewModel}">
+                <view:UserProfileView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:SettingsViewModel}">
+                <view:SettingsView/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

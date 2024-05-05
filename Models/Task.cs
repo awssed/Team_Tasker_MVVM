@@ -44,6 +44,19 @@ namespace TeamTasker.Models
             IsCompleted = isCompleted;
             Progress = progress;
         }
+        [NotMapped]
+        [JsonIgnore]
+        public bool IsExpired
+        {
+            get
+            {
+                if (this.IsCompleted)
+                    return false;
+                if (this.EndTime.Date < DateTime.Now.Date)
+                    return true;
+                return false;
+            }
+        }
         public Task()
         {
             Project = null;

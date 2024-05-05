@@ -18,7 +18,6 @@ namespace TeamTasker.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ProjectId { get; set; }
         public string Name { get; set; }
-        public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public string Description { get; set; }
         public string TeamLead { get; set; }
@@ -28,7 +27,6 @@ namespace TeamTasker.Models
         {
             ProjectId = projectId;
             Name = name;
-            StartTime = startTime;
             EndTime = endTime;
             Developers = new ObservableCollection<Developer>();
 
@@ -37,7 +35,6 @@ namespace TeamTasker.Models
         {
             ProjectId = projectId;
             Name = name;
-            StartTime = startTime;
             EndTime = endTime;
             Developers = developers;
         }
@@ -45,7 +42,6 @@ namespace TeamTasker.Models
         {
             ProjectId = 0;
             Name = string.Empty;
-            StartTime = DateTime.Now;
             EndTime = DateTime.Now;
             Developers=new ObservableCollection<Developer>();
         }
@@ -60,12 +56,9 @@ namespace TeamTasker.Models
                         if (string.IsNullOrEmpty(Name))
                             error = "Name is required.";
                         break;
-                    case nameof(StartTime):
-                        if (StartTime > EndTime)
-                            error = "Start time must be earlier than end time.";
-                        break;
+                    
                     case nameof(EndTime):
-                        if (EndTime < StartTime)
+                        if (EndTime.Date < DateTime.Now.Date)
                             error = "End time must be later than start time.";
                         break;
                     case nameof(Description):
@@ -78,6 +71,12 @@ namespace TeamTasker.Models
                         if(Developers.IsNullOrEmpty())
                         {
                             error = "Developers are reqired";
+                        }
+                        break;
+                    case nameof(TeamLead):
+                        if(TeamLead.IsNullOrEmpty())
+                        {
+                            error = "Teamled cant be empty";
                         }
                         break;
                 }

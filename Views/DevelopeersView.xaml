@@ -36,7 +36,7 @@
                 <TextBox x:Name="SearchNameBox" Text="{Binding SearchName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Padding="5" VerticalAlignment="Center" />
 
                 <Label Grid.Row="2" Style="{DynamicResource LabelDevs}" Content="{DynamicResource m_SearchPosition}"/>
-                <ComboBox Grid.Row="3" x:Name="PositionSearch" SelectedItem="{Binding SearchPosition,Mode=TwoWay}">
+                <ComboBox Grid.Row="3" x:Name="PositionSearch" SelectedItem="{Binding SearchPosition,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                     <ComboBox.ItemsSource>
                         <x:Array Type="{x:Type models:Position}">
                             <models:Position>Junior</models:Position>
@@ -61,7 +61,7 @@
             </Grid>
         </Border>
 
-        <ListBox Grid.Column="1" ItemsSource="{Binding Developers}" SelectedItem="{Binding SelectedDeveloper,Mode=TwoWay}" Style="{DynamicResource ListDevsStyle}" Background="Transparent">
+        <ListBox Grid.Column="1" ItemsSource="{Binding SearchDevelopers,Mode=OneWay}" SelectedItem="{Binding SelectedDeveloper,Mode=TwoWay}" Style="{DynamicResource ListDevsStyle}" Background="Transparent">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseDoubleClick">
                     <i:InvokeCommandAction Command="{Binding GoToProfile}" />

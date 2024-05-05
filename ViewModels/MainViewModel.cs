@@ -24,6 +24,8 @@ namespace TeamTasker.ViewModels
         public RelayCommand AddDeveloperViewCommand { get; set; }
         public RelayCommand UserProjectsViewCommand { get; set; }
         public RelayCommand UserTaskViewCommand { get; set; }
+        public RelayCommand UserProfileViewCommand { get; set; }
+        public RelayCommand SettingsViewCommand { get; set; }
         public SignViewModel SignViewModel { get; set; }
         public RegViewModel RegViewModel { get; set; }
         public DeveloperInfViewModel DeveloperInfViewModel { get; set; }
@@ -31,8 +33,22 @@ namespace TeamTasker.ViewModels
         public ProjectsViewModel ProjectsViewModel { get; set; }
         public UserProjectViewModel UserProjectViewModel { get; set; }
         public UserTaskViewModel UserTaskViewModel { get; set; }
+        public static UserProfileViewModel UserProfileViewModel { get; set; }
         public AddDeveloperView AddDeveloperView { get; set; }
-        public static Developer CurrentUser {  get; set; }
+        public SettingsViewModel SettingsViewModel { get; set; }=new SettingsViewModel();
+        private static Developer _currentDeveloper;
+        public static Developer CurrentUser
+        {
+            get
+            {
+                return _currentDeveloper;
+            }
+            set
+            {
+                _currentDeveloper = value;
+                UserProfileViewModel=new UserProfileViewModel(_currentDeveloper);
+            }
+        }
         private object _currentView;
         public object CurrentView
         {
@@ -115,7 +131,14 @@ namespace TeamTasker.ViewModels
             {
                 AnimateViewChange(UserTaskViewModel);
             });
-
+            UserProfileViewCommand = new RelayCommand(o =>
+            {
+                AnimateViewChange(UserProfileViewModel);
+            });
+            SettingsViewCommand = new RelayCommand(o =>
+            {
+                AnimateViewChange(SettingsViewModel);
+            });
         }
         private void AnimateViewChange(object newView)
         {

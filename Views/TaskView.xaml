@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TeamTasker.Views"
+        xmlns:models="clr-namespace:TeamTasker.Models"
         xmlns:viewModel="clr-namespace:TeamTasker.ViewModels"
         mc:Ignorable="d"
         Title="TaskView" Height="500" Width="600">
@@ -14,24 +15,46 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="0.5*"/>
             <RowDefinition Height="0.5*"/>
-            <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition/>
-            <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition/>
             <RowDefinition Height="0.3*"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Text="{Binding CurrentTask.Name,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBlock Grid.Row="1" Text="{Binding CurrentTask.Developer.Name,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-        <Label Grid.Row="2" Content="Description"/>
-        <TextBox Grid.Row="3" Text="{Binding Description,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextChanged="PropertyChanged"/>
-        <Label Grid.Row="4" Content="Progress"/>
-        <ListBox Grid.Row="5" ItemsSource="{Binding CurrentTask.Progress,Mode=TwoWay}">
+        <TextBlock Grid.Row="0" Text="{Binding CurrentTask.Name,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="20" FontFamily="Roboto" Padding="0 10 0 0 " HorizontalAlignment="Center"/>
+        <TextBlock Grid.Row="1" Text="{Binding CurrentTask.Developer.Name,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="20" HorizontalAlignment="Center"/>
+        <Label Grid.Row="2" Content="{DynamicResource m_Description}" FontSize="20" FontFamily="Roboto" FontWeight="Bold" HorizontalAlignment="Center"/>
+        <TextBox Grid.Row="3" Text="{Binding Description,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextChanged="PropertyChanged" FontSize="15" FontFamily="Roboto"/>
+        <Label Grid.Row="4" Content="{DynamicResource m_progress}" FontSize="20" FontFamily="Roboto" FontWeight="Bold" HorizontalAlignment="Center"/>
+        <ListBox Grid.Row="5" ItemsSource="{Binding CurrentTask.Progress, Mode=TwoWay}">
+            <ListBox.Resources>
+                <models:ConverterVisibility x:Key="BooleanToVisibilityConverter"/>
+            </ListBox.Resources>
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                </Style>
+            </ListBox.ItemContainerStyle>
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Procent}"/>
-                        <TextBlock Text="{Binding Description}"/>
-                    </StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="{Binding Procent, StringFormat={}{0}%}" Padding="10"/>
+                        <TextBlock Grid.Column="1" Text="{Binding Description}" Padding="0 10 10 0"/>
+                        <Button Grid.Column="2" Margin="10" Background="Transparent" Command="{Binding DataContext.AcceptProgressCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding}"
+                                Visibility="{Binding IsCommited, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=Inverse, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <Image Source="D:\Учёба\4сем\ОПП\TeamTasker\Images\done.png" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                        </Button>
+                        <Button Grid.Column="3" Margin="10" Background="Transparent" Command="{Binding DataContext.RegretProgressCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}"  CommandParameter="{Binding}"
+                                Visibility="{Binding IsCommited, ConverterParameter=Inverse, Converter={StaticResource BooleanToVisibilityConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <Image Source="D:\Учёба\4сем\ОПП\TeamTasker\Images\close.png" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                        </Button>
+                    </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>

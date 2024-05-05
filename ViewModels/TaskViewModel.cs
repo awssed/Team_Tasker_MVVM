@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using TeamTasker.Core;
+using TeamTasker.Models;
 using TeamTasker.UnityOfWork;
 
 namespace TeamTasker.ViewModels
@@ -12,12 +13,26 @@ namespace TeamTasker.ViewModels
     public class TaskViewModel:ObservableObject
     {
         private UnityOfWorkClass db=new UnityOfWorkClass();
-        public Models.Task CurrentTask { get; set; }
+        private Models.Task _currentTask { get; set; }
+        public Models.Task CurrentTask
+        {
+            get
+            {
+                return _currentTask;
+            }
+            set
+            {
+                _currentTask = value;
+                OnPropertyChanged();
+            }
+        }
         public string Description { get; set; }
         public RelayCommand SaveChangesCommand { get; set; }
         public RelayCommand DeleteCommand { get; set; }
         public RelayCommand CompleteCommand { get; set; }
         public RelayCommand RegretCommand { get; set; }
+        public RelayCommand AcceptProgressCommand { get; set; }
+        public RelayCommand RegretProgressCommand { get; set; }
         public TaskViewModel() { }
         public TaskViewModel( Models.Task task) 
         {
@@ -27,6 +42,24 @@ namespace TeamTasker.ViewModels
             DeleteCommand = new RelayCommand(DeleteTask);
             CompleteCommand = new RelayCommand(CompleteTask, CanComleteTask);
             RegretCommand = new RelayCommand(RegretTask,CanComleteTask);
+            AcceptProgressCommand = new RelayCommand(AcceptProgress);
+            RegretProgressCommand = new RelayCommand(RegretProgress);
+        }
+        public void AcceptProgress(object parametr)
+        {
+            Progress progress = (Progress)parametr;
+            progress.IsCommited = true;
+            db.Progress.Update(progress);
+            db.Save();
+            CurrentTask = CurrentTask;
+            OnPropertyChanged(nameof(progress.IsCommited));
+        }
+        public void RegretProgress(object parametr)
+        {
+            Progress progress = (Progress)parametr;
+            db.Progress.Delete(progress);
+            CurrentTask.Progress.Remove(progress);
+            CurrentTask = CurrentTask;
         }
         public void SaveChanges(object parametr)
         {

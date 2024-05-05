@@ -23,7 +23,19 @@ namespace TeamTasker.ViewModels
         public static event ViewChanger ProfileChanger; 
         public RelayCommand GoToProfile { get; set; }
         public ObservableCollection<Developer> Developers { get; set; }
-        public ObservableCollection<Developer> SearchDevelopers { get; set; }
+        private ObservableCollection<Developer> _searchDeveloper;
+        public ObservableCollection<Developer> SearchDevelopers
+        {
+            get
+            {
+                return _searchDeveloper;
+            }
+            set
+            {
+                _searchDeveloper = value;
+                OnPropertyChanged();
+            }
+        }
         public Developer SelectedDeveloper { get; set; }
         public static RelayCommand AddDeveloperView { get; set; }
         private string _searchName;
@@ -35,6 +47,10 @@ namespace TeamTasker.ViewModels
             set
             {
                 _searchName = value;
+                if (_searchName == String.Empty)
+                    SearchDevelopers = Developers;
+                else
+                    SearchDevelopers = new ObservableCollection<Developer>(Developers.Where(d => d.Name.Contains(_searchName) && d.Position == _searchPosition));
                 OnPropertyChanged();
             }
         }
@@ -48,6 +64,10 @@ namespace TeamTasker.ViewModels
             set
             {
                 _searchPosition = value;
+                if(SearchName==String.Empty)
+                    SearchDevelopers = new ObservableCollection<Developer>(Developers.Where(d=> d.Position == _searchPosition));
+                else
+                    SearchDevelopers = new ObservableCollection<Developer>(Developers.Where(d => d.Name.Contains(_searchName) && d.Position == _searchPosition));
                 OnPropertyChanged();
             }
         }
@@ -58,6 +78,7 @@ namespace TeamTasker.ViewModels
             {
                 Developers = new ObservableCollection<Developer>(db.Developers.GetAll());
                 SearchDevelopers = new ObservableCollection<Developer>(db.Developers.GetAll());
+                SearchName = String.Empty;
             }
             catch (Exception ex)
             {

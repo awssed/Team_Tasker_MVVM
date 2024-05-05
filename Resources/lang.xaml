@@ -3,6 +3,7 @@
                     xmlns:v="clr-namespace:System;assembly=mscorlib">
     <v:String x:Key="m_MenuItemDeveloper">Developers</v:String>
     <v:String x:Key="m_MenuItemProject">Projects</v:String>
+    <v:String x:Key="m_MenuItemProfile">Profile</v:String>
     <v:String x:Key="m_MenuItemSettings">Settings</v:String>
     <v:String x:Key="m_MenuItemTasks">Tasks</v:String>
     <v:String x:Key="m_SettingsLanguage">Language</v:String>
@@ -16,4 +17,10 @@
     <v:String x:Key="m_Delete">Delete</v:String>
     <v:String x:Key="m_Submit">Submit</v:String>
     <v:String x:Key="m_Back">Back</v:String>
+    <v:String x:Key="m_How_much_youd_done">How much you have done?</v:String>
+    <v:String x:Key="m_What_have_you_done">What have you done?</v:String>
+    <v:String x:Key="m_Push">Push</v:String>
+    <v:String x:Key="m_Description">Description</v:String>
+    <v:String x:Key="m_progress">Progress</v:String>
+    
 </ResourceDictionary>

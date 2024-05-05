@@ -27,18 +27,21 @@
                         <ColumnDefinition/>
                         <ColumnDefinition Width="0.2*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBox Grid.Column="0" FontSize="18" Text="{Binding SearchString,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-                    <Image Grid.Column="1" Source="D:\Учёба\4сем\ОПП\TeamTasker\Images\Magnifier.png"/>
+                    <TextBox Grid.Column="0" FontSize="18" Text="{Binding SearchString,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center"/>
+                    <Image  Grid.Column="1" Source="D:\Учёба\4сем\ОПП\TeamTasker\Images\Magnifier.png"/>
                 </Grid>
             </Border>
-            <ListBox Grid.Row="1" x:Name="ProjectsList" ItemsSource="{Binding SearchProjects,Mode=TwoWay}" SelectedItem="{Binding CurrentProject,Mode=TwoWay}">
+            <ListBox Grid.Row="1" x:Name="ProjectsList" ItemContainerStyle="{DynamicResource ProjectCardStyle}" ItemsSource="{Binding SearchProjects,Mode=TwoWay}" SelectedItem="{Binding CurrentProject,Mode=TwoWay}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel >
-                            <TextBlock Text="{Binding Name}"/>
-                            <TextBlock Text="{Binding StartTime.Date, StringFormat={}{0:dd.MM.yyyy}}"/>
-                            <TextBlock Text="{Binding EndTime.Date, StringFormat={}{0:dd.MM.yyyy}}"/>
-                        </StackPanel>
+                        <Grid Margin="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Text="{Binding Name}" Padding="5 0 0 0"/>
+                            <TextBlock Grid.Row="1"  Text="{Binding EndTime.Date, StringFormat={}{0:dd.MM.yyyy}}" Padding="5 0 0 0"/>
+                        </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
@@ -59,7 +62,7 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Label Grid.Row="0" Content="To Do" HorizontalContentAlignment="Center" FontSize="20"/>
-                    <ListBox Grid.Row="1" x:Name="ToDoList" ItemsSource="{Binding ToDoTasks, Mode=TwoWay}" SelectedItem="{Binding SelectedTask}">
+                    <ListBox Grid.Row="1" x:Name="ToDoList" Style="{DynamicResource TaskCardListBoxStyle}" ItemsSource="{Binding ToDoTasks, Mode=TwoWay}" SelectedItem="{Binding SelectedTask, Mode=TwoWay}">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="MouseDoubleClick">
                                 <i:InvokeCommandAction Command="{Binding OpenProgressCommand}" />
@@ -67,17 +70,16 @@
                         </i:Interaction.Triggers>
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <Grid>  
+                                <Grid>
                                     <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="4*"/>
                                         <ColumnDefinition/>
-                                        <ColumnDefinition Width="0.2*"/>
                                     </Grid.ColumnDefinitions>
                                     <StackPanel>
-                                        <TextBlock Text="{Binding Name}"/>
-                                        <TextBlock Text="{Binding Developer.Name}"/>
-                                        <TextBlock Text="{Binding EndTime.Date, StringFormat={}{0:dd.MM.yyyy}}"/>
+                                        <TextBlock FontFamily="Roboto" FontWeight="Bold" FontSize="20" Text="{Binding Name}" Padding="5 10 0 0"/>
+                                        <TextBlock FontFamily="Roboto" Text="{Binding EndTime.Date, StringFormat={}{0:dd.MM.yyyy}}" Padding="5 0 0 10"/>
                                     </StackPanel>
-                                    <TextBlock Grid.Column="1" Text="{Binding Procent}"/>
+                                    <TextBlock FontFamily="Roboto" Grid.Column="1" Text="{Binding Procent, StringFormat=\{0\}%}" HorizontalAlignment="Right"/>
                                 </Grid>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
@@ -89,7 +91,7 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Label Grid.Row="0" Content="Doing" HorizontalContentAlignment="Center" FontSize="20"/>
-                    <ListBox Grid.Row="1" x:Name="DoingList" ItemsSource="{Binding DoingTasks, Mode=TwoWay}" SelectedItem="{Binding SelectedTask}">
+                    <ListBox Grid.Row="1" x:Name="DoingList" Style="{DynamicResource TaskCardListBoxStyle}" ItemsSource="{Binding DoingTasks, Mode=TwoWay}" SelectedItem="{Binding SelectedTask, Mode=TwoWay}">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="MouseDoubleClick">
                                 <i:InvokeCommandAction Command="{Binding OpenProgressCommand}" />
@@ -99,15 +101,14 @@
                             <DataTemplate>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="4*"/>
                                         <ColumnDefinition/>
-                                        <ColumnDefinition Width="0.2*"/>
                                     </Grid.ColumnDefinitions>
                                     <StackPanel>
-                                        <TextBlock Text="{Binding Name}"/>
-                                        <TextBlock Text="{Binding Developer.Name}"/>
-                                        <TextBlock Text="{Binding EndTime.Date, StringFormat={}{0:dd.MM.yyyy}}"/>
+                                        <TextBlock FontFamily="Roboto" FontWeight="Bold" FontSize="20" Text="{Binding Name}" Padding="5 10 0 0"/>
+                                        <TextBlock FontFamily="Roboto" Text="{Binding EndTime.Date, StringFormat={}{0:dd.MM.yyyy}}" Padding="5 0 0 10"/>
                                     </StackPanel>
-                                    <TextBlock Grid.Column="1" Text="{Binding Procent}"/>
+                                    <TextBlock FontFamily="Roboto" Grid.Column="1" Text="{Binding Procent, StringFormat=\{0\}%}" HorizontalAlignment="Right"/>
                                 </Grid>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
@@ -119,7 +120,7 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Label Grid.Row="0" Content="Done" HorizontalContentAlignment="Center" FontSize="20"/>
-                    <ListBox Grid.Row="1" x:Name="DoneList" ItemsSource="{Binding DoneTasks, Mode=TwoWay}" SelectedItem="{Binding SelectedTask}">
+                    <ListBox Grid.Row="1" x:Name="DoneList" Style="{DynamicResource TaskCardListBoxStyle}" ItemsSource="{Binding DoneTasks, Mode=TwoWay}" SelectedItem="{Binding SelectedTask,Mode=TwoWay}">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="MouseDoubleClick">
                                 <i:InvokeCommandAction Command="{Binding OpenProgressCommand}" />
@@ -129,15 +130,14 @@
                             <DataTemplate>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="4*"/>
                                         <ColumnDefinition/>
-                                        <ColumnDefinition Width="0.2*"/>
                                     </Grid.ColumnDefinitions>
                                     <StackPanel>
-                                        <TextBlock Text="{Binding Name}"/>
-                                        <TextBlock Text="{Binding Developer.Name}"/>
-                                        <TextBlock Text="{Binding EndTime.Date, StringFormat={}{0:dd.MM.yyyy}}"/>
+                                        <TextBlock FontFamily="Roboto" FontWeight="Bold" FontSize="20" Text="{Binding Name}" Padding="5 10 0 0"/>
+                                        <TextBlock FontFamily="Roboto" Text="{Binding EndTime.Date, StringFormat={}{0:dd.MM.yyyy}}" Padding="5 0 0 10"/>
                                     </StackPanel>
-                                    <TextBlock Grid.Column="1" Text="{Binding Procent}"/>
+                                    <TextBlock FontFamily="Roboto" Grid.Column="1" Text="{Binding Procent, StringFormat=\{0\}%}" HorizontalAlignment="Right"/>
                                 </Grid>
                             </DataTemplate>
                         </ListBox.ItemTemplate>

@@ -49,19 +49,60 @@ namespace TeamTasker.ViewModels
                 OnPropertyChanged();
             }
         }
-        private string _searchString;
+        private string _searchStringProject;
         public string SearchString { 
             get
             {
-                return _searchString;
+                return _searchStringProject;
             }
             set
             {
-                _searchString = value;
-                SearchProjects = new ObservableCollection<Project>(Projects.Where(p => p.Name.Contains(_searchString)));
+                _searchStringProject = value;
+                SearchProjects = new ObservableCollection<Project>(Projects.Where(p => p.Name.Contains(_searchStringProject)));
                 OnPropertyChanged();
             }
         }
+        private string _searchStringDevelopers;
+        public string SearchStringDevelopers
+        {
+            get
+            {
+                return _searchStringDevelopers;
+            }
+            set
+            {
+                _searchStringDevelopers = value;
+                if(SearchProjects ==null)
+                {
+                    SearchDevelopers = AllDevelopers;
+                }
+                else
+                {
+                    SearchDevelopers = new ObservableCollection<Developer>(AllDevelopers.Where(d => d.Name.Contains(_searchStringDevelopers)));
+                }
+                if (CurrentProject != null && CurrentProject.Developers.Count!=0)
+                {
+                    SearchDevelopers = new ObservableCollection<Developer>(AllDevelopers.Except(CurrentProject.Developers));
+                    if (_searchStringDevelopers != null)
+                        SearchDevelopers = new ObservableCollection<Developer>(SearchDevelopers.Where(d => d.Name.Contains(_searchStringDevelopers)));
+                }
+                OnPropertyChanged();
+            }
+        }
+        private ObservableCollection<Developer> _searchDevelopers;
+        public ObservableCollection<Developer> SearchDevelopers
+        {
+            get
+            {
+                return _searchDevelopers;
+            }
+            set
+            {
+                _searchDevelopers = value;
+                OnPropertyChanged();
+            }
+        }
+
         public ObservableCollection<Developer> AllDevelopers
         {
             get { return _allDevelopers; }
@@ -139,11 +180,11 @@ namespace TeamTasker.ViewModels
             {
                 _currentProject = value;
                 ProjectName = value.Name;
-                StartTime = value.StartTime;
                 EndTime = value.EndTime;
                 Description = value.Description;
                 ProjectDevelopers= (ObservableCollection<Developer>)value.Developers;
                 SelectedTeamLead = ProjectDevelopers.FirstOrDefault(d => d.DeveloperId.Equals(CurrentProject.TeamLead));
+                SearchStringDevelopers=String.Empty;
                 OnPropertyChanged();
             }
         }
@@ -158,16 +199,17 @@ namespace TeamTasker.ViewModels
             Projects= (ObservableCollection<Project>)bd.Projects.GetAll();
             SearchProjects = Projects;
             AllDevelopers= new ObservableCollection<Developer>(bd.Developers.GetAll());
+            SearchDevelopers = AllDevelopers;
         }
         private void AddDeveloper(object parametr)
         {
             ProjectDevelopers.Add(SelectedDeveloper);
-            AllDevelopers.Remove(SelectedDeveloper);
+            SearchStringDevelopers = "";
         }
         private void DeleteDeveloper(object parametr)
         {
-            AllDevelopers.Add(SelectedDeveloper);
             ProjectDevelopers.Remove(SelectedDeveloper);
+            SearchStringDevelopers = "";
         }
         private void AddProject(object paramert)
         {
@@ -195,6 +237,7 @@ namespace TeamTasker.ViewModels
             error += CurrentProject["EndTime"];
             error += CurrentProject["Description"];
             error += CurrentProject["Developers"];
+            error += CurrentProject["TeamLead"];
 
             if (string.IsNullOrEmpty(error))
             {

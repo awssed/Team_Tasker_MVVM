@@ -62,6 +62,8 @@ namespace TeamTasker.ViewModels
             }
             set
             {
+                _selectedTask = null;
+                OnPropertyChanged();
                 _selectedTask = value;
                 OnPropertyChanged();
             }
@@ -133,6 +135,8 @@ namespace TeamTasker.ViewModels
            
             OpenProgressCommand = new RelayCommand(o =>
             {
+                if (SelectedTask == null)
+                    return;
                 if (SelectedTask.IsCompleted)
                     return;
                 _progressViewModel = new ProgressViewModel(SelectedTask);
