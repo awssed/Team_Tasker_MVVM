@@ -23,7 +23,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20">Sign in</TextBlock>
+                <TextBlock Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Text="{DynamicResource m_Sign_in}"/>
             </Grid>
             <Grid>
                 <Grid.RowDefinitions>
@@ -51,7 +51,7 @@
                     </Grid>
                 </Border>
             </Grid>
-            <Button Margin="0 5 0 5" Command="{Binding SignCommand}">Sign in</Button>
+            <Button Margin="0 5 0 5" Command="{Binding SignCommand}" Content="{DynamicResource m_Sign_in}"/>
         </StackPanel>
     </Grid>
 </UserControl>

@@ -63,12 +63,10 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
-                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" x:Name="SaveBut" IsEnabled="False" Content="Save changes" Command="{Binding SaveChangesCommand}" Click="ClickSave"/>
-            <Button Grid.Column="1" Content="Complete" Command="{Binding CompleteCommand}"/>
-            <Button Grid.Column="2" Content="Regret" Command="{Binding RegretCommand}"/>
-            <Button Grid.Column="3" Content="Delete task" Command="{Binding DeleteCommand}"/>
+            <Button Grid.Column="0" x:Name="SaveBut" IsEnabled="False" Content="{DynamicResource m_Save}" Command="{Binding SaveChangesCommand}" Click="ClickSave"/>
+            <Button Grid.Column="1" Content="{DynamicResource m_Complete}" Command="{Binding CompleteCommand}"/>
+            <Button Grid.Column="3" Content="{DynamicResource m_Delete_task}" Command="{Binding DeleteCommand}"/>
         </Grid>
     </Grid>
 </Window>

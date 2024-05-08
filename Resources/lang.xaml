@@ -22,5 +22,19 @@
     <v:String x:Key="m_Push">Push</v:String>
     <v:String x:Key="m_Description">Description</v:String>
     <v:String x:Key="m_progress">Progress</v:String>
-    
+    <v:String x:Key="m_Login">Login</v:String>
+    <v:String x:Key="m_Password">Password</v:String>
+    <v:String x:Key="m_Save">Save</v:String>
+    <v:String x:Key="m_Developer">Developer</v:String>
+    <v:String x:Key="m_Deadline">Deadline</v:String>
+    <v:String x:Key="m_Add">Add</v:String>
+    <v:String x:Key="m_Add_developer_from_list">Add developer from list"</v:String>
+    <v:String x:Key="m_Selected_developers">Selected developers</v:String>
+    <v:String x:Key="m_Select_teamlead">Select TeamLead</v:String>
+    <v:String x:Key="m_Register">Register</v:String>
+    <v:String x:Key="m_Sign_in">Sign in</v:String>
+    <v:String x:Key="m_Complete">Complete</v:String>
+    <v:String x:Key="m_Delete_task">Delete task</v:String>
+    <v:String x:Key="m_Add_new_task">Add new task</v:String>
+    <v:String x:Key="m_Logout">Log out</v:String>
 </ResourceDictionary>

@@ -22,9 +22,9 @@
             <RowDefinition Height="0,3*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" Content="Name" FontSize="20"/>
+        <Label Grid.Row="0" Content="{DynamicResource m_SearchName}" FontSize="20"/>
         <TextBox Grid.Row="1" Text="{Binding CurrentTask.Name, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
-        <Label Grid.Row="2" Content="Developer" FontSize="20"/>
+        <Label Grid.Row="2" Content="{DynamicResource m_Developer}" FontSize="20"/>
         <ComboBox Grid.Row="3" ItemsSource="{Binding CurrentProject.Developers}" SelectedValue="{Binding CurrentTask.Developer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
@@ -32,7 +32,7 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <Label Grid.Row="4" Content="Deadline" FontSize="20"/>
+        <Label Grid.Row="4" Content="{DynamicResource m_Deadline}" FontSize="20"/>
         <DatePicker Grid.Row="5" >
             <DatePicker.SelectedDate>
                 <Binding Path="CurrentTask.EndTime" Mode="TwoWay">
@@ -42,7 +42,7 @@
                 </Binding>
             </DatePicker.SelectedDate>
         </DatePicker>
-        <Label Grid.Row="6" Content="Description" FontSize="20"/>
+        <Label Grid.Row="6" Content="{DynamicResource m_Description}" FontSize="20"/>
         <TextBox Grid.Row="7" Text="{Binding CurrentTask.Description,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
         <Grid Grid.Row="8">
             <Grid.ColumnDefinitions>
@@ -50,8 +50,8 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Content="Add" Command="{Binding AddTask}"/>
-            <Button Grid.Column="3" Content="Cancel"/>
+            <Button Grid.Column="0" Content="{DynamicResource m_Add}" Command="{Binding AddTask}"/>
+            <Button Grid.Column="3" Content="{DynamicResource m_Undo}"/>
         </Grid>
     </Grid>
 </Window>

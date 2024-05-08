@@ -48,7 +48,7 @@
             <Button Grid.Row="2" Content="Add" Margin="10 0 10 0" Command="{Binding AddProjectCommand}" Click="ClickAddProject"/>
         </Grid>
         <StackPanel Grid.Column="2">
-            <Label Content="Name" Style="{DynamicResource LabelAddProjectSyle}"/>
+            <Label Content="{DynamicResource m_SearchName}" Style="{DynamicResource LabelAddProjectSyle}"/>
             <TextBox x:Name="txtName"  Style="{DynamicResource inputText}" TextAlignment="Center">
                 <TextBox.Text>
                     <Binding Path="CurrentProject.Name" Mode="TwoWay">
@@ -58,7 +58,7 @@
                     </Binding>
                 </TextBox.Text>
             </TextBox>
-            <Label Content="Deadline" Style="{DynamicResource LabelAddProjectSyle}"/>
+            <Label Content="{DynamicResource m_Deadline}" Style="{DynamicResource LabelAddProjectSyle}"/>
             <DatePicker x:Name="dpEndTime" HorizontalContentAlignment="Center">
                 <DatePicker.SelectedDate>
                     <Binding Path="CurrentProject.EndTime" Mode="TwoWay">
@@ -69,14 +69,14 @@
                 </DatePicker.SelectedDate>
             </DatePicker>
 
-            <Label Content="Description" Style="{DynamicResource LabelAddProjectSyle}"/>
+            <Label Content="{DynamicResource m_Description}" Style="{DynamicResource LabelAddProjectSyle}"/>
             <TextBox Height="100" Grid.Row="4" x:Name="txtDescription" TextWrapping="Wrap">
                 <TextBox.Text>
                     <Binding Path="CurrentProject.Description" Mode="TwoWay">
                     </Binding>
                 </TextBox.Text>
             </TextBox>
-            <Label Content="Add developer from list" Style="{DynamicResource LabelAddProjectSyle}"/>
+            <Label Content="{DynamicResource m_Add_developer_from_list}" Style="{DynamicResource LabelAddProjectSyle}"/>
             <Border Height="35" Margin="0 0 0 10">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -103,7 +103,7 @@
                     <Button Margin="7" Grid.Column="1" Content="+" Padding="0" Command="{Binding AddDeveloperCommand}"/>
                 </Grid>
             </Border>
-            <Label Content="Selected Developers" Style="{DynamicResource LabelAddProjectSyle}"/>
+            <Label Content="{DynamicResource m_Selected_developers}" Style="{DynamicResource LabelAddProjectSyle}"/>
             <ListBox Height="100" Grid.Row="5" x:Name="listDevelopers" ItemsSource="{Binding ProjectDevelopers}" SelectedItem="{Binding SelectedDeveloper, Mode=TwoWay}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="MouseDoubleClick">
@@ -119,7 +119,7 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <Label Content="Select TeamLead" Style="{DynamicResource LabelAddProjectSyle}"/>
+            <Label Content="{DynamicResource m_Select_teamlead}" Style="{DynamicResource LabelAddProjectSyle}"/>
             <ComboBox Name="TeamLeadBox" Grid.Row="6" ItemsSource="{Binding ProjectDevelopers,Mode=TwoWay}" SelectedItem="{Binding SelectedTeamLead,Mode=TwoWay}" >
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
@@ -135,9 +135,9 @@
                     <ColumnDefinition Width="0.2*"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Row="0" Content="Save" Command="{Binding SaveProjectCommand}" Cursor="Hand"/>
-                <Button Grid.Column="2" Content="Cancel" Visibility="Hidden"/>
-                <Button Grid.Column="4" Content="Delete" Command="{Binding DeleteProjectCommand}" Cursor="Hand"/>
+                <Button Grid.Row="0" Content="{DynamicResource m_Save}" Command="{Binding SaveProjectCommand}" Cursor="Hand"/>
+                <Button Grid.Column="2" Content="{DynamicResource m_Undo}" Visibility="Hidden"/>
+                <Button Grid.Column="4" Content="{DynamicResource m_Delete}" Command="{Binding DeleteProjectCommand}" Cursor="Hand"/>
             </Grid>
         </StackPanel>
     </Grid>

@@ -33,11 +33,11 @@
                     <Image Grid.Row="0" Source="{Binding Developer.Image}" x:Name="UserImage"  AllowDrop="True" />
                 </Border>
                 <Label Grid.Row="1" x:Name="Login" Content="{Binding Developer.DeveloperId}" HorizontalAlignment="Center" FontSize="20"/>
-                <Button Grid.Row="2" Margin="20" Content="Delete" FontSize="20" Command="{Binding DeleteCommand}"/>
+                <Button Grid.Row="2" Margin="20" Content="{DynamicResource m_Delete}" FontSize="20" Command="{Binding DeleteCommand}"/>
             </Grid>
         </Grid>
         <StackPanel Grid.Column="1">
-            <Label Content="Name" FontSize="25"/>
+            <Label Content="{DynamicResource m_SearchName}" FontSize="25"/>
             <TextBox  x:Name="NameUser" FontSize="20" Padding="10" TextChanged="PropertyChanged">
                 <Binding Path="Name" Mode="TwoWay">
                     <Binding.ValidationRules>
@@ -45,7 +45,7 @@
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox>
-            <Label Content="Email" FontSize="25"/>
+            <Label Content="{DynamicResource m_SearchEmail}" FontSize="25"/>
             <TextBox x:Name="EmailUser" FontSize="20" Padding="10" TextChanged="PropertyChanged">
                 <Binding Path="Email" Mode="TwoWay">
                     <Binding.ValidationRules>
@@ -64,8 +64,8 @@
                     <ColumnDefinition Width="0.3*"/>
                     <ColumnDefinition Width="0.3*"/>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="SaveButton" Command="{Binding SaveCommand}" FontSize="20" Content="Save" Grid.Column="0"  IsEnabled="False" Click="ButtonClick"/>
-                <Button x:Name="CancelButton" Command="{Binding CancelCommand}" FontSize="20" Content="Cancel" Grid.Column="2" IsEnabled="False" Click="ButtonClick"/>
+                <Button x:Name="SaveButton" Command="{Binding SaveCommand}" FontSize="20" Content="{DynamicResource m_Save}" Grid.Column="0"  IsEnabled="False" Click="ButtonClick"/>
+                <Button x:Name="CancelButton" Command="{Binding CancelCommand}" FontSize="20" Content="{DynamicResource m_Undo}" Grid.Column="2" IsEnabled="False" Click="ButtonClick"/>
             </Grid>
         </StackPanel>
     </Grid>

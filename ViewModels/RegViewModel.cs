@@ -1,8 +1,11 @@
-﻿using System;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using TeamTasker.Core;
 using TeamTasker.EntityModels;
 using TeamTasker.Models;
@@ -17,15 +20,33 @@ namespace TeamTasker.ViewModels
         public Developer Developer { get; set; }
         public RegViewModel()
         {
-
+            
             Developer = new Developer();
             
             RegisterCommand = new RelayCommand((o) =>
             {
                 using(TeamTaskerContext db=new TeamTaskerContext())
                 {
-                    db.Developers.Add(Developer);
-                    db.SaveChanges();
+                    try
+                    {
+                        db.Developers.Add(Developer);
+                        db.SaveChanges();
+                    }
+                    catch (DbUpdateException ex)
+                    {
+                        if (ex.InnerException is SqlException sqlException && sqlException.Number == 2627)
+                        {
+                            MessageBox.Show("Данный логин уже занят.");
+                        }
+                        else
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
                 }
                 Changer.Invoke();
             },CanRegister);

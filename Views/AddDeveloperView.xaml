@@ -31,7 +31,7 @@
                     <Image Grid.Row="0" Source="{Binding Developer.Image}" x:Name="UserImage"  AllowDrop="True" />
                 </Border>
                 <StackPanel Grid.Row="1">
-                    <Label Grid.Row="1" Content="Login" FontSize="22" HorizontalAlignment="Center"/>
+                    <Label Grid.Row="1" Content="{DynamicResource m_Login}" FontSize="22" HorizontalAlignment="Center"/>
                     <TextBox x:Name="Login" Grid.Row="2" FontSize="20" Padding="10" HorizontalAlignment="Center">
                         <Binding Path="Developer.DeveloperId" Mode="TwoWay">
                             <Binding.ValidationRules>
@@ -43,7 +43,7 @@
             </Grid>
         </Grid>
         <StackPanel Grid.Column="1" Cursor="">
-            <Label Content="Name" FontSize="25"/>
+            <Label Content="{DynamicResource m_SearchName}" FontSize="25"/>
             <TextBox  x:Name="NameUser" FontSize="20" Padding="10" >
                 <Binding Path="Developer.Name" Mode="TwoWay">
                     <Binding.ValidationRules>
@@ -51,7 +51,7 @@
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox>
-            <Label Content="Email" FontSize="25"/>
+            <Label Content="{DynamicResource m_SearchEmail}" FontSize="25"/>
             <TextBox x:Name="EmailUser" FontSize="20" Padding="10">
                 <Binding Path="Developer.Email" Mode="TwoWay">
                     <Binding.ValidationRules>
@@ -64,7 +64,7 @@
                 <ComboBoxItem>Middle</ComboBoxItem>
                 <ComboBoxItem>Senior</ComboBoxItem>
             </ComboBox>
-            <Label Content="Password" FontSize="25"/>
+            <Label Content="{DynamicResource m_Password}" FontSize="25"/>
             <TextBox x:Name="PasswordUser" FontSize="20" Padding="10">
                 <Binding Path="Developer.Password" Mode="TwoWay">
                     <Binding.ValidationRules>
@@ -76,7 +76,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.3*"/>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="SaveButton" Command="{Binding AddDeveloperCommand, Mode=TwoWay}" FontSize="20" Content="Save" Grid.Column="0"/>
+                <Button x:Name="SaveButton" Command="{Binding AddDeveloperCommand, Mode=TwoWay}" FontSize="20" Content="{DynamicResource m_Save}" Grid.Column="0"/>
             </Grid>
         </StackPanel>
     </Grid>
