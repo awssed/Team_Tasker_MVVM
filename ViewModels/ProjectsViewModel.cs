@@ -78,13 +78,13 @@ namespace TeamTasker.ViewModels
                 }
                 else
                 {
-                    SearchDevelopers = new ObservableCollection<Developer>(AllDevelopers.Where(d => d.Name.Contains(_searchStringDevelopers)));
+                    SearchDevelopers = new ObservableCollection<Developer>(AllDevelopers.Where(d => d.Name.Contains(_searchStringDevelopers)&&!d.isAdmin));
                 }
                 if (CurrentProject != null && CurrentProject.Developers.Count!=0)
                 {
                     SearchDevelopers = new ObservableCollection<Developer>(AllDevelopers.Except(CurrentProject.Developers));
                     if (_searchStringDevelopers != null)
-                        SearchDevelopers = new ObservableCollection<Developer>(SearchDevelopers.Where(d => d.Name.Contains(_searchStringDevelopers)));
+                        SearchDevelopers = new ObservableCollection<Developer>(SearchDevelopers.Where(d => d.Name.Contains(_searchStringDevelopers) && !d.isAdmin));
                 }
                 OnPropertyChanged();
             }
@@ -193,18 +193,29 @@ namespace TeamTasker.ViewModels
             CurrentProject = new Project();
             AddProjectCommand = new RelayCommand(AddProject);
             SaveProjectCommand = new RelayCommand(SaveProject,CanSaveProject);
-            AddDeveloperCommand = new RelayCommand(AddDeveloper);
+            AddDeveloperCommand = new RelayCommand(AddDeveloper,CanAddDeveloper);
             DeleteDeveloperCommand=new RelayCommand(DeleteDeveloper);
             DeleteProjectCommand = new RelayCommand(DeleteProject, CanDeleteProject);
             Projects= (ObservableCollection<Project>)bd.Projects.GetAll();
             SearchProjects = Projects;
-            AllDevelopers= new ObservableCollection<Developer>(bd.Developers.GetAll());
+            AllDevelopers= new ObservableCollection<Developer>(bd.Developers.GetAll().Where(d=>!d.isAdmin));
             SearchDevelopers = AllDevelopers;
         }
         private void AddDeveloper(object parametr)
         {
-            ProjectDevelopers.Add(SelectedDeveloper);
-            SearchStringDevelopers = "";
+            if (SelectedDeveloper != null)
+            {
+                ProjectDevelopers.Add(SelectedDeveloper);
+                SearchStringDevelopers = "";
+            }
+        }
+        private bool CanAddDeveloper(object parametr)
+        {
+            if(SelectedDeveloper!=null)
+            {
+                return true;
+            }
+            return false;
         }
         private void DeleteDeveloper(object parametr)
         {

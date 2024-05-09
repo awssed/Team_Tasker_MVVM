@@ -24,7 +24,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Text="{DynamicResource m_Register}"/>
+                <TextBlock Grid.Column="0" Foreground="{DynamicResource TextColor}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Text="{DynamicResource m_Register}"/>
             </Grid>
             <Grid>
                 <Grid.RowDefinitions>
@@ -39,8 +39,8 @@
                             <ColumnDefinition Width="0.1*"/>
                             <ColumnDefinition Width="0.9*"/>
                         </Grid.ColumnDefinitions>
-                        <Image Grid.Column="0"  Source="D:\Учёба\4сем\ОПП\Lab8\Images\login.png"/>
-                        <TextBox  Grid.Column="1" FontSize="20" x:Name="LoginBox">
+                        <Image Grid.Column="0"  Source="{DynamicResource LoginIcon}"/>
+                        <TextBox  Grid.Column="1" Foreground="{DynamicResource TextColor}" FontSize="20" x:Name="LoginBox">
                             <TextBox.Text>
                                 <Binding Path="Developer.DeveloperId">
                                     <Binding.ValidationRules>
@@ -57,8 +57,8 @@
                             <ColumnDefinition Width="0.1*"/>
                             <ColumnDefinition Width="0.9*"/>
                         </Grid.ColumnDefinitions>
-                        <Image Grid.Column="0"  Source="D:\Учёба\4сем\ОПП\Lab8\Images\UserSign.png"/>
-                        <TextBox  Grid.Column="1" FontSize="20" x:Name="NameBox">
+                        <Image Grid.Column="0"  Source="{DynamicResource NameIcon}"/>
+                        <TextBox  Grid.Column="1" Foreground="{DynamicResource TextColor}" FontSize="20" x:Name="NameBox">
                             <TextBox.Text>
                                 <Binding Path="Developer.Name">
                                     <Binding.ValidationRules>
@@ -75,8 +75,8 @@
                             <ColumnDefinition Width="0.1*"/>
                             <ColumnDefinition Width="0.9*"/>
                         </Grid.ColumnDefinitions>
-                        <Image Grid.Column="0"  Source="D:\Учёба\4сем\ОПП\Lab8\Images\lock_.png"/>
-                        <PasswordBox x:Name="OrigPassword" Grid.Column="1" FontSize="20" Height="36" VerticalAlignment="Top" PasswordChanged="PasswordChange" core:PasswordBoxAssistant.BindPassword="true"  core:PasswordBoxAssistant.BoundPassword="{Binding Path=Developer.Password, Mode=TwoWay}"/>
+                        <Image Grid.Column="0"  Source="{DynamicResource PasswordIcon}"/>
+                        <PasswordBox x:Name="OrigPassword" Foreground="{DynamicResource TextColor}" Grid.Column="1" FontSize="20" Height="36" VerticalAlignment="Top" PasswordChanged="PasswordChange" core:PasswordBoxAssistant.BindPassword="true"  core:PasswordBoxAssistant.BoundPassword="{Binding Path=Developer.Password, Mode=TwoWay}"/>
                     </Grid>
                 </Border>
                 <Border  Grid.Row="3" BorderBrush="Gray" BorderThickness="1" Padding="5" Margin="0 5 0 5" CornerRadius="4">
@@ -85,8 +85,8 @@
                             <ColumnDefinition Width="0.1*"/>
                             <ColumnDefinition Width="0.9*"/>
                         </Grid.ColumnDefinitions>
-                        <Image Grid.Column="0"  Source="D:\Учёба\4сем\ОПП\Lab8\Images\RePasword.png"/>
-                        <PasswordBox x:Name="RepPassword" Grid.Column="1" FontSize="20" PasswordChanged="PasswordChange"/>
+                        <Image Grid.Column="0"  Source="{DynamicResource RepeatPasswordIcon}"/>
+                        <PasswordBox x:Name="RepPassword" Foreground="{DynamicResource TextColor}" Grid.Column="1" FontSize="20" PasswordChanged="PasswordChange"/>
                     </Grid>
                 </Border>
             </Grid>

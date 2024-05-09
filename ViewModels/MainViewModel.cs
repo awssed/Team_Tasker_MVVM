@@ -46,7 +46,10 @@ namespace TeamTasker.ViewModels
             set
             {
                 _currentDeveloper = value;
-                UserProfileViewModel=new UserProfileViewModel(_currentDeveloper);
+                if (_currentDeveloper != null)
+                {
+                    UserProfileViewModel = new UserProfileViewModel(_currentDeveloper);
+                }
             }
         }
         private object _currentView;
@@ -138,6 +141,11 @@ namespace TeamTasker.ViewModels
             SettingsViewCommand = new RelayCommand(o =>
             {
                 AnimateViewChange(SettingsViewModel);
+            });
+            UserProfileViewModel.LogOut=new RelayCommand( (o) =>
+            {
+                CurrentUser = null;
+                AnimateViewChange(SignViewModel);
             });
         }
         private void AnimateViewChange(object newView)

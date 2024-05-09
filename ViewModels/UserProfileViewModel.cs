@@ -14,6 +14,7 @@ namespace TeamTasker.ViewModels
         private UnityOfWorkClass db = new UnityOfWorkClass();
         public delegate void ViewChanger();
         public static event ViewChanger Changer;
+        public static RelayCommand LogOut { get; set; }
         public RelayCommand CancelCommand { get; set; }
         public RelayCommand SaveCommand { get; set; }
         public RelayCommand DeleteCommand { get; set; }

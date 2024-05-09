@@ -11,6 +11,27 @@
   <ItemGroup>
     <None Remove="Images\accept.&#xD;&#xA;		  " />
     <None Remove="Images\close.png" />
+    <None Remove="Images\Dark_Login.png" />
+    <None Remove="Images\Dark_Login.svg" />
+    <None Remove="Images\Dark_Moon.png" />
+    <None Remove="Images\Dark_Moon.svg" />
+    <None Remove="Images\Dark_Name.png" />
+    <None Remove="Images\Dark_Password.png" />
+    <None Remove="Images\Dark_Password.svg" />
+    <None Remove="Images\Dark_Repeat.png" />
+    <None Remove="Images\Dark_Repeat.svg" />
+    <None Remove="Images\Dark_Search.png" />
+    <None Remove="Images\Dark_Sun.png" />
+    <None Remove="Images\Dark_Sun.svg" />
+    <None Remove="Images\defaultPerson.png" />
+    <None Remove="Images\Light_Login.png" />
+    <None Remove="Images\light_moon.png" />
+    <None Remove="Images\Light_Name.png" />
+    <None Remove="Images\Light_Password.png" />
+    <None Remove="Images\Light_Repeat.png" />
+    <None Remove="Images\Light_Search.png" />
+    <None Remove="Images\light_sun.png" />
+    <None Remove="Images\Magnifier.png" />
     <None Remove="Views\done.png" />
   </ItemGroup>
 
@@ -32,8 +53,29 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Images\close.png" />
-    <Content Include="Images\done.png" />
+    <Resource Include="Images\close.png" />
+    <Resource Include="Images\Dark_Login.png" />
+    <Resource Include="Images\Dark_Login.svg" />
+    <Resource Include="Images\Dark_Moon.png" />
+    <Resource Include="Images\Dark_Moon.svg" />
+    <Resource Include="Images\Dark_Name.png" />
+    <Resource Include="Images\Dark_Password.png" />
+    <Resource Include="Images\Dark_Password.svg" />
+    <Resource Include="Images\Dark_Repeat.png" />
+    <Resource Include="Images\Dark_Repeat.svg" />
+    <Resource Include="Images\Dark_Search.png" />
+    <Resource Include="Images\Dark_Sun.png" />
+    <Resource Include="Images\Dark_Sun.svg" />
+    <Resource Include="Images\defaultPerson.png" />
+    <Resource Include="Images\done.png" />
+    <Resource Include="Images\light_moon.png" />
+    <Resource Include="Images\Light_Login.png" />
+    <Resource Include="Images\Light_Name.png" />
+    <Resource Include="Images\Light_Password.png" />
+    <Resource Include="Images\Light_Repeat.png" />
+    <Resource Include="Images\Light_Search.png" />
+    <Resource Include="Images\light_sun.png" />
+    <Resource Include="Images\Magnifier.png" />
   </ItemGroup>
 
 </Project>

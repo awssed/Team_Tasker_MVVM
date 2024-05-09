@@ -31,9 +31,9 @@ namespace TeamTasker.Views
             this.Resources["ControlDarkHeight"] = 40.0;
             this.Resources["ControlDarkWidth"] = 40.0;
             ResourceDictionary lightTheme = new ResourceDictionary();
-            //lightTheme.Source = new Uri("Themes/LightTheme.xaml", UriKind.Relative);
+            lightTheme.Source = new Uri("Themes/LightTheme.xaml", UriKind.Relative);
             //Application.Current.Resources.Clear();
-            //Application.Current.Resources.MergedDictionaries.Add(lightTheme);
+            Application.Current.Resources.MergedDictionaries.Add(lightTheme);
         }
         private void ClickDarkTheme(object sender, RoutedEventArgs e)
         {
@@ -42,9 +42,9 @@ namespace TeamTasker.Views
             this.Resources["ControlDarkHeight"] = 50.0;
             this.Resources["ControlDarkWidth"] = 50.0;
             ResourceDictionary lightTheme = new ResourceDictionary();
-            //lightTheme.Source = new Uri("Themes/DarkTheme.xaml", UriKind.Relative);
-            Application.Current.Resources.Clear();
-            //Application.Current.Resources.MergedDictionaries.Add(lightTheme);
+            lightTheme.Source = new Uri("Themes/DarkTheme.xaml", UriKind.Relative);
+            //Application.Current.Resources.Clear();
+            Application.Current.Resources.MergedDictionaries.Add(lightTheme);
         }
     }
 }

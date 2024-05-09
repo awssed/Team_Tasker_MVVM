@@ -8,7 +8,8 @@
         mc:Ignorable="d"
         MinHeight="850"
         MinWidth="800"
-        Title="MainWindow" Height="800" Width="800">
+        Title="MainWindow" Height="800" Width="800"
+        Style="{DynamicResource WindowStyle}">
     <Window.DataContext>
         <viewModel:MainViewModel/>
     </Window.DataContext>
@@ -18,14 +19,14 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Border x:Name="Menu" Visibility="Hidden" BorderBrush="DodgerBlue" BorderThickness="0,0,0,3" Grid.Row="0">
-            <Menu Grid.Row="0" HorizontalAlignment="Center" Background="White">
+            <Menu Grid.Row="0" HorizontalAlignment="Center" Background="Transparent">
                 <MenuItem Grid.Column="0" Command="{Binding DevsViewCommand}" Style="{DynamicResource MenuItemStyle}" Header="{DynamicResource m_MenuItemDeveloper}"/>
                 <MenuItem Grid.Column="1" Command="{Binding ProjectsViewCommand}" Style="{DynamicResource MenuItemStyle}" Header="{DynamicResource m_MenuItemProject}" />
                 <MenuItem Grid.Column="2" Command="{Binding SettingsViewCommand}" Style="{DynamicResource MenuItemStyle}" Header="{DynamicResource m_MenuItemSettings}" />
             </Menu>
         </Border>
         <Border x:Name="MenuUser" Visibility="Hidden" BorderBrush="DodgerBlue" BorderThickness="0,0,0,3" Grid.Row="0">
-            <Menu Grid.Row="0" HorizontalAlignment="Center" Background="White">
+            <Menu Grid.Row="0" HorizontalAlignment="Center" Background="Transparent">
                 <MenuItem Grid.Column="0" Command="{Binding UserTaskViewCommand}" Style="{DynamicResource MenuItemStyle}" Header="{DynamicResource m_MenuItemTasks}"/>
                 <MenuItem Grid.Column="1" Command="{Binding UserProjectsViewCommand}" Style="{DynamicResource MenuItemStyle}" Header="{DynamicResource m_MenuItemProject}" />
                 <MenuItem Grid.Column="2" Command="{Binding UserProfileViewCommand}" Style="{DynamicResource MenuItemStyle}" Header="{DynamicResource m_MenuItemProfile}" />

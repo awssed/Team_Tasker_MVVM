@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:TeamTasker.Views"
         xmlns:viewModel="clr-namespace:TeamTasker.ViewModels"
         mc:Ignorable="d"
-        Title="AddTaskView" Height="400" Width="400">
+        Title="AddTaskView" Height="400" Width="400"
+        Style="{DynamicResource WindowStyle}">
     <Window.DataContext>
         <viewModel:AddTaskViewModel/>
     </Window.DataContext>
@@ -22,18 +23,18 @@
             <RowDefinition Height="0,3*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" Content="{DynamicResource m_SearchName}" FontSize="20"/>
-        <TextBox Grid.Row="1" Text="{Binding CurrentTask.Name, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
-        <Label Grid.Row="2" Content="{DynamicResource m_Developer}" FontSize="20"/>
-        <ComboBox Grid.Row="3" ItemsSource="{Binding CurrentProject.Developers}" SelectedValue="{Binding CurrentTask.Developer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+        <Label Grid.Row="0" Foreground="{DynamicResource TextColor}" Content="{DynamicResource m_SearchName}" FontSize="20"/>
+        <TextBox Grid.Row="1" Foreground="{DynamicResource TextColor}" Text="{Binding CurrentTask.Name, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+        <Label Grid.Row="2" Foreground="{DynamicResource TextColor}" Content="{DynamicResource m_Developer}" FontSize="20"/>
+        <ComboBox Grid.Row="3" Foreground="{DynamicResource TextColor}" ItemsSource="{Binding CurrentProject.Developers}" SelectedValue="{Binding CurrentTask.Developer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Name}" />
+                    <TextBlock Text="{Binding Name}" Foreground="{DynamicResource TextColor}"/>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <Label Grid.Row="4" Content="{DynamicResource m_Deadline}" FontSize="20"/>
-        <DatePicker Grid.Row="5" >
+        <Label Grid.Row="4" Foreground="{DynamicResource TextColor}" Content="{DynamicResource m_Deadline}" FontSize="20"/>
+        <DatePicker Grid.Row="5" Foreground="{DynamicResource TextColor}">
             <DatePicker.SelectedDate>
                 <Binding Path="CurrentTask.EndTime" Mode="TwoWay">
                     <Binding.ValidationRules>
@@ -42,8 +43,8 @@
                 </Binding>
             </DatePicker.SelectedDate>
         </DatePicker>
-        <Label Grid.Row="6" Content="{DynamicResource m_Description}" FontSize="20"/>
-        <TextBox Grid.Row="7" Text="{Binding CurrentTask.Description,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+        <Label Grid.Row="6" Foreground="{DynamicResource TextColor}" Content="{DynamicResource m_Description}" FontSize="20"/>
+        <TextBox Grid.Row="7" Foreground="{DynamicResource TextColor}" Text="{Binding CurrentTask.Description,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
         <Grid Grid.Row="8">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>

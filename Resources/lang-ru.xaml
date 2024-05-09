@@ -6,7 +6,7 @@
     <v:String x:Key="m_MenuItemProfile">Профиль</v:String>
     <v:String x:Key="m_MenuItemSettings">Настройки</v:String>
     <v:String x:Key="m_MenuItemTasks">Задания</v:String>
-    <v:String x:Key="m_SettingsLanguage">Язые</v:String>
+    <v:String x:Key="m_SettingsLanguage">Язык</v:String>
     <v:String x:Key="m_SettingsTheme">Тема</v:String>
     <v:String x:Key="m_SearchName">Имя</v:String>
     <v:String x:Key="m_SearchPosition">Позиция</v:String>

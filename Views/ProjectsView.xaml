@@ -7,7 +7,7 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:local="clr-namespace:TeamTasker.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="600" d:DesignWidth="800">
     <UserControl.DataContext>
         <viewModels:ProjectsViewModel/>
     </UserControl.DataContext>
@@ -30,26 +30,43 @@
                         <ColumnDefinition/>
                         <ColumnDefinition Width="0.2*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBox Grid.Column="0" FontSize="18" Text="{Binding SearchString,UpdateSourceTrigger=PropertyChanged}"/>
-                    <Image Grid.Column="1" Source="D:\Учёба\4сем\ОПП\TeamTasker\Images\Magnifier.png"/>
+                    <TextBox Grid.Column="0" Foreground="{DynamicResource TextColor}" FontSize="18" Text="{Binding SearchString,UpdateSourceTrigger=PropertyChanged}"/>
+                    <Image Grid.Column="1" Source="{DynamicResource SearchIcon}"/>
                 </Grid>
             </Border>
             <ListBox Grid.Row="1" x:Name="ProjectsList" ItemsSource="{Binding SearchProjects,Mode=TwoWay}" SelectedItem="{Binding CurrentProject,Mode=TwoWay}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel >
-                            <TextBlock Text="{Binding Name}"/>
-                            <TextBlock Text="{Binding StartTime.Date, StringFormat={}{0:dd.MM.yyyy}}"/>
-                            <TextBlock Text="{Binding EndTime.Date, StringFormat={}{0:dd.MM.yyyy}}"/>
+                            <TextBlock Text="{Binding Name}" Foreground="{DynamicResource TextColor}"/>
+                            <TextBlock Text="{Binding StartTime.Date, StringFormat={}{0:dd.MM.yyyy}}" Foreground="{DynamicResource TextColor}"/>
+                            <TextBlock Text="{Binding EndTime.Date, StringFormat={}{0:dd.MM.yyyy}}" Foreground="{DynamicResource TextColor}"/>
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
             <Button Grid.Row="2" Content="Add" Margin="10 0 10 0" Command="{Binding AddProjectCommand}" Click="ClickAddProject"/>
         </Grid>
-        <StackPanel Grid.Column="2">
-            <Label Content="{DynamicResource m_SearchName}" Style="{DynamicResource LabelAddProjectSyle}"/>
-            <TextBox x:Name="txtName"  Style="{DynamicResource inputText}" TextAlignment="Center">
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="0.3*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" Content="{DynamicResource m_SearchName}" Foreground="{DynamicResource TextColor}" Style="{DynamicResource LabelAddProjectSyle}"/>
+            <TextBox Grid.Row="1" x:Name="txtName" Foreground="{DynamicResource TextColor}" TextAlignment="Center">
                 <TextBox.Text>
                     <Binding Path="CurrentProject.Name" Mode="TwoWay">
                         <Binding.ValidationRules>
@@ -58,8 +75,9 @@
                     </Binding>
                 </TextBox.Text>
             </TextBox>
-            <Label Content="{DynamicResource m_Deadline}" Style="{DynamicResource LabelAddProjectSyle}"/>
-            <DatePicker x:Name="dpEndTime" HorizontalContentAlignment="Center">
+
+            <Label Grid.Row="2" Content="{DynamicResource m_Deadline}" Foreground="{DynamicResource TextColor}" Style="{DynamicResource LabelAddProjectSyle}"/>
+            <DatePicker Grid.Row="3" x:Name="dpEndTime" HorizontalContentAlignment="Center" Foreground="{DynamicResource TextColor}">
                 <DatePicker.SelectedDate>
                     <Binding Path="CurrentProject.EndTime" Mode="TwoWay">
                         <Binding.ValidationRules>
@@ -69,25 +87,27 @@
                 </DatePicker.SelectedDate>
             </DatePicker>
 
-            <Label Content="{DynamicResource m_Description}" Style="{DynamicResource LabelAddProjectSyle}"/>
-            <TextBox Height="100" Grid.Row="4" x:Name="txtDescription" TextWrapping="Wrap">
+            <Label Grid.Row="4" Content="{DynamicResource m_Description}" Foreground="{DynamicResource TextColor}" Style="{DynamicResource LabelAddProjectSyle}"/>
+            <TextBox Grid.Row="5" Height="100" x:Name="txtDescription" TextWrapping="Wrap" Foreground="{DynamicResource TextColor}">
                 <TextBox.Text>
                     <Binding Path="CurrentProject.Description" Mode="TwoWay">
                     </Binding>
                 </TextBox.Text>
             </TextBox>
-            <Label Content="{DynamicResource m_Add_developer_from_list}" Style="{DynamicResource LabelAddProjectSyle}"/>
-            <Border Height="35" Margin="0 0 0 10">
+
+            <Label Grid.Row="6" Content="{DynamicResource m_Add_developer_from_list}" Foreground="{DynamicResource TextColor}" Style="{DynamicResource LabelAddProjectSyle}"/>
+            <Border Grid.Row="7" Height="35" Margin="0 0 0 10">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition Width="0.1*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBox Grid.Column="0" Text="{Binding SearchStringDevelopers,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox Grid.Column="0" Foreground="{DynamicResource TextColor}" Text="{Binding SearchStringDevelopers,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                     <Image Grid.Column="1" x:Name="SearchImage" Source="D:\Учёба\4сем\ОПП\TeamTasker\Images\Magnifier.png"/>
                 </Grid>
             </Border>
-            <Border>
+
+            <Border Grid.Row="8">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -96,15 +116,16 @@
                     <ComboBox Grid.Column="0" x:Name="addDeveloperBox" ItemsSource="{Binding SearchDevelopers, Mode=TwoWay}" SelectedItem="{Binding SelectedDeveloper,Mode=TwoWay}">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Name}" />
+                                <TextBlock Text="{Binding Name}" Foreground="{DynamicResource TextColor}" />
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
-                    <Button Margin="7" Grid.Column="1" Content="+" Padding="0" Command="{Binding AddDeveloperCommand}"/>
+                    <Button Grid.Column="1" Margin="7" Content="+" Padding="0" Command="{Binding AddDeveloperCommand}"/>
                 </Grid>
             </Border>
-            <Label Content="{DynamicResource m_Selected_developers}" Style="{DynamicResource LabelAddProjectSyle}"/>
-            <ListBox Height="100" Grid.Row="5" x:Name="listDevelopers" ItemsSource="{Binding ProjectDevelopers}" SelectedItem="{Binding SelectedDeveloper, Mode=TwoWay}">
+
+            <Label Grid.Row="9" Foreground="{DynamicResource TextColor}" Content="{DynamicResource m_Selected_developers}" Style="{DynamicResource LabelAddProjectSyle}"/>
+            <ListBox Grid.Row="10" Height="100" x:Name="listDevelopers" ItemsSource="{Binding ProjectDevelopers}" SelectedItem="{Binding SelectedDeveloper, Mode=TwoWay}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="MouseDoubleClick">
                         <i:InvokeCommandAction Command="{Binding DeleteDeveloperCommand}" />
@@ -113,32 +134,34 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding Name, Mode=TwoWay}"/>
+                            <TextBlock Text="{Binding Name, Mode=TwoWay}" Foreground="{DynamicResource TextColor}"/>
                             <Image x:Name="UndoImage"/>
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <Label Content="{DynamicResource m_Select_teamlead}" Style="{DynamicResource LabelAddProjectSyle}"/>
-            <ComboBox Name="TeamLeadBox" Grid.Row="6" ItemsSource="{Binding ProjectDevelopers,Mode=TwoWay}" SelectedItem="{Binding SelectedTeamLead,Mode=TwoWay}" >
+
+            <Label Grid.Row="11" Content="{DynamicResource m_Select_teamlead}" Foreground="{DynamicResource TextColor}" Style="{DynamicResource LabelAddProjectSyle}"/>
+            <ComboBox Grid.Row="12" Margin="0 0 0 20" Name="TeamLeadBox" ItemsSource="{Binding ProjectDevelopers,Mode=TwoWay}" SelectedItem="{Binding SelectedTeamLead,Mode=TwoWay}" >
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Name}" />
+                        <TextBlock Text="{Binding Name}" Foreground="{DynamicResource TextColor}"/>
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            <Grid>
-                <Grid.ColumnDefinitions >
+
+            <Grid Grid.Row="13" Margin="0 0 0 10">
+                <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition Width="0.2*"/>
                     <ColumnDefinition/>
                     <ColumnDefinition Width="0.2*"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Row="0" Content="{DynamicResource m_Save}" Command="{Binding SaveProjectCommand}" Cursor="Hand"/>
+                <Button Grid.Column="0" Content="{DynamicResource m_Save}" Command="{Binding SaveProjectCommand}" Cursor="Hand"/>
                 <Button Grid.Column="2" Content="{DynamicResource m_Undo}" Visibility="Hidden"/>
                 <Button Grid.Column="4" Content="{DynamicResource m_Delete}" Command="{Binding DeleteProjectCommand}" Cursor="Hand"/>
             </Grid>
-        </StackPanel>
+        </Grid>
     </Grid>
 </UserControl>

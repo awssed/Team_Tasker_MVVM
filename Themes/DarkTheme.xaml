@@ -2,21 +2,21 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
     <Style x:Key="WindowStyle" TargetType="Window">
-        <Setter Property="Background" Value="White"/>
+        <Setter Property="Background" Value="#121212"/>
     </Style>
     <Storyboard x:Key="ViewAnimation">
         <DoubleAnimation From="0" To="1" Duration="0:0:0.5"
-                             Storyboard.TargetProperty="Opacity" />
+                          Storyboard.TargetProperty="Opacity" />
     </Storyboard>
-    <SolidColorBrush x:Key="TextColor" Color="Black" />
+    <SolidColorBrush x:Key="TextColor" Color="White" />
     <!--Images-->
-    <BitmapImage x:Key="SearchIcon" UriSource="D:\Учёба\4сем\ОПП\TeamTasker\Images\Dark_Search.png"/>
-    <BitmapImage x:Key="Moon" UriSource="D:\Учёба\4сем\ОПП\TeamTasker\Images\Dark_Moon.png"/>
-    <BitmapImage x:Key="Sun" UriSource="D:\Учёба\4сем\ОПП\TeamTasker\Images\Dark_Sun.png"/>
-    <BitmapImage x:Key="LoginIcon" UriSource="D:\Учёба\4сем\ОПП\TeamTasker\Images\Dark_Login.png"/>
-    <BitmapImage x:Key="NameIcon" UriSource="D:\Учёба\4сем\ОПП\TeamTasker\Images\Dark_Name.png"/>
-    <BitmapImage x:Key="PasswordIcon" UriSource="D:\Учёба\4сем\ОПП\TeamTasker\Images\Dark_Password.png"/>
-    <BitmapImage x:Key="RepeatPasswordIcon" UriSource="D:\Учёба\4сем\ОПП\TeamTasker\Images\Dark_Repeat.png"/>
+    <BitmapImage x:Key="SearchIcon" UriSource="D:\Учёба\4сем\ОПП\TeamTasker\Images\Light_Search.png"/>
+    <BitmapImage x:Key="Moon" UriSource="D:\Учёба\4сем\ОПП\TeamTasker\Images\light_moon.png"/>
+    <BitmapImage x:Key="Sun" UriSource="D:\Учёба\4сем\ОПП\TeamTasker\Images\light_sun.png"/>
+    <BitmapImage x:Key="LoginIcon" UriSource="D:\Учёба\4сем\ОПП\TeamTasker\Images\Light_Login.png"/>
+    <BitmapImage x:Key="NameIcon" UriSource="D:\Учёба\4сем\ОПП\TeamTasker\Images\Light_Name.png"/>
+    <BitmapImage x:Key="PasswordIcon" UriSource="D:\Учёба\4сем\ОПП\TeamTasker\Images\Light_Password.png"/>
+    <BitmapImage x:Key="RepeatPasswordIcon" UriSource="D:\Учёба\4сем\ОПП\TeamTasker\Images\Light_Repeat.png"/>
     <Style x:Key="AnimatedContentControlStyle" TargetType="ContentControl">
         <Setter Property="Template">
             <Setter.Value>
@@ -65,15 +65,15 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="RadioButton">
                         <Border Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}"
-                        CornerRadius="5">
+                     BorderBrush="{TemplateBinding BorderBrush}"
+                     BorderThickness="{TemplateBinding BorderThickness}"
+                     CornerRadius="5">
                             <!-- Добавляем закругление с радиусом 5 -->
                             <TextBlock VerticalAlignment="Center"
-                               HorizontalAlignment="Center"
-                               Text="{TemplateBinding Property=Content}"
-                               FontFamily="Roboto"
-                               FontSize="20"/>
+                            HorizontalAlignment="Center"
+                            Text="{TemplateBinding Property=Content}"
+                            FontFamily="Roboto"
+                            FontSize="20"/>
                             <!-- Используем шрифт Roboto -->
                         </Border>
                     </ControlTemplate>
@@ -88,9 +88,9 @@
                     <BeginStoryboard>
                         <Storyboard>
                             <ColorAnimation Storyboard.TargetProperty="(RadioButton.Background).(SolidColorBrush.Color)"
-                                        To="#FF673AB7" Duration="0:0:0.5"/>
+                                     To="#FF673AB7" Duration="0:0:0.5"/>
                             <ColorAnimation Storyboard.TargetProperty="(RadioButton.Foreground).(SolidColorBrush.Color)"
-                                        To="White" Duration="0:0:0.5"/>
+                                     To="White" Duration="0:0:0.5"/>
                         </Storyboard>
                     </BeginStoryboard>
                 </Trigger.EnterActions>
@@ -98,9 +98,9 @@
                     <BeginStoryboard>
                         <Storyboard>
                             <ColorAnimation Storyboard.TargetProperty="(RadioButton.Background).(SolidColorBrush.Color)"
-                                        To="Transparent" Duration="0:0:0.5"/>
+                                     To="Transparent" Duration="0:0:0.5"/>
                             <ColorAnimation Storyboard.TargetProperty="(RadioButton.Foreground).(SolidColorBrush.Color)"
-                                        To="Black" Duration="0:0:0.5"/>
+                                     To="Black" Duration="0:0:0.5"/>
                         </Storyboard>
                     </BeginStoryboard>
                 </Trigger.ExitActions>
@@ -116,6 +116,7 @@
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
         <Setter Property="Foreground" Value="Gray"/>
+        <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="MenuItem">
@@ -124,8 +125,8 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="#B0B0B0"/>
-                            <Setter Property="Foreground" Value="Black"/>
+                            <Setter Property="Background" Value="#FF3C3B3B"/>
+                            <Setter Property="Foreground" Value="White"/>
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
@@ -171,7 +172,7 @@
     <Style x:Key="ProjectCardStyle" TargetType="ListBoxItem">
         <Setter Property="Padding" Value="10"/>
         <Setter Property="Margin" Value="10"/>
-        <Setter Property="Background" Value="#F2F2F2"/>
+        <Setter Property="Background" Value="#FF3C3C3C"/>
         <Setter Property="FontFamily" Value="Roboto"/>
         <Setter Property="FontSize" Value="15"/>
         <Setter Property="Template">
@@ -187,7 +188,7 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Background" Value="#FFAB82F7"/>
+                            <Setter Property="Background" Value="#FFA623BD"/>
                             <Setter Property="Foreground" Value="White"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
@@ -204,7 +205,7 @@
                 <Style TargetType="ListBoxItem">
                     <Setter Property="Padding" Value="20"/>
                     <Setter Property="Margin" Value="10"/>
-                    <Setter Property="Background" Value="#F2F2F2"/>
+                    <Setter Property="Background" Value="#FF3C3C3C"/>
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="ListBoxItem">
@@ -218,7 +219,7 @@
                                 </Border>
                                 <ControlTemplate.Triggers>
                                     <Trigger Property="IsSelected" Value="True">
-                                        <Setter Property="Background" Value="#FFAB82F7"/>
+                                        <Setter Property="Background" Value="#FFA623BD"/>
                                         <Setter Property="Foreground" Value="White"/>
                                     </Trigger>
                                 </ControlTemplate.Triggers>
@@ -244,9 +245,9 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TextBox}">
                     <Border Background="{TemplateBinding Background}" 
-                        BorderBrush="{TemplateBinding BorderBrush}" 
-                        BorderThickness="{TemplateBinding BorderThickness}" 
-                        CornerRadius="1">
+                     BorderBrush="{TemplateBinding BorderBrush}" 
+                     BorderThickness="{TemplateBinding BorderThickness}" 
+                     CornerRadius="1">
                         <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
                     </Border>
                 </ControlTemplate>

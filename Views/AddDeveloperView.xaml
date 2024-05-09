@@ -31,8 +31,8 @@
                     <Image Grid.Row="0" Source="{Binding Developer.Image}" x:Name="UserImage"  AllowDrop="True" />
                 </Border>
                 <StackPanel Grid.Row="1">
-                    <Label Grid.Row="1" Content="{DynamicResource m_Login}" FontSize="22" HorizontalAlignment="Center"/>
-                    <TextBox x:Name="Login" Grid.Row="2" FontSize="20" Padding="10" HorizontalAlignment="Center">
+                    <Label Grid.Row="1" Foreground="{DynamicResource TextColor}" Content="{DynamicResource m_Login}" FontSize="22" HorizontalAlignment="Center"/>
+                    <TextBox x:Name="Login" Foreground="{DynamicResource TextColor}" Grid.Row="2" FontSize="20" Padding="10" HorizontalAlignment="Center">
                         <Binding Path="Developer.DeveloperId" Mode="TwoWay">
                             <Binding.ValidationRules>
                                 <DataErrorValidationRule />
@@ -43,29 +43,29 @@
             </Grid>
         </Grid>
         <StackPanel Grid.Column="1" Cursor="">
-            <Label Content="{DynamicResource m_SearchName}" FontSize="25"/>
-            <TextBox  x:Name="NameUser" FontSize="20" Padding="10" >
+            <Label Content="{DynamicResource m_SearchName}" Foreground="{DynamicResource TextColor}" FontSize="25"/>
+            <TextBox  x:Name="NameUser" Foreground="{DynamicResource TextColor}" FontSize="20" Padding="10" >
                 <Binding Path="Developer.Name" Mode="TwoWay">
                     <Binding.ValidationRules>
                         <DataErrorValidationRule />
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox>
-            <Label Content="{DynamicResource m_SearchEmail}" FontSize="25"/>
-            <TextBox x:Name="EmailUser" FontSize="20" Padding="10">
+            <Label Content="{DynamicResource m_SearchEmail}" Foreground="{DynamicResource TextColor}" FontSize="25"/>
+            <TextBox x:Name="EmailUser" Foreground="{DynamicResource TextColor}" FontSize="20" Padding="10">
                 <Binding Path="Developer.Email" Mode="TwoWay">
                     <Binding.ValidationRules>
                         <DataErrorValidationRule />
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox>
-            <ComboBox x:Name="PositionBox" Width="300" FontSize="20" SelectedIndex="{Binding Developer.Position,Mode=TwoWay, Converter={StaticResource EnumToIndexConverter}}">
+            <ComboBox x:Name="PositionBox" Foreground="{DynamicResource TextColor}" Width="300" FontSize="20" SelectedIndex="{Binding Developer.Position,Mode=TwoWay, Converter={StaticResource EnumToIndexConverter}}">
                 <ComboBoxItem>Junior</ComboBoxItem>
                 <ComboBoxItem>Middle</ComboBoxItem>
                 <ComboBoxItem>Senior</ComboBoxItem>
             </ComboBox>
-            <Label Content="{DynamicResource m_Password}" FontSize="25"/>
-            <TextBox x:Name="PasswordUser" FontSize="20" Padding="10">
+            <Label Content="{DynamicResource m_Password}" Foreground="{DynamicResource TextColor}" FontSize="25"/>
+            <TextBox x:Name="PasswordUser" Foreground="{DynamicResource TextColor}" FontSize="20" Padding="10">
                 <Binding Path="Developer.Password" Mode="TwoWay">
                     <Binding.ValidationRules>
                         <DataErrorValidationRule/>
