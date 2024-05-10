@@ -44,7 +44,13 @@ namespace TeamTasker.UnityOfWork
                 {
                     db.Developers.Attach(existingDeveloper);
                 }
-
+                foreach(var t in item.Project.Tasks)
+                {
+                    if(t.Name== item.Name)
+                    {
+                        throw new Exception("Task with the same name already exists in this project.");
+                    }
+                }
                 // Создание нового объекта Task
                 var newTaskEntity = new Models.Task
                 {
@@ -58,13 +64,10 @@ namespace TeamTasker.UnityOfWork
 
                 // Добавление нового задания в базу данных
                 db.Tasks.Add(newTaskEntity);
-
-                // Сохранение изменений
-                db.SaveChanges();
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                throw;
             }
         }
         public ObservableCollection<Models.Task> GetToDoTasks(Project project)
@@ -160,7 +163,12 @@ namespace TeamTasker.UnityOfWork
         {
             try
             {
-                db.Tasks.Remove((Models.Task)task);
+                Models.Task curTask=new Models.Task();
+                if(task!=null)
+                {
+                    curTask=(Models.Task)task;
+                }
+                db.Tasks.Remove(curTask);
             }
             catch (Exception ex)
             {

@@ -100,6 +100,7 @@ namespace TeamTasker.ViewModels
             AddDeveloperView = new AddDeveloperView();
             AddDeveloperViewModel.Changer += () =>
             {
+
                 AnimateViewChange(DevelopersViewModel);
             };
             DevelopersViewModel.ProfileChanger += ProfileChanger;

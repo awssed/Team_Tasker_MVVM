@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TeamTasker.Views"
         xmlns:viewModel="clr-namespace:TeamTasker.ViewModels"
         mc:Ignorable="d"
-        Title="AddTaskView" Height="400" Width="400"
+        Title="AddTaskView" Height="550" Width="400"
         Style="{DynamicResource WindowStyle}">
     <Window.DataContext>
         <viewModel:AddTaskViewModel/>
@@ -23,18 +23,24 @@
             <RowDefinition Height="0,3*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" Foreground="{DynamicResource TextColor}" Content="{DynamicResource m_SearchName}" FontSize="20"/>
-        <TextBox Grid.Row="1" Foreground="{DynamicResource TextColor}" Text="{Binding CurrentTask.Name, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
-        <Label Grid.Row="2" Foreground="{DynamicResource TextColor}" Content="{DynamicResource m_Developer}" FontSize="20"/>
-        <ComboBox Grid.Row="3" Foreground="{DynamicResource TextColor}" ItemsSource="{Binding CurrentProject.Developers}" SelectedValue="{Binding CurrentTask.Developer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+        <Label Grid.Row="0" HorizontalAlignment="Center" Foreground="{DynamicResource TextColor}" Content="{DynamicResource m_SearchName}" FontSize="20"/>
+        <TextBox Margin="10" Grid.Row="1" Foreground="{DynamicResource TextColor}" FontFamily="Roboto" FontSize="18" TextAlignment="Center">
+            <Binding Path="CurrentTask.Name" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                <Binding.ValidationRules>
+                    <DataErrorValidationRule />
+                </Binding.ValidationRules>
+            </Binding>
+        </TextBox>
+        <Label Grid.Row="2" HorizontalAlignment="Center" Foreground="{DynamicResource TextColor}" Content="{DynamicResource m_Developer}" FontSize="20"/>
+        <ComboBox Grid.Row="3" Margin="10" Foreground="{DynamicResource TextColor}" ItemsSource="{Binding CurrentProject.Developers}" SelectedValue="{Binding CurrentTask.Developer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontFamily="Roboto" FontSize="18">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}" Foreground="{DynamicResource TextColor}"/>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <Label Grid.Row="4" Foreground="{DynamicResource TextColor}" Content="{DynamicResource m_Deadline}" FontSize="20"/>
-        <DatePicker Grid.Row="5" Foreground="{DynamicResource TextColor}">
+        <Label Grid.Row="4" HorizontalAlignment="Center" Foreground="{DynamicResource TextColor}" Content="{DynamicResource m_Deadline}" FontSize="20"/>
+        <DatePicker Grid.Row="5" Margin="10" Foreground="{DynamicResource TextColor}" FontSize="15" FontFamily="Roboto" HorizontalContentAlignment="Center">
             <DatePicker.SelectedDate>
                 <Binding Path="CurrentTask.EndTime" Mode="TwoWay">
                     <Binding.ValidationRules>
@@ -43,8 +49,14 @@
                 </Binding>
             </DatePicker.SelectedDate>
         </DatePicker>
-        <Label Grid.Row="6" Foreground="{DynamicResource TextColor}" Content="{DynamicResource m_Description}" FontSize="20"/>
-        <TextBox Grid.Row="7" Foreground="{DynamicResource TextColor}" Text="{Binding CurrentTask.Description,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+        <Label Grid.Row="6" HorizontalAlignment="Center" Foreground="{DynamicResource TextColor}" Content="{DynamicResource m_Description}" FontSize="20"/>
+        <TextBox Grid.Row="7" Margin="10 0 10 20" Foreground="{DynamicResource TextColor}">
+            <Binding Path="CurrentTask.Description" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                <Binding.ValidationRules>
+                    <DataErrorValidationRule />
+                </Binding.ValidationRules>
+            </Binding>
+        </TextBox>
         <Grid Grid.Row="8">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>

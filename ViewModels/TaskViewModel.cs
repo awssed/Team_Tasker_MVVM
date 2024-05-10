@@ -1,4 +1,7 @@
-﻿using System;
+﻿using MailKit.Net.Smtp;
+using MailKit.Security;
+using MimeKit;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -89,6 +92,8 @@ namespace TeamTasker.ViewModels
             foreach(var p in CurrentTask.Progress)
             {
                 sum += p.Procent;
+                if (!p.IsCommited)
+                    return false;
             }
             if (sum < 100)
                 return false;

@@ -29,7 +29,7 @@ namespace TeamTasker.Models
         public byte[] Image { get; set; }
         public Position Position { get; set; }
         public string Email { get; set; }
-        public string Password { get; set; } // Добавленное поле Password
+        public string Password { get; set; } 
         public bool isAdmin { get; set; }
         public virtual ICollection<Project> Projects { get; set; } = new ObservableCollection<Project>();
         public virtual ICollection<Models.Task> Tasks { get; set; }=new ObservableCollection<Models.Task>();
@@ -170,9 +170,9 @@ namespace TeamTasker.Models
 
         private bool IsValidEmail(string email)
         {
-            // Проверка валидности email с использованием регулярного выражения или других методов
-            // В этом примере используется простая проверка на наличие символа @
-            return email.Contains("@");
+            string pattern = "[.\\-_a-z0-9]+@([a-z0-9][\\-a-z0-9]+\\.)+[a-z]{2,6}";
+            Match isMatch = Regex.Match(email, pattern, RegexOptions.IgnoreCase);
+            return isMatch.Success;
         }
             
     }

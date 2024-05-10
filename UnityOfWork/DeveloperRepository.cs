@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Documents;
 using TeamTasker.EntityModels;
 using TeamTasker.Models;
 
@@ -21,10 +22,11 @@ namespace TeamTasker.UnityOfWork
             try
             {
                 db.Developers.Add(item);
+                db.SaveChanges();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                throw;
             }
         }
 

@@ -56,12 +56,12 @@ namespace TeamTasker.ViewModels
             Email = Developer.Email;
             Position = Developer.Position;
             CancelCommand = new RelayCommand(CancelCommandExecute);
-            SaveCommand = new RelayCommand(SaveCommandExecute);
+            SaveCommand = new RelayCommand(SaveCommandExecute,CanSaveDeveloper);
         }
         public UserProfileViewModel()
         {
             CancelCommand = new RelayCommand(CancelCommandExecute);
-            SaveCommand = new RelayCommand(SaveCommandExecute);
+            SaveCommand = new RelayCommand(SaveCommandExecute,CanSaveDeveloper);
             DeleteCommand = new RelayCommand(DeleteCommandExecute);
             if (Developer != null)
             {
@@ -72,16 +72,16 @@ namespace TeamTasker.ViewModels
         }
         private void CancelCommandExecute(object parameter)
         {
-            Name = Developer.Name;
-            Email = Developer.Email;
-            Position = Developer.Position;
+            Developer.Name=Name;
+            Developer.Email=Email;
+            Developer.Position = Position;
             Changer?.Invoke();
         }
         private void SaveCommandExecute(object parametr)
         {
-            Developer.Name = Name;
-            Developer.Email = Email;
-            Developer.Position = Position;
+            Name= Developer.Name;
+            Email=Developer.Email;
+            Position=Developer.Position;
             db.Developers.Update(Developer);
             db.Save();
         }
@@ -92,6 +92,19 @@ namespace TeamTasker.ViewModels
                 db.Developers.Delete(Developer.DeveloperId);
                 db.Save();
                 Changer?.Invoke();
+            }
+        }
+        private bool CanSaveDeveloper(object parametr)
+        {
+            string error = Developer["Name"];
+            error += Developer["Email"];
+            if (string.IsNullOrEmpty(error))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
     }

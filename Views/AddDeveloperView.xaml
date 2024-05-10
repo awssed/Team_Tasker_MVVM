@@ -45,7 +45,7 @@
         <StackPanel Grid.Column="1" Cursor="">
             <Label Content="{DynamicResource m_SearchName}" Foreground="{DynamicResource TextColor}" FontSize="25"/>
             <TextBox  x:Name="NameUser" Foreground="{DynamicResource TextColor}" FontSize="20" Padding="10" >
-                <Binding Path="Developer.Name" Mode="TwoWay">
+                <Binding Path="Developer.Name" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
                         <DataErrorValidationRule />
                     </Binding.ValidationRules>
@@ -53,7 +53,7 @@
             </TextBox>
             <Label Content="{DynamicResource m_SearchEmail}" Foreground="{DynamicResource TextColor}" FontSize="25"/>
             <TextBox x:Name="EmailUser" Foreground="{DynamicResource TextColor}" FontSize="20" Padding="10">
-                <Binding Path="Developer.Email" Mode="TwoWay">
+                <Binding Path="Developer.Email" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
                         <DataErrorValidationRule />
                     </Binding.ValidationRules>
@@ -66,7 +66,7 @@
             </ComboBox>
             <Label Content="{DynamicResource m_Password}" Foreground="{DynamicResource TextColor}" FontSize="25"/>
             <TextBox x:Name="PasswordUser" Foreground="{DynamicResource TextColor}" FontSize="20" Padding="10">
-                <Binding Path="Developer.Password" Mode="TwoWay">
+                <Binding Path="Developer.Password" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
                         <DataErrorValidationRule/>
                     </Binding.ValidationRules>

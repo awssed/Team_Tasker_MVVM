@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MailKit.Security;
+using MimeKit;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -148,18 +150,7 @@ namespace TeamTasker.ViewModels
             Projects = new ObservableCollection<Project>(db.Projects.GetAll().Where(p => p.TeamLead == MainViewModel.CurrentUser.DeveloperId).ToList());
             SearchProjects = Projects;
 
-            AddNewTaskCommand = new RelayCommand(o =>
-            {
-                // Создание экземпляра AddTaskViewModel и передача текущего проекта
-                addTaskViewModel = new AddTaskViewModel(CurrentProject);
-                var addTaskView = new AddTaskView();
-                addTaskView.Owner = App.Current.MainWindow;
-
-                // Открытие окна AddTaskView
-                addTaskView.DataContext = addTaskViewModel;
-                addTaskView.Closed += AddTaskView_Closed; // Добавьте обработчик события Closed для окна
-                addTaskView.Show();
-            },CanAddNewTask);
+            AddNewTaskCommand = new RelayCommand(AddTask,CanAddNewTask);
             OpenTaskCommand = new RelayCommand(o =>
             {
                 if (SelectedTask == null)
@@ -188,5 +179,18 @@ namespace TeamTasker.ViewModels
             }
             return false;
         }
+        public void AddTask(object parametr)
+        {
+            // Создание экземпляра AddTaskViewModel и передача текущего проекта
+            addTaskViewModel = new AddTaskViewModel(CurrentProject);
+            var addTaskView = new AddTaskView();
+            addTaskView.Owner = App.Current.MainWindow;
+
+            // Открытие окна AddTaskView
+            addTaskView.DataContext = addTaskViewModel;
+            addTaskView.Closed += AddTaskView_Closed; // Добавьте обработчик события Closed для окна
+            addTaskView.Show();
+        }
+        
     }
 }

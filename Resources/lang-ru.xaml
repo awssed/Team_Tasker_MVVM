@@ -20,7 +20,7 @@
     <v:String x:Key="m_How_much_youd_done">Сколько было сделано?</v:String>
     <v:String x:Key="m_What_have_you_done">Что именно было сделано?</v:String>
     <v:String x:Key="m_Push">Отправить</v:String>
-    <v:String x:Key="m_Description">Опсиание</v:String>
+    <v:String x:Key="m_Description">Описание</v:String>
     <v:String x:Key="m_progress">Прогресс</v:String>
     <v:String x:Key="m_Login">Логин</v:String>
     <v:String x:Key="m_Password">Пароль</v:String>

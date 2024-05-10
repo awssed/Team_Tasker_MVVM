@@ -29,7 +29,7 @@ namespace TeamTasker.ViewModels
         }
         public bool CanPushProgress(object parametr)
         {
-            if(CurrentProgress.Procent>0 && !String.IsNullOrEmpty(CurrentProgress.Description))
+            if(CurrentProgress.Procent>0&& CurrentTask.Procent!=100 && !String.IsNullOrEmpty(CurrentProgress.Description))
             {
                 return true;
             }

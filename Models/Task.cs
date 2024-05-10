@@ -77,7 +77,7 @@ namespace TeamTasker.Models
                             error = "Name is required.";
                         break;
                     case nameof(EndTime):
-                        if (EndTime < DateTime.Now)
+                        if (EndTime.Date < DateTime.Now.Date)
                             error = "End time must be later than start time.";
                         break;
                     case nameof(Description):

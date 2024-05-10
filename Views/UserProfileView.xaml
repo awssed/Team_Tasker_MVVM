@@ -39,7 +39,7 @@
         <StackPanel Grid.Column="1">
             <Label Content="{DynamicResource m_SearchName}" Foreground="{DynamicResource TextColor}" FontSize="25"/>
             <TextBox  x:Name="NameUser" Foreground="{DynamicResource TextColor}" FontSize="20" Padding="10" TextChanged="PropertyChanged">
-                <Binding Path="Name" Mode="TwoWay">
+                <Binding Path="Developer.Name" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
                         <DataErrorValidationRule />
                     </Binding.ValidationRules>
@@ -47,13 +47,13 @@
             </TextBox>
             <Label Content="{DynamicResource m_SearchEmail}" Foreground="{DynamicResource TextColor}" FontSize="25"/>
             <TextBox x:Name="EmailUser" FontSize="20" Foreground="{DynamicResource TextColor}" Padding="10" TextChanged="PropertyChanged">
-                <Binding Path="Email" Mode="TwoWay">
+                <Binding Path="Developer.Email" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
                         <DataErrorValidationRule />
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox>
-            <ComboBox x:Name="PositionBox" Foreground="{DynamicResource TextColor}" Width="300" FontSize="20" SelectedIndex="{Binding Position,Mode=TwoWay, Converter={StaticResource EnumToIndexConverter}}" SelectionChanged="PropertyChanged">
+            <ComboBox x:Name="PositionBox" Foreground="{DynamicResource TextColor}" Margin="10" Width="300" FontSize="20" SelectedIndex="{Binding Developer.Position,Mode=TwoWay, Converter={StaticResource EnumToIndexConverter}}" SelectionChanged="PropertyChanged">
                 <ComboBoxItem>Junior</ComboBoxItem>
                 <ComboBoxItem>Middle</ComboBoxItem>
                 <ComboBoxItem>Senior</ComboBoxItem>
