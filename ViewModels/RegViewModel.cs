@@ -29,8 +29,13 @@ namespace TeamTasker.ViewModels
                 {
                     try
                     {
-                        db.Developers.Add(Developer);
-                        db.SaveChanges();
+                        if (Developer.Password != String.Empty)
+                        {
+                            Developer.Salt = Developer.CreateSalt(Developer.Password);
+                            Developer.HashPassword = Developer.CreateHash(Developer.Concat(Developer.Password, Convert.FromBase64String(Developer.Salt)));
+                            db.Developers.Add(Developer);
+                            db.SaveChanges();
+                        }
                     }
                     catch (DbUpdateException ex)
                     {

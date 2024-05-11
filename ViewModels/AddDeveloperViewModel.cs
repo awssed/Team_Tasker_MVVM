@@ -42,6 +42,8 @@ namespace TeamTasker.ViewModels
         {
             try
             {
+                Developer.Salt = Developer.CreateSalt(Developer.Password);
+                Developer.HashPassword = Developer.CreateHash(Developer.Concat(Developer.Password, Convert.FromBase64String(Developer.Salt)));
                 bd.Developers.Create(Developer);
                 //SendInfoToDeveloper(Developer.Email, Developer.DeveloperId, Developer.Password);
                 Developer=new Developer();

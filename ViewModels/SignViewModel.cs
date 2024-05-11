@@ -43,19 +43,24 @@ namespace TeamTasker.ViewModels
         {
             SignCommand = new RelayCommand((o) =>
             {
-                using (TeamTaskerContext db = new TeamTaskerContext())
+                using (TeamTaskerContext db = new TeamTaskerContext())  
                 {
-                    var user = db.Developers.FirstOrDefault(d => d.DeveloperId == Login && d.Password == Password && d.isAdmin==true);
-                    if (user!=null)
+                    var user = db.Developers.FirstOrDefault(d => d.DeveloperId == Login);
+                    if (user!=null && Developer.Verify(user.Salt,user.HashPassword,Password))
                     {
-                        SignAdmin?.Invoke();
                         MainViewModel.CurrentUser = user;
+                        if (user.isAdmin)
+                        {
+                            SignAdmin?.Invoke();
+                        }
+                        else
+                        {
+                            SignUser?.Invoke();
+                        }
                     }
-                    user= db.Developers.FirstOrDefault(d => d.DeveloperId == Login && d.Password == Password && d.isAdmin == false);
-                    if (user!=null)
+                    else
                     {
-                        MainViewModel.CurrentUser =user;
-                        SignUser?.Invoke();
+                        MessageBox.Show("Wrong password or login");
                     }
                 }
             },CanSign);

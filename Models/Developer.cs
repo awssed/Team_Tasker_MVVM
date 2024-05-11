@@ -6,6 +6,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Security.Cryptography;
+using System.Security.Policy;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
@@ -29,7 +31,37 @@ namespace TeamTasker.Models
         public byte[] Image { get; set; }
         public Position Position { get; set; }
         public string Email { get; set; }
-        public string Password { get; set; } 
+        private string _password;
+        [NotMapped]
+        public string Password 
+        {
+            get
+            {
+                return _password;
+            }
+            set
+            {
+                _password=value;
+            }
+        }
+        private string _hashPassword;
+        public string HashPassword
+        {
+            get { return _hashPassword; }
+            set { _hashPassword = value; }
+        }
+        private string _salt;
+        public string Salt
+        {
+            get
+            {
+                return _salt;
+            }
+            set
+            {
+                _salt= value;
+            }
+        }
         public bool isAdmin { get; set; }
         public virtual ICollection<Project> Projects { get; set; } = new ObservableCollection<Project>();
         public virtual ICollection<Models.Task> Tasks { get; set; }=new ObservableCollection<Models.Task>();
@@ -174,6 +206,35 @@ namespace TeamTasker.Models
             Match isMatch = Regex.Match(email, pattern, RegexOptions.IgnoreCase);
             return isMatch.Success;
         }
-            
+        public static byte[] Concat(string password, byte[] saltBytes)
+        {
+            var passwordBytes = Encoding.UTF8.GetBytes(password);
+            return passwordBytes.Concat(saltBytes).ToArray();
+
+        }
+
+        public static string CreateSalt(string password)
+        {
+            var saltBytes = new byte[32];
+            new Random().NextBytes(saltBytes);
+            string Salt = Convert.ToBase64String(saltBytes);
+            return Salt;
+        }
+        public static string CreateHash(byte[] bytes)
+        {
+            using (var sha256 = SHA256.Create())
+            {
+                return
+            Convert.ToBase64String(sha256.ComputeHash(bytes));
+            }
+        }
+        public static bool Verify(string salt, string hash, string password)
+        {
+            var saltBytes = Convert.FromBase64String(salt);
+            var passwordAndSaltBytes = Concat(password, saltBytes);
+            var hashAttempt = CreateHash(passwordAndSaltBytes);
+            return hash == hashAttempt;
+        }
+
     }
 }
