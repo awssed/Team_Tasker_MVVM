@@ -12,6 +12,7 @@ using System.Windows.Controls;
 using TeamTasker.Models;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using TeamTasker.EntityModels;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace TeamTasker.ViewModels
 {
@@ -146,6 +147,12 @@ namespace TeamTasker.ViewModels
             UserProfileViewModel.LogOut=new RelayCommand( (o) =>
             {
                 CurrentUser = null;
+                Border menu = App.Current.MainWindow.FindName("Menu") as Border;
+                Border menuUser = App.Current.MainWindow.FindName("MenuUser") as Border;
+                Grid startMenu = App.Current.MainWindow.FindName("StartMenu") as Grid;
+                menu.Visibility = Visibility.Hidden;
+                menuUser.Visibility = Visibility.Hidden;
+                startMenu.Visibility = Visibility.Visible;
                 AnimateViewChange(SignViewModel);
             });
         }
