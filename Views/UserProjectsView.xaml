@@ -33,61 +33,141 @@
                 </Grid>
             </Border>
             <ListBox Grid.Row="1" x:Name="ProjectsList" ItemContainerStyle="{DynamicResource ProjectCardStyle}" ItemsSource="{Binding SearchProjects,Mode=TwoWay}" SelectedItem="{Binding CurrentProject,Mode=TwoWay}">
-               
+
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                            <Grid Margin="10">
+                        <Grid Margin="10">
                             <Grid.RowDefinitions>
                                 <RowDefinition />
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
-                                <TextBlock Grid.Row="0" Foreground="{DynamicResource TextColor}" Text="{Binding Name}" Padding="5 0 0 0"/>
-                                <TextBlock Grid.Row="1"  Foreground="{DynamicResource TextColor}" Text="{Binding EndTime.Date, StringFormat={}{0:dd.MM.yyyy}}" Padding="5 0 0 0"/>
-                            </Grid>
+                            <TextBlock Grid.Row="0" Foreground="{DynamicResource TextColor}" Text="{Binding Name}" Padding="5 0 0 0"/>
+                            <TextBlock Grid.Row="1"  Foreground="{DynamicResource TextColor}" Text="{Binding EndTime.Date, StringFormat={}{0:dd.MM.yyyy}}" Padding="5 0 0 0"/>
+                        </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
         </Grid>
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition/>
-                <RowDefinition Height="0.1*"/>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="0.1*"/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <Label Foreground="{DynamicResource TextColor}" Grid.Row="0" Content="To Do" HorizontalContentAlignment="Center" FontSize="20"/>
-                    <ListBox Grid.Row="1" x:Name="ToDoList" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Style="{DynamicResource TaskCardListBoxStyle}" ItemsSource="{Binding ToDoTasks, Mode=TwoWay}" SelectedItem="{Binding SelectedTask, Mode=TwoWay}">
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="MouseDoubleClick">
-                                <i:InvokeCommandAction Command="{Binding OpenTaskCommand}" />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                        <ListBox.Resources>
-                            <models:ExpiredTaskBorderStyleConverter x:Key="ExpiredTaskBorderStyleConverter" />
-                        </ListBox.Resources>
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <Border>
-                                    <Border.Style>
-                                        <Style TargetType="Border">
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding IsExpired}" Value="True">
-                                                    <Setter Property="BorderBrush" Value="#7FFF0000"/>
-                                                    <Setter Property="BorderThickness" Value="2" />
-                                                    <Setter Property="CornerRadius" Value="5"/>
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Border.Style>
+            <Label Foreground="{DynamicResource TextColor}" Grid.Row="0" Content="Projects" HorizontalContentAlignment="Center" FontSize="20" FontWeight="Bold"/>
+            <Grid Grid.Column="1" Grid.Row="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="0.1*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.1*"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Label Foreground="{DynamicResource TextColor}" Grid.Row="0" Content="{DynamicResource m_MenuItemProject}" HorizontalContentAlignment="Center" FontSize="20"/>
+                        <ListBox Grid.Row="1" x:Name="ToDoList" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Style="{DynamicResource TaskCardListBoxStyle}" ItemsSource="{Binding ToDoTasks, Mode=TwoWay}" SelectedItem="{Binding SelectedTask, Mode=TwoWay}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDoubleClick">
+                                    <i:InvokeCommandAction Command="{Binding OpenTaskCommand}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <ListBox.Resources>
+                                <models:ExpiredTaskBorderStyleConverter x:Key="ExpiredTaskBorderStyleConverter" />
+                            </ListBox.Resources>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Border>
+                                        <Border.Style>
+                                            <Style TargetType="Border">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding IsExpired}" Value="True">
+                                                        <Setter Property="BorderBrush" Value="#7FFF0000"/>
+                                                        <Setter Property="BorderThickness" Value="2" />
+                                                        <Setter Property="CornerRadius" Value="5"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Border.Style>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="4*"/>
+                                                <ColumnDefinition/>
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel>
+                                                <TextBlock FontFamily="Roboto" Foreground="{DynamicResource TextColor}" FontWeight="Bold" FontSize="20" Text="{Binding Name}" Padding="5 10 0 0"/>
+                                                <TextBlock FontFamily="Roboto" Foreground="{DynamicResource TextColor}" FontSize="13" FontWeight="Regular" TextWrapping="Wrap" Text="{Binding Developer.Name}" Padding="5 0 0 0"/>
+                                                <TextBlock FontFamily="Roboto" Foreground="{DynamicResource TextColor}" Text="{Binding EndTime.Date, StringFormat=\{0:dd.MM.yyyy\}}" Padding="5 0 0 10"/>
+                                            </StackPanel>
+                                            <TextBlock FontFamily="Roboto" Foreground="{DynamicResource TextColor}" Grid.Column="1" Text="{Binding Procent, StringFormat=\{0\}%}" HorizontalAlignment="Right"/>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.1*"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Foreground="{DynamicResource TextColor}" Content="Doing" HorizontalContentAlignment="Center" FontSize="20"/>
+                        <ListBox Grid.Row="1" x:Name="DoingList" Style="{DynamicResource TaskCardListBoxStyle}" ItemsSource="{Binding DoingTasks, Mode=TwoWay}" SelectedItem="{Binding SelectedTask, Mode=TwoWay}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDoubleClick">
+                                    <i:InvokeCommandAction Command="{Binding OpenTaskCommand}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Border>
+                                        <Border.Style>
+                                            <Style TargetType="Border">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding IsExpired}" Value="True">
+                                                        <Setter Property="BorderBrush" Value="#7FFF0000"/>
+                                                        <Setter Property="BorderThickness" Value="2" />
+                                                        <Setter Property="CornerRadius" Value="5"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Border.Style>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="4*"/>
+                                                <ColumnDefinition/>
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel>
+                                                <TextBlock FontFamily="Roboto" Foreground="{DynamicResource TextColor}" FontWeight="Bold" FontSize="20" Text="{Binding Name}" Padding="5 10 0 0"/>
+                                                <TextBlock FontFamily="Roboto" Foreground="{DynamicResource TextColor}" FontSize="13" FontWeight="Regular" TextWrapping="Wrap" Text="{Binding Developer.Name}" Padding="5 0 0 0"/>
+                                                <TextBlock FontFamily="Roboto" Foreground="{DynamicResource TextColor}" Text="{Binding EndTime.Date, StringFormat=\{0:dd.MM.yyyy\}}" Padding="5 0 0 10"/>
+                                            </StackPanel>
+                                            <TextBlock FontFamily="Roboto" Grid.Column="1" Text="{Binding Procent, StringFormat=\{0\}%}" HorizontalAlignment="Right"/>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </Grid>
+                    <Grid Grid.Column="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.1*"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Content="Done" Foreground="{DynamicResource TextColor}" HorizontalContentAlignment="Center" FontSize="20"/>
+                        <ListBox Grid.Row="1" x:Name="DoneList" Style="{DynamicResource TaskCardListBoxStyle}" ItemsSource="{Binding DoneTasks, Mode=TwoWay}" SelectedItem="{Binding SelectedTask, Mode=TwoWay}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDoubleClick">
+                                    <i:InvokeCommandAction Command="{Binding OpenTaskCommand}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="4*"/>
@@ -96,91 +176,17 @@
                                         <StackPanel>
                                             <TextBlock FontFamily="Roboto" Foreground="{DynamicResource TextColor}" FontWeight="Bold" FontSize="20" Text="{Binding Name}" Padding="5 10 0 0"/>
                                             <TextBlock FontFamily="Roboto" Foreground="{DynamicResource TextColor}" FontSize="13" FontWeight="Regular" TextWrapping="Wrap" Text="{Binding Developer.Name}" Padding="5 0 0 0"/>
-                                            <TextBlock FontFamily="Roboto" Foreground="{DynamicResource TextColor}" Text="{Binding EndTime.Date, StringFormat=\{0:dd.MM.yyyy\}}" Padding="5 0 0 10"/>
+                                            <TextBlock FontFamily="Roboto" Foreground="{DynamicResource TextColor}" Text="{Binding EndTime.Date, StringFormat={}{0:dd.MM.yyyy}}" Padding="5 0 0 10"/>
                                         </StackPanel>
                                         <TextBlock FontFamily="Roboto" Foreground="{DynamicResource TextColor}" Grid.Column="1" Text="{Binding Procent, StringFormat=\{0\}%}" HorizontalAlignment="Right"/>
                                     </Grid>
-                                </Border>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </Grid>
                 </Grid>
-                <Grid Grid.Column="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="0.1*"/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <Label Grid.Row="0" Foreground="{DynamicResource TextColor}" Content="Doing" HorizontalContentAlignment="Center" FontSize="20"/>
-                    <ListBox Grid.Row="1" x:Name="DoingList" Style="{DynamicResource TaskCardListBoxStyle}" ItemsSource="{Binding DoingTasks, Mode=TwoWay}" SelectedItem="{Binding SelectedTask, Mode=TwoWay}">
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="MouseDoubleClick">
-                                <i:InvokeCommandAction Command="{Binding OpenTaskCommand}" />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <Border>
-                                    <Border.Style>
-                                        <Style TargetType="Border">
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding IsExpired}" Value="True">
-                                                    <Setter Property="BorderBrush" Value="#7FFF0000"/>
-                                                    <Setter Property="BorderThickness" Value="2" />
-                                                    <Setter Property="CornerRadius" Value="5"/>
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Border.Style>
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="4*"/>
-                                            <ColumnDefinition/>
-                                        </Grid.ColumnDefinitions>
-                                        <StackPanel>
-                                            <TextBlock FontFamily="Roboto" Foreground="{DynamicResource TextColor}" FontWeight="Bold" FontSize="20" Text="{Binding Name}" Padding="5 10 0 0"/>
-                                            <TextBlock FontFamily="Roboto" Foreground="{DynamicResource TextColor}" FontSize="13" FontWeight="Regular" TextWrapping="Wrap" Text="{Binding Developer.Name}" Padding="5 0 0 0"/>
-                                            <TextBlock FontFamily="Roboto" Foreground="{DynamicResource TextColor}" Text="{Binding EndTime.Date, StringFormat=\{0:dd.MM.yyyy\}}" Padding="5 0 0 10"/>
-                                        </StackPanel>
-                                        <TextBlock FontFamily="Roboto" Grid.Column="1" Text="{Binding Procent, StringFormat=\{0\}%}" HorizontalAlignment="Right"/>
-                                    </Grid>
-                                </Border>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                </Grid>
-                <Grid Grid.Column="2">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="0.1*"/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <Label Grid.Row="0" Content="Done" Foreground="{DynamicResource TextColor}" HorizontalContentAlignment="Center" FontSize="20"/>
-                    <ListBox Grid.Row="1" x:Name="DoneList" Style="{DynamicResource TaskCardListBoxStyle}" ItemsSource="{Binding DoneTasks, Mode=TwoWay}" SelectedItem="{Binding SelectedTask, Mode=TwoWay}">
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="MouseDoubleClick">
-                                <i:InvokeCommandAction Command="{Binding OpenTaskCommand}" />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="4*"/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-                                    <StackPanel>
-                                        <TextBlock FontFamily="Roboto" Foreground="{DynamicResource TextColor}" FontWeight="Bold" FontSize="20" Text="{Binding Name}" Padding="5 10 0 0"/>
-                                        <TextBlock FontFamily="Roboto" Foreground="{DynamicResource TextColor}" FontSize="13" FontWeight="Regular" TextWrapping="Wrap" Text="{Binding Developer.Name}" Padding="5 0 0 0"/>
-                                        <TextBlock FontFamily="Roboto" Foreground="{DynamicResource TextColor}" Text="{Binding EndTime.Date, StringFormat={}{0:dd.MM.yyyy}}" Padding="5 0 0 10"/>
-                                    </StackPanel>
-                                    <TextBlock FontFamily="Roboto" Foreground="{DynamicResource TextColor}" Grid.Column="1" Text="{Binding Procent, StringFormat=\{0\}%}" HorizontalAlignment="Right"/>
-                                </Grid>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                </Grid>
+                <Button Grid.Row="1" Grid.Column="1" Content="{DynamicResource m_Add_new_task}" Command="{Binding AddNewTaskCommand}"/>
             </Grid>
-            <Button Grid.Row="1" Grid.Column="1" Content="{DynamicResource m_Add_new_task}" Command="{Binding AddNewTaskCommand}"/>
         </Grid>
-        
     </Grid>
 </UserControl>

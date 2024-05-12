@@ -21,6 +21,7 @@ namespace TeamTasker.ViewModels
         public static Developer? Developer { get; set; }
         private string _name;
         private string _email;
+        private byte[] _image;
         private Position _position;
         public string Name
         {
@@ -49,11 +50,21 @@ namespace TeamTasker.ViewModels
                 OnPropertyChanged();
             }
         }
+        public Byte[] Image
+        {
+            get { return _image; }
+            set
+            {
+                _image= value;
+                OnPropertyChanged();
+            }
+        }
         public DeveloperInfViewModel(Developer dev) { 
             Developer = dev;
             Name = Developer.Name;
             Email = Developer.Email;
             Position = Developer.Position;
+            Image = Developer.Image;
             CancelCommand = new RelayCommand(CancelCommandExecute);
             SaveCommand = new RelayCommand(SaveCommandExecute);
         }
@@ -67,6 +78,7 @@ namespace TeamTasker.ViewModels
                 Name = Developer.Name;
                 Email = Developer.Email;
                 Position = Developer.Position;
+                Image = Developer.Image;
             }
         }
         private void CancelCommandExecute(object parameter)
@@ -74,6 +86,7 @@ namespace TeamTasker.ViewModels
             Name = Developer.Name;
             Email = Developer.Email;
             Position = Developer.Position;
+            Image = Developer.Image;
             Changer?.Invoke();
         }
         private void SaveCommandExecute(object parametr)
@@ -81,6 +94,7 @@ namespace TeamTasker.ViewModels
             Developer.Name= Name;
             Developer.Email= Email;
             Developer.Position = Position;
+            Developer.Image= Image;
             db.Developers.Update(Developer);
             db.Save();
         }

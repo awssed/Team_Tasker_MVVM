@@ -41,7 +41,7 @@ namespace TeamTasker.ViewModels
                     {
                         if (ex.InnerException is SqlException sqlException && sqlException.Number == 2627)
                         {
-                            MessageBox.Show("Данный логин уже занят.");
+                            MessageBox.Show("This login has been already taken");
                         }
                         else
                         {

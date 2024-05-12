@@ -63,8 +63,7 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Content="{DynamicResource m_Add}" Command="{Binding AddTask}"/>
-            <Button Grid.Column="3" Content="{DynamicResource m_Undo}"/>
+            <Button Grid.Column="1" Content="{DynamicResource m_Add}" Command="{Binding AddTask}"/>
         </Grid>
     </Grid>
 </Window>

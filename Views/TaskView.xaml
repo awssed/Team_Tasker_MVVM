@@ -24,7 +24,7 @@
         <TextBlock Grid.Row="0" Foreground="{DynamicResource TextColor}" Text="{Binding CurrentTask.Name,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="20" FontFamily="Roboto" Padding="0 10 0 0 " HorizontalAlignment="Center"/>
         <TextBlock Grid.Row="1" Foreground="{DynamicResource TextColor}" Text="{Binding CurrentTask.Developer.Name,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="20" HorizontalAlignment="Center"/>
         <Label Grid.Row="2"     Foreground="{DynamicResource TextColor}" Content="{DynamicResource m_Description}" FontSize="20" FontFamily="Roboto" FontWeight="Bold" HorizontalAlignment="Center"/>
-        <TextBox Grid.Row="3"   Foreground="{DynamicResource TextColor}" Text="{Binding Description,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextChanged="PropertyChanged" FontSize="15" FontFamily="Roboto"/>
+        <TextBox Grid.Row="3"   Foreground="{DynamicResource TextColor}" Padding="10" Text="{Binding Description,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextChanged="PropertyChanged" FontSize="15" FontFamily="Roboto"/>
         <Label Grid.Row="4"     Foreground="{DynamicResource TextColor}" Content="{DynamicResource m_progress}" FontSize="20" FontFamily="Roboto" FontWeight="Bold" HorizontalAlignment="Center"/>
         <ListBox Grid.Row="5" ItemsSource="{Binding CurrentTask.Progress, Mode=TwoWay}">
             <ListBox.Resources>
@@ -64,9 +64,9 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" x:Name="SaveBut" IsEnabled="False" Content="{DynamicResource m_Save}" Command="{Binding SaveChangesCommand}" Click="ClickSave"/>
-            <Button Grid.Column="1" Content="{DynamicResource m_Complete}" Command="{Binding CompleteCommand}"/>
-            <Button Grid.Column="3" Content="{DynamicResource m_Delete_task}" Command="{Binding DeleteCommand}"/>
+            <Button Grid.Column="0" Margin="10 0 10 0 " x:Name="SaveBut" IsEnabled="False" Content="{DynamicResource m_Save}" Command="{Binding SaveChangesCommand}" Click="ClickSave"/>
+            <Button Grid.Column="1" Margin="0 0 10 0" Content="{DynamicResource m_Complete}" Command="{Binding CompleteCommand}"/>
+            <Button Grid.Column="3" Margin="0 0 10 0" Content="{DynamicResource m_Delete_task}" Command="{Binding DeleteCommand}"/>
         </Grid>
     </Grid>
 </Window>

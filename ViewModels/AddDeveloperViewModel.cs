@@ -8,7 +8,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Forms;
+using System.Windows.Input;
 using TeamTasker.Core;
 using TeamTasker.EntityModels;
 using TeamTasker.Models;
@@ -53,17 +55,17 @@ namespace TeamTasker.ViewModels
             {
                 if (ex.InnerException is SqlException sqlException && sqlException.Number == 2627)
                 {
-                    MessageBox.Show("Данный логин уже занят.");
+                    System.Windows.MessageBox.Show("This login has been already taken.");
                 }
                 else
                 {
-                    MessageBox.Show(ex.Message);
+                    System.Windows.MessageBox.Show(ex.Message);
                 }
                 return;
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                System.Windows.MessageBox.Show(ex.Message);
             }
         }
         private bool CanAddDeveloper(object parametr)

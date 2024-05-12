@@ -7,11 +7,15 @@
         xmlns:viewModel="clr-namespace:TeamTasker.ViewModels"
         xmlns:slider="clr-namespace:TeamTasker.UserSlider"
         mc:Ignorable="d"
-        Title="ProgressView" Height="400" Width="600">
+        Title="ProgressView" Height="400" Width="700">
     <Window.DataContext>
         <viewModel:ProgressViewModel/>
     </Window.DataContext>
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0.9*"/>
+        </Grid.ColumnDefinitions>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.5*"/>
@@ -21,9 +25,9 @@
                 <RowDefinition Height="0.7*"/>
                 <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
-            <Label Grid.Row="0" Foreground="{DynamicResource TextColor}" HorizontalAlignment="Center" Content="{DynamicResource m_How_much_youd_done}"/>
+            <Label Grid.Row="0" Foreground="{DynamicResource TextColor}" FontSize="20" FontFamily="Roboto" FontWeight="Bold" HorizontalAlignment="Center" Content="{DynamicResource m_How_much_youd_done}"/>
             <slider:UserSlider Grid.Row="1" Foreground="{DynamicResource TextColor}" Value="{Binding CurrentProgress.Procent, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
-            <Label Grid.Row="2" Foreground="{DynamicResource TextColor}" HorizontalAlignment="Center" Content="{DynamicResource m_What_have_you_done}"/>
+            <Label Grid.Row="2" Foreground="{DynamicResource TextColor}" FontSize="20" FontFamily="Roboto" FontWeight="Bold" HorizontalAlignment="Center" Content="{DynamicResource m_What_have_you_done}"/>
             <TextBox Grid.Row="3" Foreground="{DynamicResource TextColor}" Text="{Binding CurrentProgress.Description, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
             <Button Grid.Row="4" Content="{DynamicResource m_Push}"  Command="{Binding PushProgressCommand}" Cursor="Hand"/>
             <ListBox Grid.Row="5" ItemsSource="{Binding CurrentTask.Progress, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
@@ -40,6 +44,14 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
+        </Grid>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Foreground="{DynamicResource TextColor}" FontSize="20" FontFamily="Roboto" FontWeight="Bold" HorizontalAlignment="Center" Content="{DynamicResource m_Description}"/>
+            <TextBlock Grid.Row="1" Text="{Binding CurrentTask.Description}" FontSize="18" FontFamily="Roboto" FontWeight="Light" Padding="10" Foreground="{DynamicResource TextColor}"/>
         </Grid>
     </Grid>
 </Window>

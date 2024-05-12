@@ -20,7 +20,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Label Grid.Row="0" Grid.Column="0" Foreground="{DynamicResource TextColor}" Content="{DynamicResource m_SettingsLanguage}" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Roboto" FontSize="20" FontWeight="Bold"/>
-        <ComboBox Grid.Row="0" Grid.Column="1"  Margin="50" ItemsSource="{Binding LanguageItems}" SelectedItem="{Binding CurrentLanguage,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+        <ComboBox Grid.Row="0" Grid.Column="1"  Margin="50" ItemsSource="{Binding LanguageItems}" SelectedItem="{Binding CurrentLanguage,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" FontSize="20" FontFamily="Roboto">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Content}" Foreground="{DynamicResource TextColor}"/>

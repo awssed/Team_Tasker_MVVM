@@ -13,6 +13,7 @@
             <Setter Property="Padding" Value="10"/>
         </Style>
         <model:EnumToIndexConverter x:Key="EnumToIndexConverter" />
+        <model:ByteArrayToImageSourceConverter x:Key="ByteConverter" />
     </UserControl.Resources>
     <UserControl.DataContext>
         <viewModel:UserProfileViewModel/>
@@ -30,10 +31,13 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Border Padding="50">
-                    <Image Grid.Row="0" Source="{Binding Developer.Image}" x:Name="UserImage"  AllowDrop="True" />
+                    <Image Grid.Row="0" Source="{Binding Image, Converter={StaticResource ByteConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="UserImage" SourceUpdated="PropertyChanged" AllowDrop="True" Drop="Image_Drop" DragOver="Image_DragOver"/>
                 </Border>
                 <Label Grid.Row="1"  Foreground="{DynamicResource TextColor}" x:Name="Login" Content="{Binding Developer.DeveloperId}" HorizontalAlignment="Center" FontSize="20"/>
-                <Button Grid.Row="2" Margin="20" Content="{DynamicResource m_Logout}" FontSize="18" Command="{Binding LogOut}"/>
+                <StackPanel Grid.Row="2">
+                    <Button Margin="20" Content="{DynamicResource m_Logout}" FontSize="18" Command="{Binding LogOut}"/>
+                    <Button Margin="20" Content="{DynamicResource m_Change_Password}" FontSize="18" Command="{Binding ChangePasswordCommand}"/>
+                </StackPanel>
             </Grid>
         </Grid>
         <StackPanel Grid.Column="1">

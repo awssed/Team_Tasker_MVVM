@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TeamTasker.Views"
              xmlns:model="clr-namespace:TeamTasker.Models"
+             xmlns:core="clr-namespace:TeamTasker.Core"
              xmlns:viewModel="clr-namespace:TeamTasker.ViewModels"             mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -12,6 +13,7 @@
             <Setter Property="Padding" Value="10"/>
         </Style>
         <model:EnumToIndexConverter x:Key="EnumToIndexConverter" />
+        <model:ByteArrayToImageSourceConverter x:Key="ByteConverter"/>
     </UserControl.Resources>
     <UserControl.DataContext>
         <viewModel:AddDeveloperViewModel/>
@@ -28,7 +30,7 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Border Padding="50">
-                    <Image Grid.Row="0" Source="{Binding Developer.Image}" x:Name="UserImage"  AllowDrop="True" />
+                    <Image Grid.Row="0" Source="{Binding Developer.Image, Converter={StaticResource ByteConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="UserImage" AllowDrop="True" Drop="Image_Drop" DragOver="Image_DragOver"/>
                 </Border>
                 <StackPanel Grid.Row="1">
                     <Label Grid.Row="1" Foreground="{DynamicResource TextColor}" Content="{DynamicResource m_Login}" FontSize="22" HorizontalAlignment="Center"/>
@@ -52,8 +54,8 @@
                 </Binding>
             </TextBox>
             <Label Content="{DynamicResource m_SearchEmail}" Foreground="{DynamicResource TextColor}" FontSize="25"/>
-            <TextBox x:Name="EmailUser" Foreground="{DynamicResource TextColor}" FontSize="20" Padding="10">
-                <Binding Path="Developer.Email" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+            <TextBox x:Name="EmailUser" Margin="0 0 0 10" Foreground="{DynamicResource TextColor}" FontSize="20" Padding="10">
+                <Binding Path="Developer.Email" Mode="TwoWay"  UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
                         <DataErrorValidationRule />
                     </Binding.ValidationRules>

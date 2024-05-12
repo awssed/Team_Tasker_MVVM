@@ -31,12 +31,11 @@
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
                 </Grid.RowDefinitions>
+                <Label Grid.Row="0" Foreground="{DynamicResource TextColor}" FontSize="15" FontFamily="Roboto" HorizontalContentAlignment="Center" Content="{DynamicResource m_SearchName}"/>
+                <TextBox x:Name="SearchNameBox" Foreground="{DynamicResource TextColor}" FontSize="14" FontFamily="Roboto" Text="{Binding SearchName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Padding="5" VerticalAlignment="Center" />
 
-                <Label Grid.Row="0" Foreground="{DynamicResource TextColor}" Content="{DynamicResource m_SearchName}"/>
-                <TextBox x:Name="SearchNameBox" Foreground="{DynamicResource TextColor}" Text="{Binding SearchName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Padding="5" VerticalAlignment="Center" />
-
-                <Label Grid.Row="2" Content="{DynamicResource m_SearchPosition}" Foreground="{DynamicResource TextColor}"/>
-                <ComboBox Grid.Row="3" Foreground="{DynamicResource TextColor}" x:Name="PositionSearch" SelectedItem="{Binding SearchPosition,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                <Label Grid.Row="2" Content="{DynamicResource m_SearchPosition}" FontSize="15" FontFamily="Roboto" HorizontalContentAlignment="Center" Foreground="{DynamicResource TextColor}"/>
+                <ComboBox Grid.Row="3" Foreground="{DynamicResource TextColor}" FontSize="14" FontFamily="Roboto" HorizontalContentAlignment="Center" x:Name="PositionSearch" SelectedItem="{Binding SearchPosition,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                     <ComboBox.ItemsSource>
                         <x:Array Type="{x:Type models:Position}">
                             <models:Position>Junior</models:Position>
@@ -71,9 +70,9 @@
                 <DataTemplate>
                     <!--переделать клик на айтем-->
                     <StackPanel Orientation="Horizontal">
-                        <Image Source="{Binding Image}" Width="50" Height="50"/>
+                        <Image Source="{Binding Image}" Width="50" Height="50" Margin=" 0 0 10 0"/>
                         <StackPanel>
-                            <TextBlock Text="{Binding Name}" Foreground="{DynamicResource TextColor}"/>
+                            <TextBlock Text="{Binding Name}" FontSize="17" FontFamily="Roboto" Foreground="{DynamicResource TextColor}"/>
                             <TextBlock Text="{Binding Position}" Foreground="{DynamicResource TextColor}"/>
                         </StackPanel>
                     </StackPanel>

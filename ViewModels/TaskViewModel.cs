@@ -61,7 +61,7 @@ namespace TeamTasker.ViewModels
         {
             Progress progress = (Progress)parametr;
             db.Progress.Delete(progress);
-            CurrentTask.Progress.Remove(progress);
+            db.Save();
             CurrentTask = CurrentTask;
         }
         public void SaveChanges(object parametr)

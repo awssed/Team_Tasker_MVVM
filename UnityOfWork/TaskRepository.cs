@@ -221,6 +221,7 @@ namespace TeamTasker.UnityOfWork
                     taskToUpdate.Description = item.Description;
                     taskToUpdate.Procent= item.Procent;
                     taskToUpdate.IsCompleted=item.IsCompleted;
+                    taskToUpdate = null;
                 }
             }
             catch (Exception ex)

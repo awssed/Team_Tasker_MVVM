@@ -20,7 +20,7 @@
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="0.1*"/>
+                <RowDefinition Height="auto"/>
                 <RowDefinition/>
                 <RowDefinition Height="0.1*"/>
             </Grid.RowDefinitions >
@@ -30,17 +30,16 @@
                         <ColumnDefinition/>
                         <ColumnDefinition Width="0.2*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBox Grid.Column="0" Foreground="{DynamicResource TextColor}" FontSize="18" Text="{Binding SearchString,UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox Grid.Column="0" Foreground="{DynamicResource TextColor}" FontSize="18" Text="{Binding SearchString,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center"/>
                     <Image Grid.Column="1" Source="{DynamicResource SearchIcon}"/>
                 </Grid>
             </Border>
-            <ListBox Grid.Row="1" x:Name="ProjectsList" ItemsSource="{Binding SearchProjects,Mode=TwoWay}" SelectedItem="{Binding CurrentProject,Mode=TwoWay}">
+            <ListBox Grid.Row="1" x:Name="ProjectsList" ItemContainerStyle="{DynamicResource ProjectCardStyle}" ItemsSource="{Binding SearchProjects,Mode=TwoWay}" SelectedItem="{Binding CurrentProject,Mode=TwoWay}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel >
-                            <TextBlock Text="{Binding Name}" Foreground="{DynamicResource TextColor}"/>
-                            <TextBlock Text="{Binding StartTime.Date, StringFormat={}{0:dd.MM.yyyy}}" Foreground="{DynamicResource TextColor}"/>
-                            <TextBlock Text="{Binding EndTime.Date, StringFormat={}{0:dd.MM.yyyy}}" Foreground="{DynamicResource TextColor}"/>
+                            <TextBlock Text="{Binding Name}" Foreground="{DynamicResource TextColor}" Padding="5 0 0 0"/>
+                            <TextBlock Text="{Binding EndTime.Date, StringFormat={}{0:dd.MM.yyyy}}" Foreground="{DynamicResource TextColor}" Padding="5 0 0 0"/>
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
@@ -66,9 +65,9 @@
             </Grid.RowDefinitions>
 
             <Label Grid.Row="0" Content="{DynamicResource m_SearchName}" Foreground="{DynamicResource TextColor}" Style="{DynamicResource LabelAddProjectSyle}"/>
-            <TextBox Grid.Row="1" x:Name="txtName" Foreground="{DynamicResource TextColor}" TextAlignment="Center">
+            <TextBox Grid.Row="1" x:Name="txtName" Foreground="{DynamicResource TextColor}" FontSize="15" FontFamily="Roboto"  TextAlignment="Center">
                 <TextBox.Text>
-                    <Binding Path="CurrentProject.Name" Mode="TwoWay">
+                    <Binding Path="CurrentProject.Name" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
                             <DataErrorValidationRule />
                         </Binding.ValidationRules>
@@ -77,9 +76,9 @@
             </TextBox>
 
             <Label Grid.Row="2" Content="{DynamicResource m_Deadline}" Foreground="{DynamicResource TextColor}" Style="{DynamicResource LabelAddProjectSyle}"/>
-            <DatePicker Grid.Row="3" x:Name="dpEndTime" HorizontalContentAlignment="Center" Foreground="{DynamicResource TextColor}">
+            <DatePicker Grid.Row="3" x:Name="dpEndTime" HorizontalContentAlignment="Center" FontSize="15" FontFamily="Roboto" Foreground="{DynamicResource TextColor}">
                 <DatePicker.SelectedDate>
-                    <Binding Path="CurrentProject.EndTime" Mode="TwoWay">
+                    <Binding Path="CurrentProject.EndTime" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
                             <DataErrorValidationRule />
                         </Binding.ValidationRules>
@@ -88,9 +87,12 @@
             </DatePicker>
 
             <Label Grid.Row="4" Content="{DynamicResource m_Description}" Foreground="{DynamicResource TextColor}" Style="{DynamicResource LabelAddProjectSyle}"/>
-            <TextBox Grid.Row="5" Height="100" x:Name="txtDescription" TextWrapping="Wrap" Foreground="{DynamicResource TextColor}">
+            <TextBox Grid.Row="5" Height="100" x:Name="txtDescription" FontFamily="Roboto" TextWrapping="Wrap" Foreground="{DynamicResource TextColor}">
                 <TextBox.Text>
-                    <Binding Path="CurrentProject.Description" Mode="TwoWay">
+                    <Binding Path="CurrentProject.Description" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <DataErrorValidationRule />
+                        </Binding.ValidationRules>
                     </Binding>
                 </TextBox.Text>
             </TextBox>

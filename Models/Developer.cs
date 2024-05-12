@@ -212,7 +212,6 @@ namespace TeamTasker.Models
             return passwordBytes.Concat(saltBytes).ToArray();
 
         }
-
         public static string CreateSalt(string password)
         {
             var saltBytes = new byte[32];
@@ -235,6 +234,6 @@ namespace TeamTasker.Models
             var hashAttempt = CreateHash(passwordAndSaltBytes);
             return hash == hashAttempt;
         }
-
+       
     }
 }

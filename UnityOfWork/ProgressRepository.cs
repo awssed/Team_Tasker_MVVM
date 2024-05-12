@@ -54,6 +54,7 @@ namespace TeamTasker.UnityOfWork
                 if (item != null)
                 {
                     db.Progresss.Remove(item);
+                    item.Task.Procent -= item.Procent;
                 }
             }
             catch (Exception ex)
