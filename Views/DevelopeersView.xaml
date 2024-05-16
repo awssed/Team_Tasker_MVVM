@@ -36,6 +36,12 @@
 
                 <Label Grid.Row="2" Content="{DynamicResource m_SearchPosition}" FontSize="15" FontFamily="Roboto" HorizontalContentAlignment="Center" Foreground="{DynamicResource TextColor}"/>
                 <ComboBox Grid.Row="3" Foreground="{DynamicResource TextColor}" FontSize="14" FontFamily="Roboto" HorizontalContentAlignment="Center" x:Name="PositionSearch" SelectedItem="{Binding SearchPosition,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <ComboBox.ItemContainerStyle>
+                        <Style TargetType="ComboBoxItem">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Foreground" Value="Black"/>
+                        </Style>
+                    </ComboBox.ItemContainerStyle>
                     <ComboBox.ItemsSource>
                         <x:Array Type="{x:Type models:Position}">
                             <models:Position>Junior</models:Position>

@@ -7,7 +7,10 @@
         xmlns:models="clr-namespace:TeamTasker.Models"
         xmlns:viewModel="clr-namespace:TeamTasker.ViewModels"
         mc:Ignorable="d"
-        Title="TaskView" Height="500" Width="600">
+        Title="TaskView" Height="500" Width="600"
+        MinHeight="500"
+        MinWidth="600"
+        Style="{DynamicResource WindowStyle}">
     <Window.DataContext>
         <viewModel:TaskViewModel/>
     </Window.DataContext>

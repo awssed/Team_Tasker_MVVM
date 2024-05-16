@@ -134,15 +134,18 @@ namespace TeamTasker.ViewModels
         }
         private void OpenChangePasswordView(object parametr)
         {
-            PasswordChangeView = new ChangePasswordViewModel(Developer);
-            var view = new ChangePasswordView();
-            view.Owner = App.Current.MainWindow;
-            view.DataContext = PasswordChangeView;
-            view.Closed += (object sender, EventArgs e) =>
+            if (this.PasswordChangeView == null)
             {
-                PasswordChangeView = null;
-            };
-            view.Show();
+                this.PasswordChangeView = new ChangePasswordViewModel(Developer);
+                var view = new ChangePasswordView();
+                view.Owner = App.Current.MainWindow;
+                view.DataContext = PasswordChangeView;
+                view.Closed += (object sender, EventArgs e) =>
+                {
+                    PasswordChangeView = null;
+                };
+                view.Show();
+            }
         }
     }
 }

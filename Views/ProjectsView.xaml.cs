@@ -29,6 +29,5 @@ namespace TeamTasker.Views
         {
             ProjectsList.SelectedItem = null;
         }
-
     }
 }

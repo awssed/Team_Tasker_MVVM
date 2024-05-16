@@ -22,6 +22,8 @@ namespace TeamTasker.Models
         public Developer Developer { get; set; }
         public string Description { get; set; }
         public bool IsCompleted { get; set; }
+        public bool UserCheck { get; set; } = false;
+        public bool LeadCheck { get; set; } = false;
         public int Procent { get; set; } = 0;
         public ObservableCollection<Progress> Progress { get; set; }
         public Task(String name,Project project, DateTime endTime, Developer developer,string description, bool isCompleted)
@@ -33,6 +35,7 @@ namespace TeamTasker.Models
             Description = description;
             IsCompleted = isCompleted;
             Progress = new ObservableCollection<Progress>();
+
         }
         public Task(String name, Project project, DateTime endTime, Developer developer, string description, bool isCompleted,ObservableCollection<Progress> progress)
         {
@@ -79,6 +82,8 @@ namespace TeamTasker.Models
                     case nameof(EndTime):
                         if (EndTime.Date < DateTime.Now.Date)
                             error = "End time must be later than start time.";
+                        if (EndTime.Date > Project.EndTime.Date)
+                            error = "End time must be earlier than end time of project.";
                         break;
                     case nameof(Description):
                         if (string.IsNullOrEmpty(Description))

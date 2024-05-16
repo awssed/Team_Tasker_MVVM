@@ -6,11 +6,18 @@
         xmlns:local="clr-namespace:TeamTasker.Views"
         xmlns:viewModel="clr-namespace:TeamTasker.ViewModels"
         xmlns:slider="clr-namespace:TeamTasker.UserSlider"
+        xmlns:models="clr-namespace:TeamTasker.Models"
         mc:Ignorable="d"
-        Title="ProgressView" Height="400" Width="700">
+        Title="ProgressView" Height="400" Width="700"
+        MinHeight="400"
+        MinWidth="700"
+        Style="{DynamicResource WindowStyle}">
     <Window.DataContext>
         <viewModel:ProgressViewModel/>
     </Window.DataContext>
+    <Window.Resources>
+        <models:CheckVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -35,11 +42,13 @@
                     <DataTemplate>
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="0" Foreground="{DynamicResource TextColor}" Text="{Binding Procent, StringFormat={}{0}%}" Padding="10"/>
                             <TextBlock Grid.Column="1" Foreground="{DynamicResource TextColor}" Text="{Binding Description}" Padding="0 10 10 0" TextAlignment="Center"/>
+                            <Image Grid.Column="2" Source="D:\Учёба\4сем\ОПП\TeamTasker\Images\done.png" Visibility="{Binding IsCommited,Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=Inverse, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" VerticalAlignment="Center" Width="30" Height="30"/>
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>

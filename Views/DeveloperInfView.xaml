@@ -34,7 +34,11 @@
                     <Image Grid.Row="0" Source="{Binding Image, Converter={StaticResource ByteConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="UserImage" SourceUpdated="PropertyChanged" AllowDrop="True" Drop="Image_Drop" DragOver="Image_DragOver"/>
                 </Border>
                 <Label Grid.Row="1" x:Name="Login" Foreground="{DynamicResource TextColor}" Content="{Binding Developer.DeveloperId}" HorizontalAlignment="Center" FontSize="20"/>
-                <Button Grid.Row="2" Margin="20" Content="{DynamicResource m_Delete}" FontSize="20" Command="{Binding DeleteCommand}"/>
+                <StackPanel Grid.Row="2">
+                    <Button Grid.Row="2" Margin="20" Content="{DynamicResource m_Delete}" FontSize="20" Command="{Binding DeleteCommand}"/>
+                    <Button Margin="20" Content="{DynamicResource m_Change_Password}" FontSize="18" Command="{Binding ChangePasswordCommand}"/>
+
+                </StackPanel>
             </Grid>
         </Grid>
         <StackPanel Grid.Column="1">

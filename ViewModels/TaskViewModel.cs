@@ -54,6 +54,9 @@ namespace TeamTasker.ViewModels
             progress.IsCommited = true;
             db.Progress.Update(progress);
             db.Save();
+            CurrentTask.UserCheck = true;
+            db.Tasks.Update(CurrentTask);
+            db.Save();
             CurrentTask = CurrentTask;
             OnPropertyChanged(nameof(progress.IsCommited));
         }
@@ -62,11 +65,15 @@ namespace TeamTasker.ViewModels
             Progress progress = (Progress)parametr;
             db.Progress.Delete(progress);
             db.Save();
+            CurrentTask.UserCheck = true;
+            db.Tasks.Update(CurrentTask);
+            db.Save();
             CurrentTask = CurrentTask;
         }
         public void SaveChanges(object parametr)
         {
             CurrentTask.Description = Description;
+            CurrentTask.UserCheck = true;
             db.Tasks.Update(CurrentTask);
             db.Save();
         }

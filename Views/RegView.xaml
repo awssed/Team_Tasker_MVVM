@@ -76,7 +76,7 @@
                             <ColumnDefinition Width="0.9*"/>
                         </Grid.ColumnDefinitions>
                         <Image Grid.Column="0"  Source="{DynamicResource PasswordIcon}"/>
-                            <PasswordBox x:Name="OrigPassword" Foreground="{DynamicResource TextColor}" Grid.Column="1" FontSize="20" Height="36" VerticalAlignment="Top" PasswordChanged="PasswordChange" core:PasswordBoxAssistant.BindPassword="true"  core:PasswordBoxAssistant.BoundPassword="{Binding Path=Developer.Password, Mode=TwoWay}"/>
+                        <PasswordBox x:Name="OrigPassword" Foreground="{DynamicResource TextColor}" Grid.Column="1" FontSize="20" Height="36" VerticalAlignment="Top" PasswordChanged="PasswordChange" core:PasswordBoxAssistant.BindPassword="true"  core:PasswordBoxAssistant.BoundPassword="{Binding Path=Developer.Password, Mode=TwoWay}"/>
                     </Grid>
                 </Border>
                 <Border  Grid.Row="3" BorderBrush="Gray" BorderThickness="1" Padding="5" Margin="0 5 0 5" CornerRadius="4">

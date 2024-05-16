@@ -135,17 +135,22 @@ namespace TeamTasker.ViewModels
            
             OpenProgressCommand = new RelayCommand(o =>
             {
-                if (SelectedTask == null)
-                    return;
-                if (SelectedTask.IsCompleted)
-                    return;
-                _progressViewModel = new ProgressViewModel(SelectedTask);
-                var progressView = new ProgressView();
-                progressView.Owner = App.Current.MainWindow;
+                if (this._progressViewModel == null)
+                {
+                    if (SelectedTask == null)
+                        return;
+                    if (SelectedTask.IsCompleted)
+                        return;
+                    this._progressViewModel = new ProgressViewModel(SelectedTask);
+                    var progressView = new ProgressView();
+                    progressView.Owner = App.Current.MainWindow;
 
-                progressView.DataContext = _progressViewModel;
-                progressView.Closed += (object sender, EventArgs e) => { _progressViewModel = null;CurrentProject = CurrentProject; };
-                progressView.Show();
+                    progressView.DataContext = _progressViewModel;
+                    progressView.Closed += (object sender, EventArgs e) => { _progressViewModel = null; CurrentProject = CurrentProject; };
+                    SelectedTask.UserCheck = false;
+                    db.Tasks.Update(SelectedTask);
+                    progressView.Show();
+                }
             });
         }
     }

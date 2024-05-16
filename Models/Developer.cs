@@ -115,6 +115,13 @@ namespace TeamTasker.Models
                         {
                             error = "Invalid password";
                         }
+                        if (Password != null)
+                        {
+                            if (Password.Length < 3)
+                            {
+                                error = "Зassword must be longer than 3 characters";
+                            }
+                        }
                         break;
                 }
                 return error;

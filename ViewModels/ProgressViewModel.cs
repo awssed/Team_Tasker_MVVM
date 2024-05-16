@@ -51,6 +51,7 @@ namespace TeamTasker.ViewModels
             {
                 CurrentTask.Procent = sumProgress+CurrentProgress.Procent;
             }
+            CurrentTask.LeadCheck = true;
             db.Progress.Create(CurrentProgress);
             db.Tasks.Update(CurrentTask);
             db.Save();

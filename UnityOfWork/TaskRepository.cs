@@ -59,7 +59,9 @@ namespace TeamTasker.UnityOfWork
                     EndTime = item.EndTime,
                     Developer = existingDeveloper,
                     Description = item.Description,
-                    IsCompleted = item.IsCompleted
+                    IsCompleted = item.IsCompleted,
+                    UserCheck=item.UserCheck,
+                    LeadCheck=item.LeadCheck
                 };
 
                 // Добавление нового задания в базу данных
@@ -221,6 +223,8 @@ namespace TeamTasker.UnityOfWork
                     taskToUpdate.Description = item.Description;
                     taskToUpdate.Procent= item.Procent;
                     taskToUpdate.IsCompleted=item.IsCompleted;
+                    taskToUpdate.LeadCheck = item.LeadCheck;
+                    taskToUpdate.UserCheck=item.UserCheck;
                     taskToUpdate = null;
                 }
             }

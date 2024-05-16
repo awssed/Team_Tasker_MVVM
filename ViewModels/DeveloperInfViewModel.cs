@@ -7,6 +7,7 @@ using TeamTasker.Core;
 using TeamTasker.EntityModels;
 using TeamTasker.Models;
 using TeamTasker.UnityOfWork;
+using TeamTasker.Views;
 
 namespace TeamTasker.ViewModels
 {
@@ -18,6 +19,8 @@ namespace TeamTasker.ViewModels
         public RelayCommand CancelCommand { get; set; }
         public RelayCommand SaveCommand { get; set; }
         public RelayCommand DeleteCommand { get; set; }
+        private ChangePasswordViewModel PasswordChangeView { get; set; }
+        public RelayCommand ChangePasswordCommand { get; set; }
         public static Developer? Developer { get; set; }
         private string _name;
         private string _email;
@@ -67,12 +70,14 @@ namespace TeamTasker.ViewModels
             Image = Developer.Image;
             CancelCommand = new RelayCommand(CancelCommandExecute);
             SaveCommand = new RelayCommand(SaveCommandExecute);
+            ChangePasswordCommand = new RelayCommand(OpenChangePasswordView);
         }
         public DeveloperInfViewModel()
         {
             CancelCommand = new RelayCommand(CancelCommandExecute);
             SaveCommand = new RelayCommand(SaveCommandExecute);
             DeleteCommand=new RelayCommand(DeleteCommandExecute);
+            ChangePasswordCommand = new RelayCommand(OpenChangePasswordView);
             if (Developer != null)
             {
                 Name = Developer.Name;
@@ -105,6 +110,21 @@ namespace TeamTasker.ViewModels
                 db.Developers.Delete(Developer.DeveloperId);
                 db.Save();
                 Changer?.Invoke();
+            }
+        }
+        private void OpenChangePasswordView(object parametr)
+        {
+            if (this.PasswordChangeView == null)
+            {
+                this.PasswordChangeView = new ChangePasswordViewModel(Developer);
+                var view = new ChangePasswordView();
+                view.Owner = App.Current.MainWindow;
+                view.DataContext = PasswordChangeView;
+                view.Closed += (object sender, EventArgs e) =>
+                {
+                    PasswordChangeView = null;
+                };
+                view.Show();
             }
         }
     }

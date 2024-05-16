@@ -7,6 +7,8 @@
         xmlns:viewModel="clr-namespace:TeamTasker.ViewModels"
         mc:Ignorable="d"
         Title="AddTaskView" Height="550" Width="400"
+        MinHeight="550"
+        MinWidth="400"
         Style="{DynamicResource WindowStyle}">
     <Window.DataContext>
         <viewModel:AddTaskViewModel/>
@@ -33,14 +35,20 @@
         </TextBox>
         <Label Grid.Row="2" HorizontalAlignment="Center" Foreground="{DynamicResource TextColor}" Content="{DynamicResource m_Developer}" FontSize="20"/>
         <ComboBox Grid.Row="3" Margin="10" Foreground="{DynamicResource TextColor}" ItemsSource="{Binding CurrentProject.Developers}" SelectedValue="{Binding CurrentTask.Developer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontFamily="Roboto" FontSize="18">
+            <ComboBox.ItemContainerStyle>
+                <Style TargetType="ComboBoxItem">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                </Style>
+            </ComboBox.ItemContainerStyle>
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Name}" Foreground="{DynamicResource TextColor}"/>
+                    <TextBlock Text="{Binding Name}"/>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
         <Label Grid.Row="4" HorizontalAlignment="Center" Foreground="{DynamicResource TextColor}" Content="{DynamicResource m_Deadline}" FontSize="20"/>
-        <DatePicker Grid.Row="5" Margin="10" Foreground="{DynamicResource TextColor}" FontSize="15" FontFamily="Roboto" HorizontalContentAlignment="Center">
+        <DatePicker Grid.Row="5" Margin="10" Foreground="Gray" FontSize="15" FontFamily="Roboto" HorizontalContentAlignment="Center">
             <DatePicker.SelectedDate>
                 <Binding Path="CurrentTask.EndTime" Mode="TwoWay">
                     <Binding.ValidationRules>

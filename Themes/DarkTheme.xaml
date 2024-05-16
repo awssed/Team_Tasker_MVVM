@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
     <Style x:Key="WindowStyle" TargetType="Window">
-        <Setter Property="Background" Value="#121212"/>
+        <Setter Property="Background" Value="#FF2B2B2B"/>
     </Style>
     <Storyboard x:Key="ViewAnimation">
         <DoubleAnimation From="0" To="1" Duration="0:0:0.5"
@@ -120,14 +120,33 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="MenuItem">
-                    <Border Background="{TemplateBinding Background}" VerticalAlignment="Stretch">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="5" VerticalAlignment="Stretch">
                         <ContentPresenter Content="{TemplateBinding Header}" Margin="30,10,30,10"/>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="Black" />
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetProperty="(Border.Background).Color"
+        To="#FF3C3B3B" Duration="0:0:0.2" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetProperty="(Border.Background).Color"
+        To="#FF2B2B2B" Duration="0:0:0.2" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                        <!--<Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Background" Value="#FF3C3B3B"/>
                             <Setter Property="Foreground" Value="White"/>
-                        </Trigger>
+                        </Trigger>-->
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsMouseOver" Value="True"/>

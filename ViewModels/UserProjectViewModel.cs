@@ -153,15 +153,22 @@ namespace TeamTasker.ViewModels
             AddNewTaskCommand = new RelayCommand(AddTask,CanAddNewTask);
             OpenTaskCommand = new RelayCommand(o =>
             {
-                if (SelectedTask == null)
-                    return;
-                _taskViewModel = new TaskViewModel(SelectedTask);
-                var taskView=new TaskView();
-                taskView.Owner = App.Current.MainWindow;
+                if (this._taskViewModel == null)
+                {
+                    if (SelectedTask == null)
+                        return;
+                    this._taskViewModel = new TaskViewModel(SelectedTask);
+                    var taskView = new TaskView();
+                    taskView.Owner = App.Current.MainWindow;
 
-                taskView.DataContext = _taskViewModel;
-                taskView.Closed += (object sender, EventArgs e) => { _taskViewModel = null;CurrentProject=CurrentProject; };
-                taskView.Show();
+                    taskView.DataContext = _taskViewModel;
+                    taskView.Closed += (object sender, EventArgs e) => { _taskViewModel = null; CurrentProject = CurrentProject; };
+
+                    SelectedTask.LeadCheck = false;
+                    db.Tasks.Update(SelectedTask);
+                    db.Save();
+                    taskView.Show();
+                }
             });
         }
 
@@ -181,15 +188,18 @@ namespace TeamTasker.ViewModels
         }
         public void AddTask(object parametr)
         {
-            // Создание экземпляра AddTaskViewModel и передача текущего проекта
-            addTaskViewModel = new AddTaskViewModel(CurrentProject);
-            var addTaskView = new AddTaskView();
-            addTaskView.Owner = App.Current.MainWindow;
+            if (this.addTaskViewModel == null)
+            {
+                // Создание экземпляра AddTaskViewModel и передача текущего проекта
+                this.addTaskViewModel = new AddTaskViewModel(CurrentProject);
+                var addTaskView = new AddTaskView();
+                addTaskView.Owner = App.Current.MainWindow;
 
-            // Открытие окна AddTaskView
-            addTaskView.DataContext = addTaskViewModel;
-            addTaskView.Closed += AddTaskView_Closed; // Добавьте обработчик события Closed для окна
-            addTaskView.Show();
+                // Открытие окна AddTaskView
+                addTaskView.DataContext = addTaskViewModel;
+                addTaskView.Closed += AddTaskView_Closed; // Добавьте обработчик события Closed для окна
+                addTaskView.Show();
+            }
         }
         
     }

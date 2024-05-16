@@ -12,6 +12,9 @@
     <UserControl.DataContext>
         <viewModel:UserProjectViewModel/>
     </UserControl.DataContext>
+    <UserControl.Resources>
+        <models:CheckVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.3*"/>
@@ -105,6 +108,7 @@
                                                 <TextBlock FontFamily="Roboto" Foreground="{DynamicResource TextColor}" Text="{Binding EndTime.Date, StringFormat=\{0:dd.MM.yyyy\}}" Padding="5 0 0 10"/>
                                             </StackPanel>
                                             <TextBlock FontFamily="Roboto" Foreground="{DynamicResource TextColor}" Grid.Column="1" Text="{Binding Procent, StringFormat=\{0\}%}" HorizontalAlignment="Right"/>
+                                            <Ellipse Fill="Blue" Visibility="{Binding LeadCheck,Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=Inverse, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Width="7" Height="7" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,5,5"/>
                                         </Grid>
                                     </Border>
                                 </DataTemplate>
@@ -117,7 +121,7 @@
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         <Label Grid.Row="0" Foreground="{DynamicResource TextColor}" Content="Doing" HorizontalContentAlignment="Center" FontSize="20"/>
-                        <ListBox Grid.Row="1" x:Name="DoingList" Style="{DynamicResource TaskCardListBoxStyle}" ItemsSource="{Binding DoingTasks, Mode=TwoWay}" SelectedItem="{Binding SelectedTask, Mode=TwoWay}">
+                        <ListBox Grid.Row="1" x:Name="DoingList" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Style="{DynamicResource TaskCardListBoxStyle}" ItemsSource="{Binding DoingTasks, Mode=TwoWay}" SelectedItem="{Binding SelectedTask, Mode=TwoWay}">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="MouseDoubleClick">
                                     <i:InvokeCommandAction Command="{Binding OpenTaskCommand}" />
@@ -148,6 +152,7 @@
                                                 <TextBlock FontFamily="Roboto" Foreground="{DynamicResource TextColor}" Text="{Binding EndTime.Date, StringFormat=\{0:dd.MM.yyyy\}}" Padding="5 0 0 10"/>
                                             </StackPanel>
                                             <TextBlock FontFamily="Roboto" Grid.Column="1" Text="{Binding Procent, StringFormat=\{0\}%}" HorizontalAlignment="Right"/>
+                                            <Ellipse Fill="Blue" Visibility="{Binding LeadCheck, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=Inverse, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Width="7" Height="7" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,5,5"/>
                                         </Grid>
                                     </Border>
                                 </DataTemplate>
@@ -160,7 +165,7 @@
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         <Label Grid.Row="0" Content="Done" Foreground="{DynamicResource TextColor}" HorizontalContentAlignment="Center" FontSize="20"/>
-                        <ListBox Grid.Row="1" x:Name="DoneList" Style="{DynamicResource TaskCardListBoxStyle}" ItemsSource="{Binding DoneTasks, Mode=TwoWay}" SelectedItem="{Binding SelectedTask, Mode=TwoWay}">
+                        <ListBox Grid.Row="1" x:Name="DoneList" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Style="{DynamicResource TaskCardListBoxStyle}" ItemsSource="{Binding DoneTasks, Mode=TwoWay}" SelectedItem="{Binding SelectedTask, Mode=TwoWay}">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="MouseDoubleClick">
                                     <i:InvokeCommandAction Command="{Binding OpenTaskCommand}" />
@@ -179,6 +184,7 @@
                                             <TextBlock FontFamily="Roboto" Foreground="{DynamicResource TextColor}" Text="{Binding EndTime.Date, StringFormat={}{0:dd.MM.yyyy}}" Padding="5 0 0 10"/>
                                         </StackPanel>
                                         <TextBlock FontFamily="Roboto" Foreground="{DynamicResource TextColor}" Grid.Column="1" Text="{Binding Procent, StringFormat=\{0\}%}" HorizontalAlignment="Right"/>
+                                        <Ellipse Fill="Blue" Visibility="{Binding LeadCheck, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=Inverse, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Width="7" Height="7" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,5,5"/>
                                     </Grid>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
